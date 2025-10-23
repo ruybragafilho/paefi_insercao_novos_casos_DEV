@@ -1,0 +1,34 @@
+<script>
+
+  "use strict";
+  
+  /**
+   * Função frontend que designa um caso
+   *  
+   * @param {String} id: id do caso de será designado 
+   * @param {String} idMotivoDeDesignacao: id do motivo de designação 
+   */  
+  function designacaoCaso( idCaso, idMotivoDeDesignacao ) {
+
+    // Chama função do Apps Script para designar um caso
+    google.script.run
+                 .withSuccessHandler( () => {
+
+                   // Volta para a tela de resumos de casos
+                   redirecionarParaTelaResumosDosCasos( 1 );
+
+                 })
+                 .withFailureHandler( erro => {
+
+                   // mostra modal com mensagem de erro
+                   mostrarModalErro( "designacaoCaso - " + erro.message );
+
+                 })
+                 // Chama a função backend que designa o caso
+                 .designarCaso( idCaso,                       
+                                idMotivoDeDesignacao );  
+
+  } // Fim da função designacaoCaso
+
+
+</script>

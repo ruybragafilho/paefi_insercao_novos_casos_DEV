@@ -1,0 +1,393 @@
+<script>
+
+  "use strict";
+
+  // Cache do caso que está sendo editado
+  let cacheCasoEmEdicao;  
+
+
+  /**
+   * Função que configura a página de cadastro para Edição de caso
+   */
+  function configurarPaginaEdicaoDeCaso() {
+
+    // Configura o Título da Página
+    if( usuarioLogado.tipo == "2" ) {
+      document.getElementById( "tituloPagina" ).innerHTML = "VISUALIZAÇÃO DE CASO";
+    } else {
+      document.getElementById( "tituloPagina" ).innerHTML = "EDIÇÃO DE CASO";
+    }
+    
+
+    // Esconde os botões de gravação de novo caso
+    document.getElementById( "botaoGravarNovoCasoSuperior" ).style.display = "none";
+    document.getElementById( "botaoGravarNovoCasoInferior" ).style.display = "none";
+
+    // Mostra os botões de gravação de edição caso apenas para trabalhadores da ponta e devs
+    if( usuarioLogado.tipo == "2" ) {
+      // Não mostra os botões de gravação de edição de caso para gestores
+      document.getElementById( "botaoGravarEdicaoDeCasoSuperior" ).style.display = "none";
+      document.getElementById( "botaoGravarEdicaoDeCasoInferior" ).style.display = "none";    
+    } else {
+      // Mostra os botões de gravação de edição de caso para trabalhadores da ponta e devs
+      document.getElementById( "botaoGravarEdicaoDeCasoSuperior" ).style.display = "";
+      document.getElementById( "botaoGravarEdicaoDeCasoInferior" ).style.display = "";    
+    }    
+
+
+    // Mostra Componentes não utilizados na inserção de novo caso
+    document.getElementById( "dataUltimaResposta" ).style.display = "";
+    document.getElementById( "situacaoDoCaso" ).style.display = "";    
+
+  } // Fim da função configurarPaginaEdicaoDeCaso
+
+
+ 
+  /**
+   * Função que mostra na tela os dados do caso em edição
+   */
+  function mostrarDadosDoCasoEmEdicao() {
+
+    // Referência Familiar
+    document.getElementById('referenciaFamiliarInput').value = cacheCasoEmEdicao.referenciaFamiliar;
+
+
+    // Endereço
+    document.getElementById('tipoLogradouroInput').value = cacheCasoEmEdicao.tipoLogradouro;
+    document.getElementById('nomeLogradouroInput').value = cacheCasoEmEdicao.nomeLogradouro;
+    document.getElementById('numeroInput').value = cacheCasoEmEdicao.numero;
+    document.getElementById('complementoInput').value = cacheCasoEmEdicao.complemento;
+    document.getElementById('bairroInput').value = cacheCasoEmEdicao.bairro;
+
+    // Deixa a regional travada apenas se o usuário do sistema
+    // for um trabalhador de uma regional    
+    if( usuarioLogado.regional == "0" ) {
+      document.getElementById('selectRegionais').value = cacheCasoEmEdicao.idRegional;
+    } else {
+      document.getElementById('selectRegionais').innerHTML = 
+      `<option selected value="${cacheCasoEmEdicao.idRegional}">${cacheCasoEmEdicao.nomeRegional}</option>`;
+    }                                     
+
+    document.getElementById('cepInput').value = cacheCasoEmEdicao.cep;
+    document.getElementById('tpsaInput').value = cacheCasoEmEdicao.tpsa;
+
+
+    // Datas
+    let data = cacheCasoEmEdicao.dataDeChegadaNoCREAS.split("/");
+    document.getElementById('dataChegadaCREASInput').value = `${data[2]}-${data[1]}-${data[0]}`;
+
+    if( cacheCasoEmEdicao.dataPrevistaParaResposta != "" ) {
+      data = cacheCasoEmEdicao.dataPrevistaParaResposta.split("/");
+      document.getElementById('dataPrevistaRespostaInput').value = `${data[2]}-${data[1]}-${data[0]}`;
+    }
+
+    if( cacheCasoEmEdicao.dataDaUltimaResposta != "" ) {
+      data = cacheCasoEmEdicao.dataDaUltimaResposta.split("/");
+      document.getElementById('dataUltimaRespostaInput').value = `${data[2]}-${data[1]}-${data[0]}`;
+    }
+
+
+    // checkboxOrgaosEncaminhadores
+    let idsOrgaosEncaminhadores = cacheCasoEmEdicao.idsOrgaosEncaminhadores.split(";").filter( id => id != "" );
+    let idItem;
+    idsOrgaosEncaminhadores.forEach( id => {
+      idItem = 'checkboxOrgaosEncaminhadores' + id;
+      document.getElementById( idItem ).checked = true;
+    });
+
+
+    // Designação Caso
+    if( cacheCasoEmEdicao.ativo == "Sim" ) {
+      document.getElementById( "situacaoCasoInput" ).value = "Ativo";
+    } else {
+      document.getElementById( "situacaoCasoInput" ).value = "Inativo";
+
+      data = cacheCasoEmEdicao.dataDeDesignacao.split("/");
+      document.getElementById( "dataDesignacaoInput" ).value = `${data[2]}-${data[1]}-${data[0]}`;
+
+      document.getElementById('selectMotivoDesiginacao').innerHTML = 
+      `<option selected value="${cacheCasoEmEdicao.idMotivoDeDesignacao}">${cacheCasoEmEdicao.nomeMotivoDeDesignacao}</option>`;      
+    }
+
+
+    // checkboxCategorias    
+    let idsCategorias;
+    if( cacheCasoEmEdicao.idsCategorias != "" ) {
+      idsCategorias = cacheCasoEmEdicao.idsCategorias.split(";").filter( id => id != "" );     
+      idsCategorias.forEach( id => {
+        idItem = 'checkboxCategorias' + id;
+        document.getElementById( idItem ).checked = true;
+      });
+
+
+      // Abas Parâmetros
+      mostrarAbasParametros();
+
+  
+      // Checkbox Parâmetros    
+      if( cacheCasoEmEdicao.idsParametros != "" ) { 
+  
+        let idsParametros = cacheCasoEmEdicao.idsParametros.split(";").filter( id => id != "" );    
+        let arrayIdsCategoriasDoParametro;
+  
+        idsParametros.forEach( idParametro => {  
+          arrayIdsCategoriasDoParametro = (cacheParametros[idParametro-1][COLUNA_CATEGORIAS_DO_PARAMETRO]).split(";").filter( id => id != "");    
+  
+          arrayIdsCategoriasDoParametro.forEach( idCategoria => {  
+            idItem =  "checkboxParametros_" + idCategoria + "_" + idParametro;
+            document.getElementById( idItem ).checked = true;  
+          });  
+        });
+
+      } // Fim if checkbox parâmetros
+
+    } // Fim if checkbox categorias  
+    
+
+    // Observação
+    document.getElementById('textAreaObservacao').value = cacheCasoEmEdicao.observacao;
+
+  } // Fim da função mostrarDadosDoCasoEmEdicao
+
+
+
+  /**
+   * Função chamada quando o botão editar é clicado para salvar uma edição de caso
+   */    
+  function salvarEdicaoDeCaso() {
+
+    // RF
+    const referenciaFamiliar = document.getElementById('referenciaFamiliarInput').value;
+
+    // Validação RF: referencia familiar é campo obrigatório
+    if (!referenciaFamiliar) {      
+      mostrarModalErro( "Campo REFERÊNCIA FAMILIAR é obrigatório!" );
+      return;
+    } // Fim da validação de RF           
+
+
+    // Endereço
+    const tipoLogradouro = document.getElementById('tipoLogradouroInput').value;
+    const nomeLogradouro = document.getElementById('nomeLogradouroInput').value;
+    const numero = document.getElementById('numeroInput').value;
+    const complemento = document.getElementById('complementoInput').value;
+    const bairro = document.getElementById('bairroInput').value;
+
+    const idRegional = document.getElementById('selectRegionais').value;
+
+    // Validação Regional: Regional é campo obrigatório
+    if (!idRegional) {      
+      mostrarModalErro( "Campo REGIONAL é obrigatório!" );
+      return;
+    } // Fim da validação de RF           
+
+    const cep = document.getElementById('cepInput').value;     
+
+    // TPSA
+    const tpsa = document.getElementById('tpsaInput').value;
+
+
+    // Data de chegada no CREAS
+    let dataChegadaCREASInput = document.getElementById('dataChegadaCREASInput').value;
+    let auxDataChegadaCREAS;
+    let dataChegadaCREAS;
+
+    // Validação Data de Chegada no CREAS:       
+
+    // Se a data de chegada no CREAS tiver sido informada
+    if( dataChegadaCREASInput )  {
+
+      // Corrige e formata a data de chegada no CREAS
+      auxDataChegadaCREAS = new Date( dataChegadaCREASInput );  
+      auxDataChegadaCREAS.setDate( auxDataChegadaCREAS.getDate() + 1 );      
+      dataChegadaCREAS = auxDataChegadaCREAS.toLocaleString("pt-BR", {dateStyle: "short"});
+
+      // Impede data futura para data de chegada no CREAS
+      let dataHoje = new Date();            
+      auxDataChegadaCREAS.setHours( 1 );      
+      if( auxDataChegadaCREAS.getTime() > dataHoje.getTime() ) {
+        mostrarModalErro( "O campo DATA DE CHEGADA NO CREAS não aceita data futura!" );  
+        return;
+      }
+
+    // Se a data de chegada no CREAS NÃO tiver sido informada,
+    // utiliza a data do dia
+    } else {
+        
+      dataChegadaCREAS = cacheCasoEmEdicao.dataDeChegadaNoCREAS;  
+
+    } // Fim do tratamendo da data de chegada no CREAS
+
+
+    // Data prevista para resposta
+    let dataPrevistaRespostaInput = document.getElementById('dataPrevistaRespostaInput').value;
+    let auxDataPrevistaResposta;
+    let dataPrevistaResposta;
+
+    // Validação Data Prevista para Resposta: 
+
+    // Se a data prevista para resposta tiver sido informada
+    if( dataPrevistaRespostaInput )  {
+
+      // Corrige e formata a data prevista para resposta
+      auxDataPrevistaResposta = new Date( dataPrevistaRespostaInput );  
+      auxDataPrevistaResposta.setDate( auxDataPrevistaResposta.getDate() + 1 );
+      dataPrevistaResposta = auxDataPrevistaResposta.toLocaleString("pt-BR", {dateStyle: "short"});
+      
+      // Impede que a data prevista para resposta seja anterior à data
+      // de chegada no CREAS        
+      auxDataPrevistaResposta.setHours( 1 );      
+      if( auxDataPrevistaResposta.getTime() < auxDataChegadaCREAS.getTime() ) {
+        mostrarModalErro( "A DATA PREVISTA PARA RESPOSTA deve ser maior ou igual à DATA DE CHEGADA NO CREAS!" );          
+        return;
+      }        
+
+    // Se a data prevista para resposta NÃO tiver sido informada,
+    // utiliza null
+    } else {
+
+      dataPrevistaResposta = cacheCasoEmEdicao.dataPrevistaParaResposta;
+
+    } // Fim do tratamento da data prevista para resposta
+
+
+    // Data da última resposta
+    let dataUltimaRespostaInput = document.getElementById('dataUltimaRespostaInput').value;
+    let auxDataUltimaResposta;
+    let dataUltimaResposta;
+
+    // Validação Data da última Resposta: 
+
+    // Se a data da última resposta tiver sido informada
+    if( dataUltimaRespostaInput )  {
+
+      // Corrige e formata a data da última resposta
+      auxDataUltimaResposta = new Date( dataUltimaRespostaInput );  
+      auxDataUltimaResposta.setDate( auxDataUltimaResposta.getDate() + 1 );
+      dataUltimaResposta = auxDataUltimaResposta.toLocaleString("pt-BR", {dateStyle: "short"});
+      
+      // Impede que a data da última resposta seja anterior à data
+      // de prevista para resposta
+      auxDataUltimaResposta.setHours( 1 ); 
+      if( auxDataUltimaResposta.getTime() < auxDataChegadaCREAS.getTime() ) {
+        mostrarModalErro( "A DATA DA ÚLTIMA RESPOSTA deve ser maior ou igual à DATA DE CHEGADA NO CREAS!" );          
+        return;
+      }        
+
+    // Se a data da última resposta NÃO tiver sido informada,
+    // mantém a data que já estava
+    } else {
+
+      dataUltimaResposta = cacheCasoEmEdicao.dataDaUltimaResposta;
+
+    } // Fim do tratamento da data da última resposta
+
+      
+    // Órgãos encaminhadores
+    const checkBoxIdsOrgaosEncaminhadores = document.querySelectorAll('input[name="checkboxOrgaosEncaminhadores"]:checked');
+    let arrayIdsOrgaosEncaminhadores;
+    let idsOrgaosEncaminhadores;
+
+    // Validação Órgãos Encaminhadores: Órgãos Encaminhadores é obrigatório
+    if( checkBoxIdsOrgaosEncaminhadores.length ) {
+ 
+      arrayIdsOrgaosEncaminhadores = Array.from(checkBoxIdsOrgaosEncaminhadores).map(chk => chk.value);
+      idsOrgaosEncaminhadores = arrayIdsOrgaosEncaminhadores.join(";");
+
+    } else {
+
+      mostrarModalErro( "Campo ÓRGÃOS ENCAMINHADORES é obrigatório!" );
+      return;
+
+    } // Fim da validação dos Órgãos Encaminhadores     
+
+
+    // Categorias Caso
+    const checkBoxIdsCategoriasCaso = document.querySelectorAll('input[name="checkboxCategorias"]:checked');
+    let arrayIdsCategoriasCaso;
+    let idsCategoriasCaso;
+
+    // Validação Categorias Caso: Categorias Caso é obrigatório
+    if( checkBoxIdsCategoriasCaso.length ) {
+ 
+      arrayIdsCategoriasCaso = Array.from(checkBoxIdsCategoriasCaso).map(chk => chk.value);
+      idsCategoriasCaso = arrayIdsCategoriasCaso.join(";");
+
+    } else {
+
+      mostrarModalErro( "Campo CATEGORIAS é obrigatório!" );
+      return;
+
+    } // Fim da validação das Categorias Caso
+
+
+    // Parametros Caso
+    const checkBoxIdsParametrosCaso = processarParametros();
+    let idsParametrosCaso;
+
+    // Validação Parâmetros Caso: Parâmetros Caso é obrigatório
+    if( checkBoxIdsParametrosCaso.length ) {
+
+      idsParametrosCaso = checkBoxIdsParametrosCaso.join(";");      
+
+    } else {
+
+      mostrarModalErro( "Campo PARÂMETROS é obrigatório!" );
+      return;
+
+    } // Fim da validação dos Parâmetros Caso
+
+      
+    // Observação
+    let observacao = document.getElementById('textAreaObservacao').value;
+    if( observacao.length > 200 ) {
+      observacao = observacao.substring(0, 200);
+    }
+
+
+    // mostra modal com mensagem de gravação de dados
+    mostrarModalMensagem( "Gravando os dados, por favor aguarde..." );   
+
+
+    // Chama função backend para atualizar o caso
+    google.script.run
+                 .withSuccessHandler( () => {
+
+                   // Volta para a tela de resumos de casos
+                   redirecionarParaTelaResumosDosCasos( 1 );
+
+                 })
+                 .withFailureHandler( erro => {
+
+                   // mostra modal com mensagem de erro 
+                   mostrarModalErro( "salvarEdicaoDeCaso - " + erro.message );
+
+                 })
+                 // Chama a função backend que atualiza um caso
+                 .atualizarCaso( cacheCasoEmEdicao.id,
+                                 referenciaFamiliar,
+                                 tipoLogradouro,
+                                 nomeLogradouro,
+                                 numero,
+                                 complemento,
+                                 bairro,
+                                 idRegional,
+                                 cep,                          
+                                 tpsa,
+                                 dataChegadaCREAS,
+                                 idsOrgaosEncaminhadores,
+                                 dataPrevistaResposta, 
+                                 dataUltimaResposta, 
+                                 cacheCasoEmEdicao.dataDeDesignacao,   
+                                 cacheCasoEmEdicao.idMotivoDeDesignacao, 
+                                 idsCategoriasCaso,
+                                 idsParametrosCaso,
+                                 observacao );        
+
+
+  } // Fim da função salvarEdicaoDeCaso
+
+
+  </script>
+
+

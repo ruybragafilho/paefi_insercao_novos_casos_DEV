@@ -1,0 +1,119 @@
+<script>
+
+  "use strict";
+
+  /** 
+   *  ####################################################
+   *  #####                                          ##### 
+   *  #####  CACHE COM DADOS CARREGADOS DO SERVIDOR  #####
+   *  #####                                          ##### 
+   *  ####################################################
+   */  
+
+  // Cache da tabela Categorias, carregados via chamada 
+  // da função backend obterTabelaCompleta( "CATEGORIAS" )
+  let cacheCategorias = [];  
+
+  // Cache da tabela Parâmetros, carregados via chamada 
+  // da função backend obterTabelaCompleta( "PARAMETROS" )
+  let cacheParametros = [];    
+
+  // Cache da tabela Órgãos Encaminhadores, carregados via chamada 
+  // da função backend obterTabelaCompleta( "ORGAOS_ENCAMINHADORES" )
+  let cacheOrgaosEncaminhadores = [];    
+
+  // Cache da tabela Regionais, carregados via chamada 
+  // da função backend obterTabelaCompleta( "REGIONAIS" )
+  let cacheRegionais = [];
+
+  // Cache da tabela Motivos de Designação, carregados via chamada 
+  // da função backend obterTabelaCompleta( "MOTIVOS_DE_DESIGNACAO" )
+  let cacheMotivosDeDesignacao = [];
+
+
+  // Cache da tabela com os casos, carregados via chamada 
+  // da função backend obterCasos
+  let cacheCasos = [];
+
+
+
+  /**
+   *  ##########################################################################
+   *  #####                                                                #####
+   *  #####  Constantes que armazenam as posições das colunas nas tabelas  #####
+   *  #####                                                                #####
+   *  ##########################################################################
+   */
+
+  // Posições das colunas ID, NOME e ATIVO nas tabelas da planilha CODIGOS
+  const COLUNA_ID    = 0;
+  const COLUNA_NOME  = 1;
+  const COLUNA_ATIVO = 2;  
+
+  const COLUNA_CATEGORIAS_DO_PARAMETRO = 4;
+
+
+
+  /**
+   *  #########################################################
+   *  #####                                               #####
+   *  #####  Funções que inicializam o cache do frontend  #####
+   *  #####                                               #####
+   *  #########################################################
+   */
+
+
+  /**
+  * Função que carrega todas as tabelas da base de dados CODIGOS para o cache do frontend
+  */  
+  function inicializarCaches() {
+    
+    carregarTabelaNaCache( "CATEGORIAS" );
+    carregarTabelaNaCache( "PARAMETROS" );
+    carregarTabelaNaCache( "ORGAOS_ENCAMINHADORES" );
+    carregarTabelaNaCache( "REGIONAIS" );    
+    carregarTabelaNaCache( "MOTIVOS_DE_DESIGNACAO" );
+
+  } // Fim da função inicializarCaches
+
+
+
+  /**
+  * Função que carrega uma tabela da base de dados CODIGOS para o cache do frontend
+  *
+  * @param {String} nomeTabela - Nome da tabela da base CODIGO que será carregada   
+  */
+  function carregarTabelaNaCache( nomeTabela ) {
+
+    google.script.run
+                 .withSuccessHandler( tabela => {                     
+
+                    // Atribui a tabela carregada ao cache apropriado
+                    switch( nomeTabela ) {
+                      case "CATEGORIAS":               cacheCategorias = tabela;
+                                                       break;
+                      case "PARAMETROS":               cacheParametros = tabela;
+                                                       break;                                                                  
+                      case "ORGAOS_ENCAMINHADORES":    cacheOrgaosEncaminhadores = tabela;
+                                                       break;
+                      case "REGIONAIS":                cacheRegionais = tabela;
+                                                       break;            
+                      case "MOTIVOS_DE_DESIGNACAO":    cacheMotivosDeDesignacao = tabela;
+                                                       break;            
+                      default:                         throw( new Error( "Tabela Inválida" ) ); 
+                    }
+
+                 })
+                 .withFailureHandler( erro => {
+
+                   // Mostra modal de erro
+                   mostrarModalErro( "carregarTabelaNaCache - " + erro.message );
+
+                 })
+                 // Chama a função backend para carregar a tabela
+                 .obterTabelaCompleta( nomeTabela );                                          
+
+  } // Fim da função carregarTabelaNaCache
+
+
+</script>
