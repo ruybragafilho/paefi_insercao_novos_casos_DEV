@@ -1,7 +1,8 @@
 /**
  * Planilha externa que será importada
  */
-const PLANILHA_EXTERNA_ID  =  "1lCzpK99jD0KnYJAkRWeE49Ppq8u1IR793sQJ1bn3N30";
+//const PLANILHA_EXTERNA_ID  =  "1lCzpK99jD0KnYJAkRWeE49Ppq8u1IR793sQJ1bn3N30";
+const PLANILHA_EXTERNA_ID  =  "15McHyDXcDaUlLo_OwEB_1YDJVUTokQcCB6OH9THyWNI";
 const PLANILHA_EXTERNA     =  SpreadsheetApp.openById(PLANILHA_EXTERNA_ID);
 
 const TABELA_EXTERNA         =  PLANILHA_EXTERNA.getSheetByName('Página1');
@@ -10,14 +11,14 @@ const BUFFER_TABELA_EXTERNA  =  TABELA_EXTERNA.getDataRange().getDisplayValues()
 const NUM_CASOS_TABELA_EXTERNA  =  BUFFER_TABELA_EXTERNA.length;
 
 
-//const LINHA_INICIAL = 0;
-//const LINHA_FINAL = 99;
+const LINHA_INICIAL = 0;
+const LINHA_FINAL = 99;
 
 //const LINHA_INICIAL = 100;
 //const LINHA_FINAL = 199;
 
-const LINHA_INICIAL = 200;
-const LINHA_FINAL = NUM_CASOS_TABELA_EXTERNA - 1;
+//const LINHA_INICIAL = 200;
+//const LINHA_FINAL = NUM_CASOS_TABELA_EXTERNA - 1;
 
 
 /**
@@ -180,3 +181,11 @@ function teste_codificarDados() {
 
 
 
+function teste() {
+
+  let linhaCaso64 = BUFFER_TABELA_EXTERNA[ 63 ];
+  console.log( "Parâmetros L64: " + linhaCaso64[PARAMETROS_CASO - 7] );
+
+  let linhaCaso65 = BUFFER_TABELA_EXTERNA[ 64 ];
+  console.log( "\nParâmetros L65: " + linhaCaso65[PARAMETROS_CASO - 7] );  
+}
