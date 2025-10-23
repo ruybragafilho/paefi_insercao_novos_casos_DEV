@@ -363,7 +363,9 @@ function gravarNaTabelaCasos( id,
  * @return Um Integer contendo o somatório das pontuações
  */
 function calcularPontuacaoParametros( idsParametros ) {
-    
+  
+  if(idsParametros.length < 1) return 0;
+
   // Somatório das pontuações dos parâmetros 
   let somaPontos = 0;
 
