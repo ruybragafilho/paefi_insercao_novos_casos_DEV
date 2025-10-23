@@ -94,7 +94,7 @@ function obterCasosPlanilhaExterna( linhaInicial, linhaFinal ) {
         dataPrevistaParaResposta: linhaCaso[DATA_PREVISTA_PARA_RESPOSTA - 2],
         dataDaUltimaResposta: linhaCaso[DATA_DA_ULTIMA_RESPOSTA - 2],                
         idsCategorias: codificarDados( BUFFER_CATEGORIAS, linhaCaso[CATEGORIAS_CASO - 6] ),           
-        idsParametros: codificarDados( BUFFER_PARAMETROS, linhaCaso[PARAMETROS_CASO - 7] ),
+        idsParametros: (linhaCaso[PARAMETROS_CASO - 7] != "") ? codificarDados( BUFFER_PARAMETROS, linhaCaso[PARAMETROS_CASO - 7] ) : "",
         observacao: linhaCaso[OBSERVACAO - 7]  
       }
     ); // Fim push
@@ -189,3 +189,6 @@ function teste() {
   let linhaCaso65 = BUFFER_TABELA_EXTERNA[ 64 ];
   console.log( "\nParâmetros L65: " + linhaCaso65[PARAMETROS_CASO - 7] );  
 }
+
+
+
