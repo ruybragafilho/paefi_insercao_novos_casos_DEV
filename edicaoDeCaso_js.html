@@ -322,20 +322,7 @@
 
 
     // Parametros Caso
-    const checkBoxIdsParametrosCaso = processarParametros();
-    let idsParametrosCaso;
-
-    // Validação Parâmetros Caso: Parâmetros Caso é obrigatório
-    if( checkBoxIdsParametrosCaso.length ) {
-
-      idsParametrosCaso = checkBoxIdsParametrosCaso.join(";");      
-
-    } else {
-
-      mostrarModalErro( "Campo PARÂMETROS é obrigatório!" );
-      return;
-
-    } // Fim da validação dos Parâmetros Caso
+    const idsParametrosCaso = processarParametros();
 
       
     // Observação

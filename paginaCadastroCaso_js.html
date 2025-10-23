@@ -11,6 +11,11 @@
 
     // Variáveis para tratar as categorias selecionadas
     const checkBoxIdsCategoriasCaso = document.querySelectorAll('input[name="checkboxCategorias"]:checked');
+
+    // Se nenhum parâmetro tiver sido selecionado, retorna string "" 
+    if( checkBoxIdsCategoriasCaso.length < 1 ) return "";
+
+    // Se algum parâmetro tiver sido selecionado, processa os parâmetros
     let arrayIdsCategoriasCaso = Array.from(checkBoxIdsCategoriasCaso).map(chk => chk.value);
 
     // Variáveis para tratar os parâmetros
@@ -33,7 +38,7 @@
     const conjuntoParametrosSelecionados = new Set(arrayParametrosSelecionados);
     const arraySemDuplicatas = [...conjuntoParametrosSelecionados];
 
-    return arraySemDuplicatas;
+    return arraySemDuplicatas.join(";");
 
   } // Fim da função processarParametros() 
 

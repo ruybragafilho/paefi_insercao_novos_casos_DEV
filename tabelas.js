@@ -276,7 +276,7 @@ function gravarNaTabelaCasos( id,
     caso[CATEGORIAS_CASO] = formatarListaIds( idsCategoriasCaso, NUM_CATEGORIAS );
       
     // Calcula e insere a pontuação dos parâmetros selecioados
-    caso[PONTUACAO_PARAMETROS_CASO] = idsParametrosCaso.length ? calcularPontuacaoParametros( idsParametrosCaso.split(";") ) : 0;
+    caso[PONTUACAO_PARAMETROS_CASO] = (idsParametrosCaso != "") ? calcularPontuacaoParametros( idsParametrosCaso.split(";") ) : 0;
         
     // Processa e insere os parâmetros no array
     caso[PARAMETROS_CASO] = formatarListaIds( idsParametrosCaso, NUM_PARAMETROS );
@@ -364,7 +364,7 @@ function gravarNaTabelaCasos( id,
  */
 function calcularPontuacaoParametros( idsParametros ) {
   
-  if(idsParametros.length < 1) return 0;
+  if(idsParametros == "") return 0;
 
   // Somatório das pontuações dos parâmetros 
   let somaPontos = 0;
