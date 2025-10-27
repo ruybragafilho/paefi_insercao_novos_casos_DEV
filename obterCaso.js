@@ -80,7 +80,7 @@ function obterCaso( id ) {
 
 
 /**
- * Função para testar a função principal atualizarCaso
+ * Função para testar a função principal obterCaso
  */
 function teste_obterCaso() {
 
