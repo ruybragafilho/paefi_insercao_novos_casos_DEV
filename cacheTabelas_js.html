@@ -10,6 +10,10 @@
    *  ####################################################
    */  
 
+  // Cache da tabela Violacoes, carregados via chamada 
+  // da função backend obterTabelaCompleta( "VIOLACOES" )
+  let cacheViolacoes = [];  
+
   // Cache da tabela Categorias, carregados via chamada 
   // da função backend obterTabelaCompleta( "CATEGORIAS" )
   let cacheCategorias = [];  
@@ -67,7 +71,8 @@
   * Função que carrega todas as tabelas da base de dados CODIGOS para o cache do frontend
   */  
   function inicializarCaches() {
-    
+
+    carregarTabelaNaCache( "VIOLACOES" );    
     carregarTabelaNaCache( "CATEGORIAS" );
     carregarTabelaNaCache( "PARAMETROS" );
     carregarTabelaNaCache( "ORGAOS_ENCAMINHADORES" );
@@ -90,6 +95,8 @@
 
                     // Atribui a tabela carregada ao cache apropriado
                     switch( nomeTabela ) {
+                      case "VIOLACOES":                cacheViolacoes = tabela;
+                                                       break;                      
                       case "CATEGORIAS":               cacheCategorias = tabela;
                                                        break;
                       case "PARAMETROS":               cacheParametros = tabela;

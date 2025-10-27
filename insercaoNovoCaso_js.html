@@ -160,7 +160,25 @@
       mostrarModalErro( "Campo ÓRGÃOS ENCAMINHADORES é obrigatório!" );
       return;
 
-    } // Fim da validação dos Órgãos Encaminhadores     
+    } // Fim da validação dos Órgãos Encaminhadores    
+    
+    
+    // Violacoes Caso
+    const checkBoxIdsViolacoesCaso = document.querySelectorAll('input[name="checkboxViolacoes"]:checked');
+    let arrayIdsViolacoesCaso;
+    let idsViolacoesCaso;
+
+    // Processamento das violações do caso
+    if( checkBoxIdsViolacoesCaso.length ) {
+ 
+      arrayIdsViolacoesCaso = Array.from(checkBoxIdsViolacoesCaso).map(chk => chk.value);
+      idsViolacoesCaso = arrayIdsViolacoesCaso.join(";");
+
+    } else {
+
+      idsViolacoesCaso = "";      
+
+    } // Fim do processamento das violações do caso
 
 
     // Categorias Caso
@@ -182,7 +200,7 @@
     } // Fim da validação das Categorias Caso
 
 
-    // Parametros Caso
+    // Parametros Caso - Não obrigatório
     const idsParametrosCaso = processarParametros();
     
       
@@ -223,7 +241,8 @@
                                    tpsa,
                                    dataChegadaCREAS,
                                    idsOrgaosEncaminhadores,
-                                   dataPrevistaResposta,                    
+                                   dataPrevistaResposta,   
+                                   idsViolacoesCaso,                 
                                    idsCategoriasCaso,
                                    idsParametrosCaso,
                                    observacao  );        

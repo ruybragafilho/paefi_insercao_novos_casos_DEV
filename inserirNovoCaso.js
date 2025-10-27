@@ -37,7 +37,8 @@ function inserirNovoCaso( referenciaFamiliar,
                           tpsa,
                           dataChegadaNoCREAS,
                           idsOrgaosEncaminhadores,
-                          dataPrevistaResposta,                          
+                          dataPrevistaResposta,  
+                          idsViolacoesCaso,                        
                           idsCategoriasCaso,
                           idsParametrosCaso,
                           observacao ) {
@@ -82,6 +83,7 @@ function inserirNovoCaso( referenciaFamiliar,
                          dataDaUltimaResposta,
                          dataDeDesignacao,
                          idMotivoDeDesignacao,     
+                         idsViolacoesCaso,
                          idsCategoriasCaso,
                          idsParametrosCaso,
                          observacao );
@@ -116,6 +118,7 @@ function teste_inserirNovoCaso() {
   let dataChegadaNoCREAS = new Date("2025-07-31");
   let idsOrgaosEncaminhadores = "2;4";
   let dataPrevistaResposta = new Date("2025-08-31");  
+  let idsViolacoesCaso = "2;4";
   let idsCategoriasCaso = "1;3;5";
   let idsParametrosCaso = "1;2;3;18;28";
   let observacao = "  Observação do novo caso inserido  ";
@@ -132,7 +135,8 @@ function teste_inserirNovoCaso() {
                       tpsa,
                       dataChegadaNoCREAS,
                       idsOrgaosEncaminhadores,
-                      dataPrevistaResposta,                    
+                      dataPrevistaResposta,    
+                      idsViolacoesCaso,                
                       idsCategoriasCaso,
                       idsParametrosCaso,
                       observacao  );

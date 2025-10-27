@@ -69,6 +69,9 @@ function obterCasos( idRegional ) {
         totalPontos: linhaCaso[TOTAL_DE_PONTOS],
   
         tempoDeEspera: linhaCaso[TEMPO_DE_ESPERA],
+
+        idsViolacoes: linhaCaso[VIOLACOES_CASO],
+        nomesViolacoes: idsToNomes(linhaCaso[VIOLACOES_CASO], "VIOLACOES"),        
   
         idsCategorias: linhaCaso[CATEGORIAS_CASO],
         nomesCategorias: idsToNomes(linhaCaso[CATEGORIAS_CASO], "CATEGORIAS"),

@@ -110,6 +110,17 @@
     }
 
 
+    // checkboxViolacoes
+    let idsViolacoes;
+    if( cacheCasoEmEdicao.idsViolacoes != "" ) {
+      idsViolacoes = cacheCasoEmEdicao.idsViolacoes.split(";").filter( id => id != "" );    
+      idsViolacoes.forEach( id => {
+        idItem = 'checkboxViolacoes' + id;
+        document.getElementById( idItem ).checked = true;
+      });    
+    }
+    
+
     // checkboxCategorias    
     let idsCategorias;
     if( cacheCasoEmEdicao.idsCategorias != "" ) {
@@ -299,7 +310,25 @@
       mostrarModalErro( "Campo ÓRGÃOS ENCAMINHADORES é obrigatório!" );
       return;
 
-    } // Fim da validação dos Órgãos Encaminhadores     
+    } // Fim da validação dos Órgãos Encaminhadores   
+    
+    
+    // Violacoes Caso
+    const checkBoxIdsViolacoesCaso = document.querySelectorAll('input[name="checkboxViolacoes"]:checked');
+    let arrayIdsViolacoesCaso;
+    let idsViolacoesCaso;
+
+    // Processamento das violações do caso
+    if( checkBoxIdsViolacoesCaso.length ) {
+ 
+      arrayIdsViolacoesCaso = Array.from(checkBoxIdsViolacoesCaso).map(chk => chk.value);
+      idsViolacoesCaso = arrayIdsViolacoesCaso.join(";");
+
+    } else {
+
+      idsViolacoesCaso = "";      
+
+    } // Fim do processamento das violações do caso    
 
 
     // Categorias Caso

@@ -26,6 +26,7 @@
  * @param {Date}   dataDaUltimaResposta: Data da última resposta
  * @param {Date}   dataDeDesignacao: Data de designação do caso
  * @param {String} idMotivoDeDesignacao: id do motivo de designação 
+ * @param {String} idsViolacoesCaso: ids das violacoes
  * @param {String} idsCategoriasCaso: ids das categorias
  * @param {String} idsParametrosCaso: ids dos parâmetros selecionados
  * @param {String} observacao: Observação do trabalhador - text de 200 caracteres
@@ -45,7 +46,8 @@ function atualizarCaso( id,
                         dataPrevistaResposta,  
                         dataDaUltimaResposta, 
                         dataDeDesignacao,   
-                        idMotivoDeDesignacao,                    
+                        idMotivoDeDesignacao,   
+                        idsViolacoesCaso,                 
                         idsCategoriasCaso,
                         idsParametrosCaso,
                         observacao ) {
@@ -77,7 +79,8 @@ function atualizarCaso( id,
                          dataPrevistaResposta, 
                          dataDaUltimaResposta,
                          dataDeDesignacao,
-                         idMotivoDeDesignacao,     
+                         idMotivoDeDesignacao,    
+                         idsViolacoesCaso, 
                          idsCategoriasCaso,
                          idsParametrosCaso,
                          observacao );
@@ -116,6 +119,7 @@ function teste_atualizarCaso() {
   let dataDaUltimaResposta = new Date("2025-09-01");  
   let dataDeDesignacao = new Date("2025-09-01");  
   let idMotivoDeDesignacao = "2";   
+  let idsViolacoesCaso = "2;4";
   let idsCategoriasCaso = "1;3;5";
   let idsParametrosCaso = "1;2;4;6;9";
   let observacao = "Observação do caso atualizado";
@@ -136,7 +140,8 @@ function teste_atualizarCaso() {
                     dataPrevistaResposta,  
                     dataDaUltimaResposta, 
                     dataDeDesignacao,   
-                    idMotivoDeDesignacao,                    
+                    idMotivoDeDesignacao,   
+                    idsViolacoesCaso,                 
                     idsCategoriasCaso,
                     idsParametrosCaso,
                     observacao );
