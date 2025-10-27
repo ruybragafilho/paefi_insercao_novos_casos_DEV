@@ -22,6 +22,7 @@
  * @param {Date}   dataChegadaNoCREAS: Data de chegada no CREAS
  * @param {String} idsOrgaosEncaminhadores: ids dos órgãos encaminhadores
  * @param {Date}   dataPrevistaResposta: Data prevista para a resposta 
+ * @param {String} idsViolacoesCaso: ids das violações
  * @param {String} idsCategoriasCaso: ids das categorias
  * @param {String} idsParametrosCaso: ids dos parâmetros selecionados
  * @param {String} observacao: Observação do trabalhador - text de 200 caracteres
