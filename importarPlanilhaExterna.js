@@ -87,10 +87,11 @@ function obterCasosPlanilhaExterna( linhaInicial, linhaFinal ) {
         dataDeChegadaNoCREAS: linhaCaso[DATA_DE_CHEGADA_NO_CREAS - 2],  
         idsOrgaosEncaminhadores: codificarDados( BUFFER_ORGAOS_ENCAMINHADORES, linhaCaso[ORGAOS_ENCAMINHADORES - 2] ),          
         dataPrevistaParaResposta: linhaCaso[DATA_PREVISTA_PARA_RESPOSTA - 2],
-        dataDaUltimaResposta: linhaCaso[DATA_DA_ULTIMA_RESPOSTA - 2],                
-        idsCategorias: codificarDados( BUFFER_CATEGORIAS, linhaCaso[CATEGORIAS_CASO - 6] ),           
-        idsParametros: (linhaCaso[PARAMETROS_CASO - 7] != "") ? codificarDados( BUFFER_PARAMETROS, linhaCaso[PARAMETROS_CASO - 7] ) : "",
-        observacao: linhaCaso[OBSERVACAO - 7]  
+        dataDaUltimaResposta: linhaCaso[DATA_DA_ULTIMA_RESPOSTA - 2],  
+        idsViolacoes: "",              
+        idsCategorias: codificarDados( BUFFER_CATEGORIAS, linhaCaso[CATEGORIAS_CASO - 7] ),           
+        idsParametros: (linhaCaso[PARAMETROS_CASO - 7] != "") ? codificarDados( BUFFER_PARAMETROS, linhaCaso[PARAMETROS_CASO - 8] ) : "",
+        observacao: linhaCaso[OBSERVACAO - 8]  
       }
     ); // Fim push
 
