@@ -91,8 +91,14 @@ function obterCasos( idRegional ) {
   // Determina a posicao na fila da regional / fila geral
   let posicao = 1;
   casos.forEach( caso => {
-    caso.posicaoNaFila = posicao;
-    ++posicao; 
+
+    if( caso.ativo == "Sim" ) {
+      caso.posicaoNaFila = posicao;
+      ++posicao; 
+    } else {
+      caso.posicaoNaFila = "-";
+    }
+
   });
 
   // Retorna os casos
