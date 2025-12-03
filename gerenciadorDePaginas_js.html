@@ -8,6 +8,12 @@
   let cachePaginaCadastroCaso;
 
 
+  // Flag que indica se a página inicial foi carregada
+  //    0: ainda não foi carregada
+  //    1: já foi carregada
+  let flagPaginaInicialCarregada = 0;
+
+
   // timer
   const esperar = (time) => new Promise( ( resolve, reject ) => setTimeout( resolve, time ) );
 
@@ -34,6 +40,12 @@
       case "resumosDosCasos": 
                               // Carrega a página resumosDosCasos.html, armazenada no cache do frontend,
                               // no elemento de id "conteudo" da página index.html (SPA)
+
+                              while( !flagPaginaInicialCarregada ) {
+                                console.log( "Aguardando carregamento da página na cache" );
+                                await esperar( 1000 );
+                              }
+
                               document.getElementById("conteudo").innerHTML = cachePaginaResumosDosCasos;  
 
                               // Configura a página de resumos dos casos
@@ -119,6 +131,7 @@
                     // Atribui a página carregada ao cache apropriado
                     switch( nomePagina ) {
                       case "resumosDosCasos":     cachePaginaResumosDosCasos = pagina;
+                                                  flagPaginaInicialCarregada = 1;
                                                   break;                      
                       case "paginaCadastroCaso":  cachePaginaCadastroCaso = pagina;
                                                   break;   
