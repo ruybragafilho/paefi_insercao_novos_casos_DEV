@@ -41,6 +41,19 @@
 
 
 
+  // Flag que indica se as tabelas foram carregadas no cache de tabelas
+  //    0: ainda não foi carregada
+  //    1: já foi carregada
+  let flagTabelaViolacoes             = 0;
+  let flagTabelaCategorias            = 0;
+  let flagTabelaParametros            = 0;
+  let flagTabelaOrgaosEncaminhadores  = 0;  
+  let flagTabelaRegionais             = 0;
+  let flagTabelaMotivosDeDesignacao   = 0;  
+  let flagTabelaCasos                 = 0;
+
+
+
   /**
    *  ##########################################################################
    *  #####                                                                #####
@@ -95,19 +108,32 @@
 
                     // Atribui a tabela carregada ao cache apropriado
                     switch( nomeTabela ) {
-                      case "VIOLACOES":                cacheViolacoes = tabela;
-                                                       break;                      
-                      case "CATEGORIAS":               cacheCategorias = tabela;
+                      case "VIOLACOES":                cacheViolacoes      = tabela;
+                                                       flagTabelaViolacoes = 1;
+                                                       break;              
+
+                      case "CATEGORIAS":               cacheCategorias      = tabela;
+                                                       flagTabelaCategorias = 1;
                                                        break;
-                      case "PARAMETROS":               cacheParametros = tabela;
-                                                       break;                                                                  
-                      case "ORGAOS_ENCAMINHADORES":    cacheOrgaosEncaminhadores = tabela;
+
+                      case "PARAMETROS":               cacheParametros      = tabela;
+                                                       flagTabelaParametros = 1;
+                                                       break;                   
+
+                      case "ORGAOS_ENCAMINHADORES":    cacheOrgaosEncaminhadores      = tabela;
+                                                       flagTabelaOrgaosEncaminhadores = 1;  
                                                        break;
-                      case "REGIONAIS":                cacheRegionais = tabela;
+
+                      case "REGIONAIS":                cacheRegionais      = tabela;
+                                                       flagTabelaRegionais = 1;
                                                        break;            
-                      case "MOTIVOS_DE_DESIGNACAO":    cacheMotivosDeDesignacao = tabela;
+
+                      case "MOTIVOS_DE_DESIGNACAO":    cacheMotivosDeDesignacao      = tabela;
+                                                       flagTabelaMotivosDeDesignacao = 1;  
                                                        break;            
+
                       default:                         throw( new Error( "Tabela Inválida" ) ); 
+
                     }
 
                  })
