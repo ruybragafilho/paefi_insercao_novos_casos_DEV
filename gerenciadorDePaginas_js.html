@@ -8,10 +8,11 @@
   let cachePaginaCadastroCaso;
 
 
-  // Flag que indica se a página inicial foi carregada
+  // Flag que indica se as páginas foram carregadas no cache de páginas
   //    0: ainda não foi carregada
   //    1: já foi carregada
-  let flagPaginaInicialCarregada = 0;
+  let flagPaginaResumosDosCasos = 0;
+  let flagPaginaCadastroCaso    = 0;
 
 
   // timer
@@ -41,7 +42,7 @@
                               // Carrega a página resumosDosCasos.html, armazenada no cache do frontend,
                               // no elemento de id "conteudo" da página index.html (SPA)
 
-                              while( !flagPaginaInicialCarregada ) {
+                              while( !flagPaginaResumosDosCasos ) {
                                 console.log( "Aguardando carregamento da página na cache" );
                                 await esperar( 1000 );
                               }
@@ -63,6 +64,12 @@
       case "insercaoNovoCaso": 
                                // Carrega a página paginaCadastroCaso.html, armazenada no cache do frontend,
                                // no elemento de id "conteudo" da página index.html (SPA)
+
+                               while( !flagPaginaCadastroCaso ) {
+                                 console.log( "Aguardando carregamento da página na cache" );
+                                 await esperar( 1000 );
+                               } 
+
                                document.getElementById("conteudo").innerHTML = cachePaginaCadastroCaso;
 
                                // Configura a página de cadastro de caso para
@@ -75,6 +82,12 @@
       case "edicaoDeCaso":    
                               // Carrega a página paginaCadastroCaso.html, armazenada no cache do frontend,
                               // no elemento de id "conteudo" da página index.html (SPA)
+
+                              while( !flagPaginaCadastroCaso ) {
+                                console.log( "Aguardando carregamento da página na cache" );
+                                await esperar( 1000 );
+                              } 
+                               
                               document.getElementById("conteudo").innerHTML = cachePaginaCadastroCaso;
 
                               // Configura a página de cadastro de caso para
@@ -130,11 +143,15 @@
 
                     // Atribui a página carregada ao cache apropriado
                     switch( nomePagina ) {
+
                       case "resumosDosCasos":     cachePaginaResumosDosCasos = pagina;
-                                                  flagPaginaInicialCarregada = 1;
+                                                  flagPaginaResumosDosCasos = 1;
                                                   break;                      
+
                       case "paginaCadastroCaso":  cachePaginaCadastroCaso = pagina;
+                                                  flagPaginaCadastroCaso = 1;
                                                   break;   
+
                       default:                    throw( new Error( "Página Inválida" ) ); 
                     }
 
