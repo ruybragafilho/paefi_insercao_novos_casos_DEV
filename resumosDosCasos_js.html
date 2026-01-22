@@ -94,21 +94,11 @@
 
       let clickedElement = event.target;
 
-      // Trata evento de clique sobre uma linha da tabela
-      // mostranto mais detalhes do caso
-      if( clickedElement.classList.contains('clicavel') ) {
-
-        // Obtém o id do caso 
-        let idCaso = clickedElement.parentElement.id;          
-
-        // Chama a função frontend para visualizar os parâmetros do caso
-        mostrarModalParametros( idCaso, tabelaCasos);
-
       // Trata evento de clique no botão, reativando o caso        
-      } else if( clickedElement.classList.contains('bt-reativar') ) {
+      if( clickedElement.classList.contains('bt-reativar') ) {
 
-          // mostra modal com mensagem de designação de caso
-          mostrarModalMensagem( "Reativando o caso, por favor aguarde..." );                                       
+        // mostra modal com mensagem de designação de caso
+        mostrarModalMensagem( "Reativando o caso, por favor aguarde..." );                                       
 
         // Obtém o id do caso
         let idCaso = clickedElement.parentElement.parentElement.parentElement.id;
@@ -132,7 +122,7 @@
           mostrarModalMensagem( "Designando o caso, por favor aguarde..." );                               
   
           // Chama a função front end para designar o caso
-          designacaoCaso( idCaso, valorSelect );          
+          designarCasoFE( idCaso, valorSelect );          
 
         // Se não, mostra modal de erro
         } else {
@@ -140,6 +130,16 @@
           // Exibe modal de erro caso motivo de designação não tenha sido selecionado
           mostrarModalErro( "O campo MOTIVO DE DESIGNAÇÂO é obrigatório!" );                      
         }
+
+      // Trata evento de clique sobre uma linha da tabela
+      // mostranto mais detalhes do caso        
+      } else if( clickedElement.classList.contains('clicavel') ) {
+
+        // Obtém o id do caso 
+        let idCaso = clickedElement.parentElement.id;          
+
+        // Chama a função frontend para visualizar os parâmetros do caso
+        mostrarModalParametros( idCaso, tabelaCasos);
 
       } // Fim teste target evento - tabela ou botão designar caso
         
@@ -270,6 +270,8 @@
   } // Fim da função filtrar
 
 
+let contador = 0;
+
   /**
    * Função que redireciona para a tela com os resumos dos casos
    *
@@ -280,24 +282,29 @@
    */  
   function redirecionarParaTelaResumosDosCasos( recarregarCasos ) {
 
+    ++contador;
+
+    console.log( "redirecionarParaTelaResumosDosCasos " + contador + " " + recarregarCasos );
+
     // Se flag == 1, chama a função que recarrega a tabela de resumos dos casos
     // e em seguida carrega a página de resumo de casos
     if( recarregarCasos ) {
 
       // Sinaliza que a tabela de casos ainda não está na cache
-      flagTabelaCasos = 0;
+      flagCache_TabelaCasos = 0;
 
       google.script.run
                    .withSuccessHandler( dados => {
 
-                     // mostra modal com mensagem de operação concluída
-                     mostrarModalMensagem( "Operação concluída!" );                    
+                     // mostra modal com mensagem de operação concluída                     
+                     console.log( "Operação concluída! " + contador );
+                     mostrarModalMensagem( "Operação concluída! " + contador );                    
   
                      // Atualiza o cache de resumos de casos com a tabela carregada do servidor
-                     cacheCasos = dados;   
+                     cache_TabelaCasos = dados;   
 
                      // Sinaliza que a tabela de casos já está na cache
-                     flagTabelaCasos = 1;
+                     flagCache_TabelaCasos = 1;
 
                      // Carrega a página de resumos de casos
                      exibirPagina("resumosDosCasos");

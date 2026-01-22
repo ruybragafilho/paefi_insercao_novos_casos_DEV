@@ -2,88 +2,78 @@
 
   "use strict";
 
-  /** 
-   *  ####################################################
-   *  #####                                          ##### 
-   *  #####  CACHE COM DADOS CARREGADOS DO SERVIDOR  #####
-   *  #####                                          ##### 
-   *  ####################################################
-   */  
+  /**
+  *  #######################################################################################
+  *  #####                                                                             #####
+  *  #####  Módulo:    cacheTabelas_js                                                 #####
+  *  #####  Objetivo:  Gerenciar o cache das tabelas de dados carregadas do servidor   #####
+  *  #####                                                                             #####
+  *  #######################################################################################
+  */
 
   // Cache da tabela Violacoes, carregados via chamada 
   // da função backend obterTabelaCompleta( "VIOLACOES" )
-  let cacheViolacoes = [];  
+  //let cacheViolacoes = [];  
+  let cache_TabelaViolacoes = [];  
 
   // Cache da tabela Categorias, carregados via chamada 
   // da função backend obterTabelaCompleta( "CATEGORIAS" )
-  let cacheCategorias = [];  
+  //let cacheCategorias = [];  
+  let cache_TabelaCategorias = [];  
 
   // Cache da tabela Parâmetros, carregados via chamada 
   // da função backend obterTabelaCompleta( "PARAMETROS" )
-  let cacheParametros = [];    
+  //let cacheParametros = [];    
+  let cache_TabelaParametros = [];      
 
   // Cache da tabela Órgãos Encaminhadores, carregados via chamada 
   // da função backend obterTabelaCompleta( "ORGAOS_ENCAMINHADORES" )
-  let cacheOrgaosEncaminhadores = [];    
+  //let cacheOrgaosEncaminhadores = [];    
+  let cache_TabelaOrgaosEncaminhadores = [];    
 
   // Cache da tabela Regionais, carregados via chamada 
   // da função backend obterTabelaCompleta( "REGIONAIS" )
-  let cacheRegionais = [];
+  //let cacheRegionais = [];
+  let cache_TabelaRegionais = [];
 
   // Cache da tabela Motivos de Designação, carregados via chamada 
   // da função backend obterTabelaCompleta( "MOTIVOS_DE_DESIGNACAO" )
-  let cacheMotivosDeDesignacao = [];
+  //let cacheMotivosDeDesignacao = [];
+  let cache_TabelaMotivosDeDesignacao = [];
 
 
   // Cache da tabela com os casos, carregados via chamada 
   // da função backend obterCasos
-  let cacheCasos = [];
+  //let cacheCasos = [];
+  let cache_TabelaCasos = [];
 
 
 
-  // Flag que indica se as tabelas foram carregadas no cache de tabelas
+  // Flags que indicam se as tabelas foram carregadas no cache de tabelas
   //    0: ainda não foi carregada
   //    1: já foi carregada
-  let flagTabelaViolacoes             = 0;
-  let flagTabelaCategorias            = 0;
-  let flagTabelaParametros            = 0;
-  let flagTabelaOrgaosEncaminhadores  = 0;  
-  let flagTabelaRegionais             = 0;
-  let flagTabelaMotivosDeDesignacao   = 0;  
-  let flagTabelaCasos                 = 0;
+  let flagCache_TabelaViolacoes             = 0;
+  let flagCache_TabelaCategorias            = 0;
+  let flagCache_TabelaParametros            = 0;
+  let flagCache_TabelaOrgaosEncaminhadores  = 0;  
+  let flagCache_TabelaRegionais             = 0;
+  let flagCache_TabelaMotivosDeDesignacao   = 0;  
+  let flagCache_TabelaCasos                 = 0;
 
 
 
-  /**
-   *  ##########################################################################
-   *  #####                                                                #####
-   *  #####  Constantes que armazenam as posições das colunas nas tabelas  #####
-   *  #####                                                                #####
-   *  ##########################################################################
-   */
-
-  // Posições das colunas ID, NOME e ATIVO nas tabelas da planilha CODIGOS
+  // Posições das colunas nas tabelas
   const COLUNA_ID    = 0;
   const COLUNA_NOME  = 1;
   const COLUNA_ATIVO = 2;  
-
   const COLUNA_CATEGORIAS_DO_PARAMETRO = 4;
 
 
 
   /**
-   *  #########################################################
-   *  #####                                               #####
-   *  #####  Funções que inicializam o cache do frontend  #####
-   *  #####                                               #####
-   *  #########################################################
-   */
-
-
-  /**
-  * Função que carrega todas as tabelas da base de dados CODIGOS para o cache do frontend
+  * Função que pré carrega todas as tabelas da base de dados CODIGOS para o cache de tabelas do frontend
   */  
-  function inicializarCaches() {
+  function preCarregarTabelasNaCache() {
 
     carregarTabelaNaCache( "VIOLACOES" );    
     carregarTabelaNaCache( "CATEGORIAS" );
@@ -92,7 +82,7 @@
     carregarTabelaNaCache( "REGIONAIS" );    
     carregarTabelaNaCache( "MOTIVOS_DE_DESIGNACAO" );
 
-  } // Fim da função inicializarCaches
+  } // Fim da função preCarregarTabelasNaCache
 
 
 
@@ -109,27 +99,27 @@
                     // Atribui a tabela carregada ao cache apropriado
                     switch( nomeTabela ) {
                       case "VIOLACOES":                cacheViolacoes      = tabela;
-                                                       flagTabelaViolacoes = 1;
+                                                       flagCache_TabelaViolacoes = 1;
                                                        break;              
 
                       case "CATEGORIAS":               cacheCategorias      = tabela;
-                                                       flagTabelaCategorias = 1;
+                                                       flagCache_TabelaCategorias = 1;
                                                        break;
 
                       case "PARAMETROS":               cacheParametros      = tabela;
-                                                       flagTabelaParametros = 1;
+                                                       flagCache_TabelaParametros = 1;
                                                        break;                   
 
                       case "ORGAOS_ENCAMINHADORES":    cacheOrgaosEncaminhadores      = tabela;
-                                                       flagTabelaOrgaosEncaminhadores = 1;  
+                                                       flagCache_TabelaOrgaosEncaminhadores = 1;  
                                                        break;
 
                       case "REGIONAIS":                cacheRegionais      = tabela;
-                                                       flagTabelaRegionais = 1;
+                                                       flagCache_TabelaRegionais = 1;
                                                        break;            
 
                       case "MOTIVOS_DE_DESIGNACAO":    cacheMotivosDeDesignacao      = tabela;
-                                                       flagTabelaMotivosDeDesignacao = 1;  
+                                                       flagCache_TabelaMotivosDeDesignacao = 1;  
                                                        break;            
 
                       default:                         throw( new Error( "Tabela Inválida" ) ); 

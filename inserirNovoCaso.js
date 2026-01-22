@@ -88,6 +88,9 @@ function inserirNovoCaso( referenciaFamiliar,
                          idsCategoriasCaso,
                          idsParametrosCaso,
                          observacao );
+
+    return true;
+                             
   } catch( error ) {
     throw( error.message );
   }

@@ -160,7 +160,7 @@ function obterTabelaCompleta( nomeTabela ) {
                                      break;            
     case "MOTIVOS_DE_DESIGNACAO":    bufferTabela = BUFFER_MOTIVOS_DE_DESIGNACAO;
                                      break;            
-    default:                         throw( new Error( "Tabela nválida" ) ); 
+    default:                         throw( new Error( "Tabela inválida" ) ); 
   }
 
   let tabela = [];

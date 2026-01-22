@@ -84,6 +84,9 @@ function atualizarCaso( id,
                          idsCategoriasCaso,
                          idsParametrosCaso,
                          observacao );
+
+    return true;
+
   } catch( error ) {
     throw( error.message );
   }

@@ -40,6 +40,8 @@ function reativarCaso( id ) {
     // SOLTA O LOCK
     lock.releaseLock();
 
+    return true;
+
   } else {
 
     // SE NAO CONSEGUIR PEGAR O LOCK, LANCA UMA EXCESSAO

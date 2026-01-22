@@ -8,7 +8,7 @@
    * @param {String} id: id do caso de será designado 
    * @param {String} idMotivoDeDesignacao: id do motivo de designação 
    */  
-  function designacaoCaso( idCaso, idMotivoDeDesignacao ) {
+  function designarCasoFE( idCaso, idMotivoDeDesignacao ) {
 
     // Chama função do Apps Script para designar um caso
     google.script.run
@@ -21,14 +21,14 @@
                  .withFailureHandler( erro => {
 
                    // mostra modal com mensagem de erro
-                   mostrarModalErro( "designacaoCaso - " + erro.message );
+                   mostrarModalErro( "designarCasoFE - " + erro.message );
 
                  })
                  // Chama a função backend que designa o caso
                  .designarCasoBE( idCaso,                       
                                   idMotivoDeDesignacao );  
 
-  } // Fim da função designacaoCaso
+  } // Fim da função designarCasoFE
 
 
 </script>
