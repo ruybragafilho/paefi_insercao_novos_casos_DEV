@@ -110,7 +110,7 @@
     carregarPaginaNaCache( "resumosDosCasos" );
     carregarPaginaNaCache( "paginaCadastroCaso" );    
 
-    while( !flagCache_PaginaResumosDosCasos || flagCache_PaginaCadastroCaso ) {
+    while( !flagCache_PaginaResumosDosCasos || !flagCache_PaginaCadastroCaso ) {
       console.log( "Aguardando carregamento das páginas na cache" );
       await esperarPagina( 1000 );
     }    
