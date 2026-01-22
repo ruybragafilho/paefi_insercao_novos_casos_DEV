@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Módulo:    designarCaso.gs
+ * Módulo:    designarCasoBE.gs
  * Objetivo:  designa um caso da tabela CASOS
  */
 
@@ -12,8 +12,8 @@
  * @param {String} id: id do caso de será designado 
  * @param {String} idMotivoDeDesignacao: id do motivo de designação 
  */
-function designarCaso( id,                       
-                       idMotivoDeDesignacao ) {
+function designarCasoBE( id,                       
+                         idMotivoDeDesignacao ) {
 
   // Se id inválido, retorna uma exceção
   if( id < 1  ||  id > NUM_CASOS ) {
@@ -48,7 +48,7 @@ function designarCaso( id,
     throw( new Error( "Nao foi possivel pegar o LOCK" ) );
   }
 
-} // Fim da função designarCaso
+} // Fim da função designarCasoBE
 
 
 
@@ -59,27 +59,27 @@ function designarCaso( id,
 
 
 /**
- * Função para testar a função principal designarCaso
+ * Função para testar a função principal designarCasoBE
  */
-function teste_designarCaso() {
+function teste_designarCasoBE() {
 
   let id = 1;
   let idMotivoDeDesignacao = "3";   
 
   try {
-    designarCaso( id,
-                  idMotivoDeDesignacao );
+    designarCasoBE( id,
+                    idMotivoDeDesignacao );
   } catch( error ) {
     console.log( error.message );
   }
 
-} // Fim da função teste_designarCaso
+} // Fim da função teste_designarCasoBE
 
 
 
 
 /**
- * ##### FIM DO MÓDULO designarCaso.gs #####
+ * ##### FIM DO MÓDULO designarCasoBE.gs #####
  */
 
 
