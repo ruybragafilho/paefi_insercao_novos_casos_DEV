@@ -55,7 +55,7 @@
             <!-- Aqui a lista será inserida via JS -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btnEditar" onclick="carregarPagina('edicaoDeCaso')">Editar Caso</button> 
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btnEditar" onclick="exibirPagina('edicaoDeCaso')">Editar Caso</button> 
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
           </div>
         </div>
@@ -88,8 +88,12 @@
 
     <!-- Chamadas de script -->    
     
+
+
     <?!= include("cacheTabelas_js"); ?>     
-    <?!= include("gerenciadorDePaginas_js"); ?>      
+    <?!= include("cachePaginas_js"); ?>     
+    
+    <?!= include("gerenciadorSPA_js"); ?>      
     <?!= include("telasModais_js"); ?>         
 
     <?!= include("rendersFrontend_js"); ?>                 
