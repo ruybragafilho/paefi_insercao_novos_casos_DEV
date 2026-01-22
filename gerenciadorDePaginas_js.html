@@ -11,12 +11,12 @@
   // Flag que indica se as páginas foram carregadas no cache de páginas
   //    0: ainda não foi carregada
   //    1: já foi carregada
-  let flagPaginaResumosDosCasos = 0;
-  let flagPaginaCadastroCaso    = 0;
+  let flagCache_PaginaResumosDosCasos = 0;
+  let flagCache_PaginaCadastroCaso    = 0;
 
 
-  // timer
-  const esperar = (time) => new Promise( ( resolve, reject ) => setTimeout( resolve, time ) );
+  // Timer utilizado para aguardar o carregamento das páginas na cache
+  const esperarPagina = (time) => new Promise( ( resolve, reject ) => setTimeout( resolve, time ) );
 
 
   /**
@@ -32,7 +32,7 @@
    * 1. Substitui o conteúdo do elemento #conteudo pelo HTML informado.
    * 2. Chama a função apropriada para gerar o conteúdo dinâmico da página carregada    
    */   
-  async function carregarPagina(nomePagina) {
+  function carregarPagina(nomePagina) {
 
     // Insere a página carregada no elemento de id Conteudo - SPA
     // e chama a função apropriada para gerar o conteudo dinâmico da páginacarregada
@@ -41,11 +41,6 @@
       case "resumosDosCasos": 
                               // Carrega a página resumosDosCasos.html, armazenada no cache do frontend,
                               // no elemento de id "conteudo" da página index.html (SPA)
-
-                              while( !flagPaginaResumosDosCasos ) {
-                                console.log( "Aguardando carregamento da página na cache" );
-                                await esperar( 1000 );
-                              }
 
                               document.getElementById("conteudo").innerHTML = cachePaginaResumosDosCasos;  
 
@@ -63,11 +58,6 @@
                                // Carrega a página paginaCadastroCaso.html, armazenada no cache do frontend,
                                // no elemento de id "conteudo" da página index.html (SPA)
 
-                               while( !flagPaginaCadastroCaso ) {
-                                 console.log( "Aguardando carregamento da página na cache" );
-                                 await esperar( 1000 );
-                               } 
-
                                document.getElementById("conteudo").innerHTML = cachePaginaCadastroCaso;
 
                                // Configura a página de cadastro de caso para
@@ -80,11 +70,6 @@
       case "edicaoDeCaso":    
                               // Carrega a página paginaCadastroCaso.html, armazenada no cache do frontend,
                               // no elemento de id "conteudo" da página index.html (SPA)
-
-                              while( !flagPaginaCadastroCaso ) {
-                                console.log( "Aguardando carregamento da página na cache" );
-                                await esperar( 1000 );
-                              } 
                                
                               document.getElementById("conteudo").innerHTML = cachePaginaCadastroCaso;
 
@@ -120,10 +105,15 @@
   /**
   * Função que pré carrega todas as páginas do sistema para o cache de páginas
   */  
-  function preCarregarPaginas() {
+  async function preCarregarPaginas() {
     
     carregarPaginaNaCache( "resumosDosCasos" );
     carregarPaginaNaCache( "paginaCadastroCaso" );    
+
+    while( !flagCache_PaginaResumosDosCasos || flagCache_PaginaCadastroCaso ) {
+      console.log( "Aguardando carregamento das páginas na cache" );
+      await esperarPagina( 1000 );
+    }    
 
   } // Fim da função preCarregarPaginas
 
@@ -143,11 +133,11 @@
                     switch( nomePagina ) {
 
                       case "resumosDosCasos":     cachePaginaResumosDosCasos = pagina;
-                                                  flagPaginaResumosDosCasos = 1;
+                                                  flagCache_PaginaResumosDosCasos = 1;
                                                   break;                      
 
                       case "paginaCadastroCaso":  cachePaginaCadastroCaso = pagina;
-                                                  flagPaginaCadastroCaso = 1;
+                                                  flagCache_PaginaCadastroCaso = 1;
                                                   break;   
 
                       default:                    throw( new Error( "Página Inválida" ) ); 
