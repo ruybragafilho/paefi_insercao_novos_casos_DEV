@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Módulo:    reativarCaso.gs
+ * Módulo:    reativarCasoBE.gs
  * Objetivo:  Reativa um caso da tabela CASOS
  */
 
@@ -12,7 +12,7 @@
  * @param {String} id: id do caso de será reativado 
  *  
  */
-function reativarCaso( id ) {
+function reativarCasoBE( id ) {
 
   // Se id inválido, retorna uma exceção
   if( id < 1  ||  id > NUM_CASOS ) {
@@ -48,7 +48,7 @@ function reativarCaso( id ) {
     throw( new Error( "Nao foi possivel pegar o LOCK" ) );
   }
 
-} // Fim da função reativarCaso
+} // Fim da função reativarCasoBE
 
 
 
@@ -61,17 +61,17 @@ function reativarCaso( id ) {
 /**
  * Função para testar a função principal reativarCaso
  */
-function teste_reativarCaso() {
+function teste_reativarCasoBE() {
 
   let id = 1;  
 
   try {
-    reativarCaso( id );
+    reativarCasoBE( id );
   } catch( error ) {
     console.log( error.message );
   }
 
-} // Fim da função teste_reativarCaso
+} // Fim da função teste_reativarCasoBE
 
 
 

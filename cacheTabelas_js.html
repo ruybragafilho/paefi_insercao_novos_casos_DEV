@@ -87,6 +87,30 @@
 
 
   /**
+  * Função que retorna true se as tabelas tiverem sido carregadas na cache de tabelas,
+  * ou false se ainda não tiverem sido carregadas na cache de tabelas
+  */  
+  function tabelasCarregadasNaCache() {
+    
+    if( flagCache_TabelaViolacoes    && 
+        flagCache_TabelaCategorias   &&
+        flagCache_TabelaParametros   &&
+        flagCache_TabelaOrgaosEncaminhadores &&
+        flagCache_TabelaRegionais    &&
+        flagCache_TabelaMotivosDeDesignacao ) {
+
+      return true;
+
+    } else {
+
+      return false;
+    }
+
+  } // Fim da função tabelasCarregadasNaCache  
+
+
+
+  /**
   * Função que carrega uma tabela da base de dados CODIGOS para o cache do frontend
   *
   * @param {String} nomeTabela - Nome da tabela da base CODIGO que será carregada   
@@ -98,27 +122,27 @@
 
                     // Atribui a tabela carregada ao cache apropriado
                     switch( nomeTabela ) {
-                      case "VIOLACOES":                cacheViolacoes      = tabela;
+                      case "VIOLACOES":                cache_TabelaViolacoes     = tabela;
                                                        flagCache_TabelaViolacoes = 1;
                                                        break;              
 
-                      case "CATEGORIAS":               cacheCategorias      = tabela;
+                      case "CATEGORIAS":               cache_TabelaCategorias     = tabela;
                                                        flagCache_TabelaCategorias = 1;
                                                        break;
 
-                      case "PARAMETROS":               cacheParametros      = tabela;
+                      case "PARAMETROS":               cache_TabelaParametros     = tabela;
                                                        flagCache_TabelaParametros = 1;
                                                        break;                   
 
-                      case "ORGAOS_ENCAMINHADORES":    cacheOrgaosEncaminhadores      = tabela;
+                      case "ORGAOS_ENCAMINHADORES":    cache_TabelaOrgaosEncaminhadores     = tabela;
                                                        flagCache_TabelaOrgaosEncaminhadores = 1;  
                                                        break;
 
-                      case "REGIONAIS":                cacheRegionais      = tabela;
+                      case "REGIONAIS":                cache_TabelaRegionais     = tabela;
                                                        flagCache_TabelaRegionais = 1;
                                                        break;            
 
-                      case "MOTIVOS_DE_DESIGNACAO":    cacheMotivosDeDesignacao      = tabela;
+                      case "MOTIVOS_DE_DESIGNACAO":    cache_TabelaMotivosDeDesignacao     = tabela;
                                                        flagCache_TabelaMotivosDeDesignacao = 1;  
                                                        break;            
 

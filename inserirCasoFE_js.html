@@ -4,9 +4,9 @@
 
 
   /**
-   * Função que configura a página de cadastro para Inserção de novo caso
+   * Função que configura a página de cadastro para Inserção de caso
    */
-  function configurarPaginaInsercaoDeNovoCaso() {
+  function configurarPaginaInserirCaso() {
 
     // Configura o Título da Página
     document.getElementById( "tituloPagina" ).innerHTML = "INSERÇÃO DE NOVO CASO";
@@ -32,7 +32,7 @@
     // com a regional do trabalhador
     if( usuarioLogado.regional != "0" ) {
       document.getElementById('selectRegionais').innerHTML = 
-      `<option selected value="${usuarioLogado.regional}">${cacheRegionais[usuarioLogado.regional-1][COLUNA_NOME]}</option>`;
+      `<option selected value="${usuarioLogado.regional}">${cache_TabelaRegionais[usuarioLogado.regional-1][COLUNA_NOME]}</option>`;
     }   
 
     // Esconde Componentes não utilizados na inserção de novo caso
@@ -40,14 +40,14 @@
     document.getElementById( "situacaoDoCaso" ).style.display = "none";    
 
 
-  } // Fim da função configurarPaginaInsercaoDeNovoCaso
+  } // Fim da função configurarPaginaInserirCaso
 
 
 
   /**
-   * Função chamada quando o botão salvar é clicado para salvar um novo caso
+   * Função chamada quando o botão salvar é clicado para inserir um caso
    */    
-  function salvarNovoCaso() {
+  function inserirCasoFE() {
 
     // RF
     const referenciaFamiliar = document.getElementById('referenciaFamiliarInput').value;
@@ -226,28 +226,28 @@
                  .withFailureHandler( erro => {
 
                    // mostra modal com mensagem de erro 
-                   mostrarModalErro( "salvarNovoCaso - " + erro.message );
+                   mostrarModalErro( "inserirCasoFE - " + erro.message );
 
                  })
                  // Chama a função backend que insere novo caso
-                 .inserirNovoCaso( referenciaFamiliar,
-                                   tipoLogradouro,
-                                   nomeLogradouro,
-                                   numero,
-                                   complemento,
-                                   bairro,
-                                   idRegional,
-                                   cep,                          
-                                   tpsa,
-                                   dataChegadaCREAS,
-                                   idsOrgaosEncaminhadores,
-                                   dataPrevistaResposta,   
-                                   idsViolacoesCaso,                 
-                                   idsCategoriasCaso,
-                                   idsParametrosCaso,
-                                   observacao  );        
+                 .inserirCasoBE( referenciaFamiliar,
+                                 tipoLogradouro,
+                                 nomeLogradouro,
+                                 numero,
+                                 complemento,
+                                 bairro,
+                                 idRegional,
+                                 cep,                          
+                                 tpsa,
+                                 dataChegadaCREAS,
+                                 idsOrgaosEncaminhadores,
+                                 dataPrevistaResposta,   
+                                 idsViolacoesCaso,                 
+                                 idsCategoriasCaso,
+                                 idsParametrosCaso,
+                                 observacao  );        
            
-  } // Fim da função salvarNovoCaso 
+  } // Fim da função inserirCasoFE 
 
 
 </script>

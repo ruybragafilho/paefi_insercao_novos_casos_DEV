@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Módulo:    inserirNovoCaso.gs
+ * Módulo:    inserirCasoBE.gs
  * Objetivo:  inserir um novo caso na tabela CASOS
  */
 
@@ -27,22 +27,22 @@
  * @param {String} idsParametrosCaso: ids dos parâmetros selecionados
  * @param {String} observacao: Observação do trabalhador - text de 200 caracteres
  */
-function inserirNovoCaso( referenciaFamiliar,
-                          tipoLogradouro,
-                          nomeLogradouro,
-                          numero,
-                          complemento,
-                          bairro,
-                          idRegional,
-                          cep,                          
-                          tpsa,
-                          dataChegadaNoCREAS,
-                          idsOrgaosEncaminhadores,
-                          dataPrevistaResposta,  
-                          idsViolacoesCaso,                        
-                          idsCategoriasCaso,
-                          idsParametrosCaso,
-                          observacao ) {
+function inserirCasoBE( referenciaFamiliar,
+                        tipoLogradouro,
+                        nomeLogradouro,
+                        numero,
+                        complemento,
+                        bairro,
+                        idRegional,
+                        cep,                          
+                        tpsa,
+                        dataChegadaNoCREAS,
+                        idsOrgaosEncaminhadores,
+                        dataPrevistaResposta,  
+                        idsViolacoesCaso,                        
+                        idsCategoriasCaso,
+                        idsParametrosCaso,
+                        observacao ) {
 
   // Gera o id do novo caso
   const idNovoCaso = NUM_CASOS + 1;    
@@ -95,7 +95,7 @@ function inserirNovoCaso( referenciaFamiliar,
     throw( error.message );
   }
 
-} // Fim da função inserirNovoCaso
+} // Fim da função inserirCasoBE
 
 
 
@@ -108,7 +108,7 @@ function inserirNovoCaso( referenciaFamiliar,
 /**
  * Função para testar a função principal inserirNovoCaso
  */
-function teste_inserirNovoCaso() {
+function teste_inserirCasoBE() {
 
   let referenciaFamiliar = "TESTE UM";  
   let tipoLogradouro = "  Rua  ";
@@ -128,27 +128,27 @@ function teste_inserirNovoCaso() {
   let observacao = "  Observação do novo caso inserido  ";
 
   try {
-    inserirNovoCaso(  referenciaFamiliar,
-                      tipoLogradouro,
-                      nomeLogradouro,
-                      numero,
-                      complemento,
-                      bairro,
-                      idRegional,
-                      cep,                          
-                      tpsa,
-                      dataChegadaNoCREAS,
-                      idsOrgaosEncaminhadores,
-                      dataPrevistaResposta,    
-                      idsViolacoesCaso,                
-                      idsCategoriasCaso,
-                      idsParametrosCaso,
-                      observacao  );
+    inserirCasoBE(  referenciaFamiliar,
+                    tipoLogradouro,
+                    nomeLogradouro,
+                    numero,
+                    complemento,
+                    bairro,
+                    idRegional,
+                    cep,                          
+                    tpsa,
+                    dataChegadaNoCREAS,
+                    idsOrgaosEncaminhadores,
+                    dataPrevistaResposta,    
+                    idsViolacoesCaso,                
+                    idsCategoriasCaso,
+                    idsParametrosCaso,
+                    observacao  );
   } catch( error ) {
     console.log( error.message );
   } 
 
-} // Fim da função teste_inserirNovoCaso
+} // Fim da função teste_inserirCasoBE
 
 
 

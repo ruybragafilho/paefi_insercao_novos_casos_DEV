@@ -50,7 +50,7 @@
   function mostrarAbasParametros() {
  
     // Reset dos displays de todas as abas
-    cacheCategorias.forEach( categoria => {
+    cache_TabelaCategorias.forEach( categoria => {
       if( categoria[COLUNA_ATIVO] ) {
         document.getElementById( "abasCategorias_" + categoria[COLUNA_ID] ).style.display = "none";
         if( document.getElementById( "abasCategorias_" + categoria[COLUNA_ID] ).classList.contains('active') ) {
@@ -87,7 +87,7 @@
         let name;
         let arrayCheckboxParametros = [];
 
-        cacheCategorias.forEach( categoria => {
+        cache_TabelaCategorias.forEach( categoria => {
           if( categoria[COLUNA_ATIVO] ) {
             name = "checkboxParametros_" + categoria[COLUNA_ID] + "_";
             arrayCheckboxParametros = document.querySelectorAll(`input[name='${name}']`);            
@@ -113,7 +113,7 @@
     let idConteudoAba = "checkboxParametros_" + idCategoria +"_";
 
     // Esconde os conteúdos das abas
-    cacheCategorias.forEach( categoria => {
+    cache_TabelaCategorias.forEach( categoria => {
       if( categoria[COLUNA_ATIVO] ) {
         document.getElementById( "checkboxParametros_" + categoria[COLUNA_ID] + "_" ).style.display = "none";
         if( document.getElementById( "abasCategorias_" + categoria[COLUNA_ID] ).classList.contains('active') ) {
@@ -143,14 +143,14 @@
     let idParametro = parametro.value;
 
     // Categorias associadas ao parâmetro clicado
-    let arrayIdsCategoriasDoParametro = (cacheParametros[idParametro-1][COLUNA_CATEGORIAS_DO_PARAMETRO]).split(";").filter( id => id != "");    
+    let arrayIdsCategoriasDoParametro = (cache_TabelaParametros[idParametro-1][COLUNA_CATEGORIAS_DO_PARAMETRO]).split(";").filter( id => id != "");    
 
     // Percorre todos os parâmetros iguais, deixando-os no mesmo estado
     // ( checked ou unchecked ) do parâmetro original
     let idCheckboxParametroIgual;
     arrayIdsCategoriasDoParametro.forEach( idCategoria => {
 
-      if( cacheCategorias[idCategoria-1][COLUNA_ATIVO] ) {
+      if( cache_TabelaCategorias[idCategoria-1][COLUNA_ATIVO] ) {
 
         idCheckboxParametroIgual = "checkboxParametros_" + idCategoria + "_" + idParametro;
   

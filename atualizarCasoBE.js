@@ -31,26 +31,26 @@
  * @param {String} idsParametrosCaso: ids dos parâmetros selecionados
  * @param {String} observacao: Observação do trabalhador - text de 200 caracteres
  */
-function atualizarCaso( id,
-                        referenciaFamiliar,
-                        tipoLogradouro,
-                        nomeLogradouro,
-                        numero,
-                        complemento,
-                        bairro,
-                        idRegional,
-                        cep,                          
-                        tpsa,
-                        dataChegadaNoCREAS,
-                        idsOrgaosEncaminhadores,
-                        dataPrevistaResposta,  
-                        dataDaUltimaResposta, 
-                        dataDeDesignacao,   
-                        idMotivoDeDesignacao,   
-                        idsViolacoesCaso,                 
-                        idsCategoriasCaso,
-                        idsParametrosCaso,
-                        observacao ) {
+function atualizarCasoBE( id,
+                          referenciaFamiliar,
+                          tipoLogradouro,
+                          nomeLogradouro,
+                          numero,
+                          complemento,
+                          bairro,
+                          idRegional,
+                          cep,                          
+                          tpsa,
+                          dataChegadaNoCREAS,
+                          idsOrgaosEncaminhadores,
+                          dataPrevistaResposta,  
+                          dataDaUltimaResposta, 
+                          dataDeDesignacao,   
+                          idMotivoDeDesignacao,   
+                          idsViolacoesCaso,                 
+                          idsCategoriasCaso,
+                          idsParametrosCaso,
+                          observacao ) {
 
   // Se id inválido, retorna uma exceção
   if( id < 1  ||  id > NUM_CASOS ) {
@@ -91,7 +91,7 @@ function atualizarCaso( id,
     throw( error.message );
   }
 
-} // Fim da função atualizarCaso
+} // Fim da função atualizarCasoBE
 
 
 
@@ -104,7 +104,7 @@ function atualizarCaso( id,
 /**
  * Função para testar a função principal atualizarCaso
  */
-function teste_atualizarCaso() {
+function teste_atualizarCasoBE() {
 
   let id = 4;
   let referenciaFamiliar = "Francisco Júnior";  
@@ -128,37 +128,37 @@ function teste_atualizarCaso() {
   let observacao = "Observação do caso atualizado";
 
   try {
-    atualizarCaso(  id,
-                    referenciaFamiliar,
-                    tipoLogradouro,
-                    nomeLogradouro,
-                    numero,
-                    complemento,
-                    bairro,
-                    idRegional,
-                    cep,                          
-                    tpsa,
-                    dataChegadaNoCREAS,
-                    idsOrgaosEncaminhadores,
-                    dataPrevistaResposta,  
-                    dataDaUltimaResposta, 
-                    dataDeDesignacao,   
-                    idMotivoDeDesignacao,   
-                    idsViolacoesCaso,                 
-                    idsCategoriasCaso,
-                    idsParametrosCaso,
-                    observacao );
+    atualizarCasoBE(  id,
+                      referenciaFamiliar,
+                      tipoLogradouro,
+                      nomeLogradouro,
+                      numero,
+                      complemento,
+                      bairro,
+                      idRegional,
+                      cep,                          
+                      tpsa,
+                      dataChegadaNoCREAS,
+                      idsOrgaosEncaminhadores,
+                      dataPrevistaResposta,  
+                      dataDaUltimaResposta, 
+                      dataDeDesignacao,   
+                      idMotivoDeDesignacao,   
+                      idsViolacoesCaso,                 
+                      idsCategoriasCaso,
+                      idsParametrosCaso,
+                      observacao );
   } catch( error ) {
     console.log( error.message );
   }
 
-} // Fim da função teste_atualizarCaso
+} // Fim da função teste_atualizarCasoBE
 
 
 
 
 /**
- * ##### FIM DO MÓDULO atualizarCaso.gs #####
+ * ##### FIM DO MÓDULO atualizarCasoBE.gs #####
  */
 
 

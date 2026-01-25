@@ -59,7 +59,7 @@
       // Não mostra para trabalhadores da gestão
       let designacao;
       if( usuarioLogado.tipo != "2" ) {
-        designacao = item.ativo == "Sim" ? gerarSelectDesignacao( cacheMotivosDeDesignacao, item.id ) 
+        designacao = item.ativo == "Sim" ? gerarSelectDesignacao( cache_TabelaMotivosDeDesignacao, item.id ) 
                                          : gerarBotaoReativar( item.id );         
       } else {
         designacao = "";
@@ -104,7 +104,7 @@
         let idCaso = clickedElement.parentElement.parentElement.parentElement.id;
        
         // Chama a função front end para reativar o caso
-        reativacaoCaso( idCaso );          
+        reativarCasoFE( idCaso );          
 
       // Trata evento de clique no botão, designando o caso        
       } else if( clickedElement.classList.contains('bt-designar') ) {
@@ -205,7 +205,7 @@
       // Nome pesquisado na tabela casos
       let nomeRFPesquisado = document.getElementById("inputTextPesquisaCaso").value.trim().toUpperCase();
 
-      casosFiltrados = cacheCasos.filter( caso => { return caso.referenciaFamiliar.trim().toUpperCase().includes( nomeRFPesquisado ) } ) ;        
+      casosFiltrados = cache_TabelaCasos.filter( caso => { return caso.referenciaFamiliar.trim().toUpperCase().includes( nomeRFPesquisado ) } ) ;        
       gerarTabelaResumosCasos(casosFiltrados);
 
     // Filtra pelos checkbox
@@ -226,7 +226,7 @@
           comPrazoParaResposta.length ) {
 
         // Percorre todos os casos, selecionando os que atendem aos filtros
-        cacheCasos.forEach( caso => {                                                       
+        cache_TabelaCasos.forEach( caso => {                                                       
 
           // Verifica as regras de cada filtro individualmente
           // para o caso atual
@@ -261,7 +261,7 @@
       // Mostra a tabela completa
       } else {
 
-        gerarTabelaResumosCasos(cacheCasos);
+        gerarTabelaResumosCasos(cache_TabelaCasos);
 
       } // Fim do if checkbox de filtro marcado
 
@@ -270,7 +270,6 @@
   } // Fim da função filtrar
 
 
-let contador = 0;
 
   /**
    * Função que redireciona para a tela com os resumos dos casos
@@ -282,9 +281,7 @@ let contador = 0;
    */  
   function redirecionarParaTelaResumosDosCasos( recarregarCasos ) {
 
-    ++contador;
-
-    console.log( "redirecionarParaTelaResumosDosCasos " + contador + " " + recarregarCasos );
+    console.log( "redirecionarParaTelaResumosDosCasos - INÍCIO" );
 
     // Se flag == 1, chama a função que recarrega a tabela de resumos dos casos
     // e em seguida carrega a página de resumo de casos
@@ -297,8 +294,7 @@ let contador = 0;
                    .withSuccessHandler( dados => {
 
                      // mostra modal com mensagem de operação concluída                     
-                     console.log( "Operação concluída! " + contador );
-                     mostrarModalMensagem( "Operação concluída! " + contador );                    
+                     mostrarModalMensagem( "Operação concluída! " );                    
   
                      // Atualiza o cache de resumos de casos com a tabela carregada do servidor
                      cache_TabelaCasos = dados;   
@@ -326,6 +322,8 @@ let contador = 0;
       exibirPagina("resumosDosCasos");
 
     }
+
+    console.log( "redirecionarParaTelaResumosDosCasos - FIM" );    
 
   } // Fim da função redirecionarParaTelaResumosDosCasos
 

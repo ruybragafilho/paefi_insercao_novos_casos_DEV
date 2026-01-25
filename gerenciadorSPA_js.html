@@ -13,8 +13,8 @@
   */  
 
 
-  // Timer utilizado para aguardar o carregamento das páginas na cache
-  const esperarPagina = (time) => new Promise( ( resolve, reject ) => setTimeout( resolve, time ) );
+  // Timer 
+  const esperar = (time) => new Promise( ( resolve, reject ) => setTimeout( resolve, time ) );
 
 
   /**
@@ -32,6 +32,18 @@
    */   
   async function exibirPagina(nomePagina) {
 
+    // Aguarda carregamento das páginas na cache de páginas
+    while( !paginasCarregadasNaCache() ) {
+      console.log( "Aguardando carregamento das páginas na cache" );
+      await esperar( 1000 );
+    }    
+
+    // Aguarda carregamento das tabelas na cache de tabelas
+    while( !tabelasCarregadasNaCache() ) {
+      console.log( "Aguardando carregamento das tabelas na cache" );
+      await esperar( 1000 );
+    }        
+
     // Insere a página carregada no elemento de id Conteudo - SPA
     // e chama a função apropriada para gerar o conteudo dinâmico da páginacarregada
     switch( nomePagina ) {
@@ -39,12 +51,6 @@
       case "resumosDosCasos": 
                               // Carrega a página resumosDosCasos.html, armazenada no cache do frontend,
                               // no elemento de id "conteudo" da página index.html (SPA)
-
-                              while( !paginasCarregadasNaCache() ) {
-                                console.log( "Aguardando carregamento da página na cache" );
-                                await esperarPagina( 1000 );
-                              }    
-
                               document.getElementById("conteudo").innerHTML = cache_PaginaResumosDosCasos;  
 
                               // Configura a página de resumos dos casos
@@ -57,42 +63,30 @@
 
                               break;
 
-      case "insercaoNovoCaso": 
+      case "inserirCaso": 
                               // Carrega a página paginaCadastroCaso.html, armazenada no cache do frontend,
                               // no elemento de id "conteudo" da página index.html (SPA)
-
-                              while( !paginasCarregadasNaCache() ) {
-                                console.log( "Aguardando carregamento da página na cache" );
-                                await esperarPagina( 1000 );
-                              }                                   
-
                               document.getElementById("conteudo").innerHTML = cache_PaginaCadastroCaso;
 
                               // Configura a página de cadastro de caso para
                               // ser utilizada para inserção de novo caso
                               window.scrollTo(0, 0);
-                              configurarPaginaInsercaoDeNovoCaso();                               
+                              configurarPaginaInserirCaso();                               
 
                               break;     
 
-      case "edicaoDeCaso":    
+      case "atualizarCaso":    
                               // Carrega a página paginaCadastroCaso.html, armazenada no cache do frontend,
-                              // no elemento de id "conteudo" da página index.html (SPA)
-
-                              while( !paginasCarregadasNaCache() ) {
-                                console.log( "Aguardando carregamento da página na cache" );
-                                await esperarPagina( 1000 );
-                              }                                  
-                               
+                              // no elemento de id "conteudo" da página index.html (SPA)                               
                               document.getElementById("conteudo").innerHTML = cache_PaginaCadastroCaso;
 
                               // Configura a página de cadastro de caso para
-                              // ser utilizada para edição de caso
+                              // ser utilizada para atualização de caso
                               window.scrollTo(0, 0);
-                              configurarPaginaEdicaoDeCaso();                              
+                              configurarPaginaAtualizarCaso();                              
 
-                              // Carrega os dados do caso que será editado
-                              mostrarDadosDoCasoEmEdicao();
+                              // Carrega os dados do caso que será atualizado
+                              mostrarDadosDoCasoEmAtualizacao();
 
                               break;                                             
     } // Fim switch - case

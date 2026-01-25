@@ -8,7 +8,7 @@
    * @param {String} id: id do caso de será reativado 
    * 
    */  
-  function reativacaoCaso( idCaso ) {
+  function reativarCasoFE( idCaso ) {
 
     // Chama função do Apps Script para reativar um caso
     google.script.run
@@ -21,13 +21,13 @@
                  .withFailureHandler( erro => {
 
                    // mostra modal com mensagem de erro
-                   mostrarModalErro( "reativacaoCaso - " + erro.message );
+                   mostrarModalErro( "reativarCasoFE - " + erro.message );
 
                  })
                  // Chama a função backend que reativa o caso
-                 .reativarCaso( idCaso );  
+                 .reativarCasoBE( idCaso );  
 
-  } // Fim da função reativacaoCaso
+  } // Fim da função reativarCasoFE
 
 
 </script>

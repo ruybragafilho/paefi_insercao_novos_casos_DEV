@@ -2,14 +2,14 @@
 
   "use strict";
 
-  // Cache do caso que está sendo editado
-  let cacheCasoEmEdicao;  
+  // Cache do caso que está sendo atualizado
+  let cache_CasoEmAtualizacao;  
 
 
   /**
-   * Função que configura a página de cadastro para Edição de caso
+   * Função que configura a página de cadastro para Atualização de caso
    */
-  function configurarPaginaEdicaoDeCaso() {
+  function configurarPaginaAtualizarCaso() {
 
     // Configura o Título da Página
     if( usuarioLogado.tipo == "2" ) {
@@ -39,56 +39,56 @@
     document.getElementById( "dataUltimaResposta" ).style.display = "";
     document.getElementById( "situacaoDoCaso" ).style.display = "";    
 
-  } // Fim da função configurarPaginaEdicaoDeCaso
+  } // Fim da função configurarPaginaAtualizarCaso
 
 
  
   /**
-   * Função que mostra na tela os dados do caso em edição
+   * Função que mostra na tela os dados do caso em atualização
    */
-  function mostrarDadosDoCasoEmEdicao() {
+  function mostrarDadosDoCasoEmAtualizacao() {
 
     // Referência Familiar
-    document.getElementById('referenciaFamiliarInput').value = cacheCasoEmEdicao.referenciaFamiliar;
+    document.getElementById('referenciaFamiliarInput').value = cache_CasoEmAtualizacao.referenciaFamiliar;
 
 
     // Endereço
-    document.getElementById('tipoLogradouroInput').value = cacheCasoEmEdicao.tipoLogradouro;
-    document.getElementById('nomeLogradouroInput').value = cacheCasoEmEdicao.nomeLogradouro;
-    document.getElementById('numeroInput').value = cacheCasoEmEdicao.numero;
-    document.getElementById('complementoInput').value = cacheCasoEmEdicao.complemento;
-    document.getElementById('bairroInput').value = cacheCasoEmEdicao.bairro;
+    document.getElementById('tipoLogradouroInput').value = cache_CasoEmAtualizacao.tipoLogradouro;
+    document.getElementById('nomeLogradouroInput').value = cache_CasoEmAtualizacao.nomeLogradouro;
+    document.getElementById('numeroInput').value = cache_CasoEmAtualizacao.numero;
+    document.getElementById('complementoInput').value = cache_CasoEmAtualizacao.complemento;
+    document.getElementById('bairroInput').value = cache_CasoEmAtualizacao.bairro;
 
     // Deixa a regional travada apenas se o usuário do sistema
     // for um trabalhador de uma regional    
     if( usuarioLogado.regional == "0" ) {
-      document.getElementById('selectRegionais').value = cacheCasoEmEdicao.idRegional;
+      document.getElementById('selectRegionais').value = cache_CasoEmAtualizacao.idRegional;
     } else {
       document.getElementById('selectRegionais').innerHTML = 
-      `<option selected value="${cacheCasoEmEdicao.idRegional}">${cacheCasoEmEdicao.nomeRegional}</option>`;
+      `<option selected value="${cache_CasoEmAtualizacao.idRegional}">${cache_CasoEmAtualizacao.nomeRegional}</option>`;
     }                                     
 
-    document.getElementById('cepInput').value = cacheCasoEmEdicao.cep;
-    document.getElementById('tpsaInput').value = cacheCasoEmEdicao.tpsa;
+    document.getElementById('cepInput').value = cache_CasoEmAtualizacao.cep;
+    document.getElementById('tpsaInput').value = cache_CasoEmAtualizacao.tpsa;
 
 
     // Datas
-    let data = cacheCasoEmEdicao.dataDeChegadaNoCREAS.split("/");
+    let data = cache_CasoEmAtualizacao.dataDeChegadaNoCREAS.split("/");
     document.getElementById('dataChegadaCREASInput').value = `${data[2]}-${data[1]}-${data[0]}`;
 
-    if( cacheCasoEmEdicao.dataPrevistaParaResposta != "" ) {
-      data = cacheCasoEmEdicao.dataPrevistaParaResposta.split("/");
+    if( cache_CasoEmAtualizacao.dataPrevistaParaResposta != "" ) {
+      data = cache_CasoEmAtualizacao.dataPrevistaParaResposta.split("/");
       document.getElementById('dataPrevistaRespostaInput').value = `${data[2]}-${data[1]}-${data[0]}`;
     }
 
-    if( cacheCasoEmEdicao.dataDaUltimaResposta != "" ) {
-      data = cacheCasoEmEdicao.dataDaUltimaResposta.split("/");
+    if( cache_CasoEmAtualizacao.dataDaUltimaResposta != "" ) {
+      data = cache_CasoEmAtualizacao.dataDaUltimaResposta.split("/");
       document.getElementById('dataUltimaRespostaInput').value = `${data[2]}-${data[1]}-${data[0]}`;
     }
 
 
     // checkboxOrgaosEncaminhadores
-    let idsOrgaosEncaminhadores = cacheCasoEmEdicao.idsOrgaosEncaminhadores.split(";").filter( id => id != "" );
+    let idsOrgaosEncaminhadores = cache_CasoEmAtualizacao.idsOrgaosEncaminhadores.split(";").filter( id => id != "" );
     let idItem;
     idsOrgaosEncaminhadores.forEach( id => {
       idItem = 'checkboxOrgaosEncaminhadores' + id;
@@ -97,23 +97,23 @@
 
 
     // Designação Caso
-    if( cacheCasoEmEdicao.ativo == "Sim" ) {
+    if( cache_CasoEmAtualizacao.ativo == "Sim" ) {
       document.getElementById( "situacaoCasoInput" ).value = "Ativo";
     } else {
       document.getElementById( "situacaoCasoInput" ).value = "Inativo";
 
-      data = cacheCasoEmEdicao.dataDeDesignacao.split("/");
+      data = cache_CasoEmAtualizacao.dataDeDesignacao.split("/");
       document.getElementById( "dataDesignacaoInput" ).value = `${data[2]}-${data[1]}-${data[0]}`;
 
       document.getElementById('selectMotivoDesiginacao').innerHTML = 
-      `<option selected value="${cacheCasoEmEdicao.idMotivoDeDesignacao}">${cacheCasoEmEdicao.nomeMotivoDeDesignacao}</option>`;      
+      `<option selected value="${cache_CasoEmAtualizacao.idMotivoDeDesignacao}">${cache_CasoEmAtualizacao.nomeMotivoDeDesignacao}</option>`;      
     }
 
 
     // checkboxViolacoes
     let idsViolacoes;
-    if( cacheCasoEmEdicao.idsViolacoes != "" ) {
-      idsViolacoes = cacheCasoEmEdicao.idsViolacoes.split(";").filter( id => id != "" );    
+    if( cache_CasoEmAtualizacao.idsViolacoes != "" ) {
+      idsViolacoes = cache_CasoEmAtualizacao.idsViolacoes.split(";").filter( id => id != "" );    
       idsViolacoes.forEach( id => {
         idItem = 'checkboxViolacoes' + id;
         document.getElementById( idItem ).checked = true;
@@ -123,8 +123,8 @@
 
     // checkboxCategorias    
     let idsCategorias;
-    if( cacheCasoEmEdicao.idsCategorias != "" ) {
-      idsCategorias = cacheCasoEmEdicao.idsCategorias.split(";").filter( id => id != "" );     
+    if( cache_CasoEmAtualizacao.idsCategorias != "" ) {
+      idsCategorias = cache_CasoEmAtualizacao.idsCategorias.split(";").filter( id => id != "" );     
       idsCategorias.forEach( id => {
         idItem = 'checkboxCategorias' + id;
         document.getElementById( idItem ).checked = true;
@@ -136,13 +136,13 @@
 
   
       // Checkbox Parâmetros    
-      if( cacheCasoEmEdicao.idsParametros != "" ) { 
+      if( cache_CasoEmAtualizacao.idsParametros != "" ) { 
   
-        let idsParametros = cacheCasoEmEdicao.idsParametros.split(";").filter( id => id != "" );    
+        let idsParametros = cache_CasoEmAtualizacao.idsParametros.split(";").filter( id => id != "" );    
         let arrayIdsCategoriasDoParametro;
   
         idsParametros.forEach( idParametro => {  
-          arrayIdsCategoriasDoParametro = (cacheParametros[idParametro-1][COLUNA_CATEGORIAS_DO_PARAMETRO]).split(";").filter( id => id != "");    
+          arrayIdsCategoriasDoParametro = (cache_CasoEmAtualizacao[idParametro-1][COLUNA_CATEGORIAS_DO_PARAMETRO]).split(";").filter( id => id != "");    
   
           arrayIdsCategoriasDoParametro.forEach( idCategoria => {  
             idItem =  "checkboxParametros_" + idCategoria + "_" + idParametro;
@@ -156,16 +156,16 @@
     
 
     // Observação
-    document.getElementById('textAreaObservacao').value = cacheCasoEmEdicao.observacao;
+    document.getElementById('textAreaObservacao').value = cache_CasoEmAtualizacao.observacao;
 
-  } // Fim da função mostrarDadosDoCasoEmEdicao
+  } // Fim da função mostrarDadosDoCasoEmAtualizacao
 
 
 
   /**
-   * Função chamada quando o botão editar é clicado para salvar uma edição de caso
+   * Função chamada quando o botão editar é clicado para salvar uma atualização de caso
    */    
-  function salvarEdicaoDeCaso() {
+  function atualizarCasoFE() {
 
     // RF
     const referenciaFamiliar = document.getElementById('referenciaFamiliarInput').value;
@@ -225,7 +225,7 @@
     // utiliza a data do dia
     } else {
         
-      dataChegadaCREAS = cacheCasoEmEdicao.dataDeChegadaNoCREAS;  
+      dataChegadaCREAS = cache_CasoEmAtualizacao.dataDeChegadaNoCREAS;  
 
     } // Fim do tratamendo da data de chegada no CREAS
 
@@ -257,7 +257,7 @@
     // utiliza null
     } else {
 
-      dataPrevistaResposta = cacheCasoEmEdicao.dataPrevistaParaResposta;
+      dataPrevistaResposta = cache_CasoEmAtualizacao.dataPrevistaParaResposta;
 
     } // Fim do tratamento da data prevista para resposta
 
@@ -289,7 +289,7 @@
     // mantém a data que já estava
     } else {
 
-      dataUltimaResposta = cacheCasoEmEdicao.dataDaUltimaResposta;
+      dataUltimaResposta = cache_CasoEmAtualizacao.dataDaUltimaResposta;
 
     } // Fim do tratamento da data da última resposta
 
@@ -376,33 +376,33 @@
                  .withFailureHandler( erro => {
 
                    // mostra modal com mensagem de erro 
-                   mostrarModalErro( "salvarEdicaoDeCaso - " + erro.message );
+                   mostrarModalErro( "atualizarCasoFE - " + erro.message );
 
                  })
                  // Chama a função backend que atualiza um caso
-                 .atualizarCaso( cacheCasoEmEdicao.id,
-                                 referenciaFamiliar,
-                                 tipoLogradouro,
-                                 nomeLogradouro,
-                                 numero,
-                                 complemento,
-                                 bairro,
-                                 idRegional,
-                                 cep,                          
-                                 tpsa,
-                                 dataChegadaCREAS,
-                                 idsOrgaosEncaminhadores,
-                                 dataPrevistaResposta, 
-                                 dataUltimaResposta, 
-                                 cacheCasoEmEdicao.dataDeDesignacao,   
-                                 cacheCasoEmEdicao.idMotivoDeDesignacao, 
-                                 idsViolacoesCaso,
-                                 idsCategoriasCaso,
-                                 idsParametrosCaso,
-                                 observacao );        
+                 .atualizarCasoBE( cache_CasoEmAtualizacao.id,
+                                   referenciaFamiliar,
+                                   tipoLogradouro,
+                                   nomeLogradouro,
+                                   numero,
+                                   complemento,
+                                   bairro,
+                                   idRegional,
+                                   cep,                          
+                                   tpsa,
+                                   dataChegadaCREAS,
+                                   idsOrgaosEncaminhadores,
+                                   dataPrevistaResposta, 
+                                   dataUltimaResposta, 
+                                   cache_CasoEmAtualizacao.dataDeDesignacao,   
+                                   cache_CasoEmAtualizacao.idMotivoDeDesignacao, 
+                                   idsViolacoesCaso,
+                                   idsCategoriasCaso,
+                                   idsParametrosCaso,
+                                   observacao );        
 
 
-  } // Fim da função salvarEdicaoDeCaso
+  } // Fim da função atualizarCasoFE
 
 
   </script>
