@@ -142,7 +142,7 @@
         let arrayIdsCategoriasDoParametro;
   
         idsParametros.forEach( idParametro => {  
-          arrayIdsCategoriasDoParametro = (cache_CasoEmAtualizacao[idParametro-1][COLUNA_CATEGORIAS_DO_PARAMETRO]).split(";").filter( id => id != "");    
+          arrayIdsCategoriasDoParametro = (cache_TabelaParametros[idParametro-1][COLUNA_CATEGORIAS_DO_PARAMETRO]).split(";").filter( id => id != "");    
   
           arrayIdsCategoriasDoParametro.forEach( idCategoria => {  
             idItem =  "checkboxParametros_" + idCategoria + "_" + idParametro;
@@ -370,7 +370,9 @@
                  .withSuccessHandler( () => {
 
                    // Volta para a tela de resumos de casos
+                   console.log( "\natualizarCasoFE_js - INÍCIO" ); 
                    redirecionarParaTelaResumosDosCasos( 1 );
+                   console.log( "atualizarCasoFE_js - FIM" ); 
 
                  })
                  .withFailureHandler( erro => {

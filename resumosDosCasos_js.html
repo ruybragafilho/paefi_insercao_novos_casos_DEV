@@ -287,11 +287,14 @@
     // e em seguida carrega a página de resumo de casos
     if( recarregarCasos ) {
 
+      console.log( "redirecionarParaTelaResumosDosCasos - RECARREGAR == 1" );
       // Sinaliza que a tabela de casos ainda não está na cache
       flagCache_TabelaCasos = 0;
 
       google.script.run
                    .withSuccessHandler( dados => {
+
+                     console.log( "redirecionarParaTelaResumosDosCasos - SUCCESS HANDLER" );
 
                      // mostra modal com mensagem de operação concluída                     
                      mostrarModalMensagem( "Operação concluída! " );                    
@@ -306,7 +309,9 @@
                      exibirPagina("resumosDosCasos");
   
                    })
-                   .withFailureHandler( erro => {                     
+                   .withFailureHandler( erro => {       
+                    
+                     console.log( "redirecionarParaTelaResumosDosCasos - FAILURE HANDLER" );
 
                      // mostra modal de erro
                      mostrarModalErro( "redirecionarParaTelaResumosDosCasos - " + erro.message );
@@ -318,6 +323,7 @@
     // Se flag == 0, apenas carrega a página de resumo de casos, sem recarregar a tabela
     } else {
 
+      console.log( "redirecionarParaTelaResumosDosCasos - RECARREGAR == 0" );
       // Carrega a página de resumos de casos
       exibirPagina("resumosDosCasos");
 

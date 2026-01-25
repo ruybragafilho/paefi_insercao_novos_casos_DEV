@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Módulo:    atualizarCaso.gs
+ * Módulo:    atualizarCasoBE.gs
  * Objetivo:  atualiza um caso na tabela CASOS
  */
 

@@ -15,7 +15,9 @@
                  .withSuccessHandler( () => {
 
                    // Volta para a tela de resumos de casos
+                   console.log( "\nreativarCasoFE_js - INÍCIO" ); 
                    redirecionarParaTelaResumosDosCasos( 1 );
+                   console.log( "reativarCasoFE_js - FIM" ); 
 
                  })
                  .withFailureHandler( erro => {

@@ -28,21 +28,21 @@ function importarPlanilhaExterna() {
   // Insere os casos na planilha interna do sistema
   casos.forEach( caso => {
 
-    inserirNovoCaso( caso.referenciaFamiliar,
-                     caso.tipoLogradouro,
-                     caso.nomeLogradouro,
-                     caso.numero,
-                     caso.complemento,
-                     caso.bairro,
-                     caso.idRegional,
-                     caso.cep,                          
-                     caso.tpsa,
-                     caso.dataDeChegadaNoCREAS,
-                     caso.idsOrgaosEncaminhadores,
-                     caso.dataPrevistaParaResposta,                          
-                     caso.idsCategorias,
-                     caso.idsParametros,
-                     caso.observacao );
+    inserirCasoBE( caso.referenciaFamiliar,
+                   caso.tipoLogradouro,
+                   caso.nomeLogradouro,
+                   caso.numero,
+                   caso.complemento,
+                   caso.bairro,
+                   caso.idRegional,
+                   caso.cep,                          
+                   caso.tpsa,
+                   caso.dataDeChegadaNoCREAS,
+                   caso.idsOrgaosEncaminhadores,
+                   caso.dataPrevistaParaResposta,                          
+                   caso.idsCategorias,
+                   caso.idsParametros,
+                   caso.observacao );
 
   }); // Fim do forEach 
 
