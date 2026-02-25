@@ -124,7 +124,7 @@
       let designacao;
       if( usuarioLogado.tipo != "2" ) {
         designacao = item.ativo == "Sim" ? gerarSelectDesignacao( cache_TabelaMotivosDeDesignacao, item.id ) 
-                                         : gerarBotaoReativar( item.id );         
+                                         : gerarBotaoReativar();         
       } else {
         designacao = "";
       }
