@@ -62,7 +62,7 @@ function obterCasos( idRegional ) {
         dataDaUltimaResposta: linhaCaso[DATA_DA_ULTIMA_RESPOSTA],
   
         dataDeDesignacao: linhaCaso[DATA_DE_DESIGNACAO],
-        ativo: linhaCaso[DATA_DE_DESIGNACAO]? "Não" : "Sim",
+        ativo: (linhaCaso[DATA_DE_DESIGNACAO]).trim()? "Não" : "Sim",
         idMotivoDeDesignacao: linhaCaso[MOTIVO_DE_DESIGNACAO],
         nomeMotivoDeDesignacao: idsToNomes(linhaCaso[MOTIVO_DE_DESIGNACAO], "MOTIVOS_DE_DESIGNACAO"),
   
