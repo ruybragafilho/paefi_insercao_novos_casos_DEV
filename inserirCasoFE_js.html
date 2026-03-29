@@ -35,8 +35,9 @@
       `<option selected value="${usuarioLogado.regional}">${cache_TabelaRegionais[usuarioLogado.regional-1][COLUNA_NOME]}</option>`;
     }   
 
-    // Esconde Componentes não utilizados na inserção de novo caso
-    document.getElementById( "dataUltimaResposta" ).style.display = "none";
+    // Esconde Componentes não utilizados na inserção de novo caso    
+    document.getElementById( "dataUltimaRespostaLabel" ).style.display = "none";
+    document.getElementById( "dataUltimaRespostaInput" ).style.display = "none";    
     document.getElementById( "situacaoDoCaso" ).style.display = "none";    
 
 
