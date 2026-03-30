@@ -52,10 +52,17 @@ function atualizarCasoBE( id,
                           idsParametrosCaso,
                           observacao ) {
 
+
   // Se id inválido, retorna uma exceção
   if( id < 1  ||  id > NUM_CASOS ) {
     throw( new Error( "ID Inválido" ) );
   }  
+
+  // Verifica se o usuário do app tem permissão para atualizar o caso
+  const usuarioLogado = JSON.parse( autenticarUsuario() );
+  if( usuarioLogado.tipo == "2" || usuarioLogado.regional != idRegional ) {
+    throw( new Error( "Usuário sem permissão para atualizar o caso" ) );
+  }
 
   // Gera a data de insercao do caso no sistema
   // No caso de atualização, essa data não deve ser alterada

@@ -15,9 +15,17 @@
 function designarCasoBE( id,                       
                          idMotivoDeDesignacao ) {
 
+
   // Se id inválido, retorna uma exceção
   if( id < 1  ||  id > NUM_CASOS ) {
     throw( new Error( "ID Inválido" ) );
+  }  
+
+  // Verifica se o usuário do app tem permissão para designar o caso
+  const usuarioLogado = JSON.parse( autenticarUsuario() );
+  const idRegional = BUFFER_CASOS[id-1][REGIONAL]
+  if( usuarioLogado.tipo == "2" || usuarioLogado.regional != idRegional ) {
+    throw( new Error( "Usuário sem permissão para designar o caso" ) );
   }  
 
   // TENTA PEGAR O LOCK

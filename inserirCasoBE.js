@@ -44,6 +44,12 @@ function inserirCasoBE( referenciaFamiliar,
                         idsParametrosCaso,
                         observacao ) {
 
+  // Verifica se o usuário do app tem permissão para inserir o novo caso
+  const usuarioLogado = JSON.parse( autenticarUsuario() );
+  if( usuarioLogado.tipo == "2" || usuarioLogado.regional != idRegional ) {
+    throw( new Error( "Usuário sem permissão para inserir o novo caso" ) );
+  }                          
+
   // Gera o id do novo caso
   const idNovoCaso = NUM_CASOS + 1;    
 

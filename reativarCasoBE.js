@@ -19,6 +19,13 @@ function reativarCasoBE( id ) {
     throw( new Error( "ID Inválido" ) );
   }  
 
+  // Verifica se o usuário do app tem permissão para reativar o caso
+  const usuarioLogado = JSON.parse( autenticarUsuario() );
+  const idRegional = BUFFER_CASOS[id-1][REGIONAL]
+  if( usuarioLogado.tipo == "2" || usuarioLogado.regional != idRegional ) {
+    throw( new Error( "Usuário sem permissão para reativar o caso" ) );
+  }  
+
   // TENTA PEGAR O LOCK
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);  
