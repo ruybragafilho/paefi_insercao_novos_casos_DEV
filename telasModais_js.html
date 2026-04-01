@@ -14,6 +14,11 @@
   let conteudoModalParametrosCaso;
   let modalParametrosCaso;
 
+  // Variáveis para controlar a exibição da janela modal para o nome do técnico do PAEFI
+  let conteudoModalNomeTecnicoPAEFI;
+  let modalNomeTecnicoPAEFI;
+
+  
 
   /**
   * Função que inicializa as telas modais utilizadas no frontend
@@ -25,7 +30,12 @@
     modalMensagem = new bootstrap.Modal( document.getElementById("modalMensagem" ), {
       backdrop: 'static',
       keyboard: false
-    });
+    }); 
+
+
+    // Instancia as variáveis para controlar a exibição da janela modal para o nome do técnico do PAEFI    
+    conteudoModalNomeTecnicoPAEFI = document.getElementById("nomeTecnicoPAEFI");
+    modalNomeTecnicoPAEFI = new bootstrap.Modal( document.getElementById("modalNomeTecnicoPAEFI") );
 
 
     // Instancia as variáveis para controlar a exibição da janela modal de erro
@@ -35,7 +45,7 @@
 
     // Instancia as variáveis para controlar a exibição da janela modal de parâmetros    
     conteudoModalParametrosCaso = document.getElementById("listaParametrosCaso");
-    modalParametrosCaso = new bootstrap.Modal( document.getElementById("modalParametrosCaso") );   
+    modalParametrosCaso = new bootstrap.Modal( document.getElementById("modalParametrosCaso") );         
 
   } // Fim da função inicializarModais
 
@@ -51,9 +61,20 @@
     conteudoModalMensagem.textContent = mensagem;
     modalMensagem.show();
 
-  } // Fim da função modalErro
+  } // Fim da função mostrarModalMensagem
 
-  
+
+  /**
+   * Função frontend que mostra o modal para o nome do técnico do PAEFI    
+   */  
+  function mostrarModalNomeTecnicoPAEFI() {
+
+    // Mostra modal para o nome do técnico do PAEFI 
+    modalNomeTecnicoPAEFI.show();
+
+  } // Fim da função mostrarModalNomeTecnicoPAEFI  
+
+
   /**
    * Função frontend que mostra o modal de erro
    *  
