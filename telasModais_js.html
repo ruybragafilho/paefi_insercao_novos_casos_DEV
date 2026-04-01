@@ -17,6 +17,7 @@
   // Variáveis para controlar a exibição da janela modal para o nome do técnico do PAEFI
   let conteudoModalNomeTecnicoPAEFI;
   let modalNomeTecnicoPAEFI;
+  let idCasoDesignadoPAEFI;
 
   
 
@@ -36,6 +37,7 @@
     // Instancia as variáveis para controlar a exibição da janela modal para o nome do técnico do PAEFI    
     conteudoModalNomeTecnicoPAEFI = document.getElementById("nomeTecnicoPAEFI");
     modalNomeTecnicoPAEFI = new bootstrap.Modal( document.getElementById("modalNomeTecnicoPAEFI") );
+    idCasoDesignadoPAEFI = 0;
 
 
     // Instancia as variáveis para controlar a exibição da janela modal de erro
@@ -67,12 +69,36 @@
   /**
    * Função frontend que mostra o modal para o nome do técnico do PAEFI    
    */  
-  function mostrarModalNomeTecnicoPAEFI() {
+  function mostrarModalNomeTecnicoPAEFI( idCaso ) {
+
+    // Armazena o id do caso que será designado ao PAEFI
+    idCasoDesignadoPAEFI = idCaso;
+
+    // Limpa o campo para o nome do técnico do PAEFI
+    conteudoModalNomeTecnicoPAEFI.value = "";
 
     // Mostra modal para o nome do técnico do PAEFI 
     modalNomeTecnicoPAEFI.show();
 
   } // Fim da função mostrarModalNomeTecnicoPAEFI  
+
+
+  /**
+   * Função frontend que mostra o modal para o nome do técnico do PAEFI    
+   */    
+  function handleBotaoInserirNoPAEFI() {
+
+    let nomeTecnicoPAEFI = conteudoModalNomeTecnicoPAEFI.value;
+
+    console.log( `handleBotaoInserirNoPAEFI: ${nomeTecnicoPAEFI} - ${idCasoDesignadoPAEFI}`  );
+
+    // mostra modal com mensagem de designação de caso
+    mostrarModalMensagem( "Designando o caso, por favor aguarde..." );                               
+    
+    // Chama a função front end para designar o caso    
+    designarCasoFE( idCasoDesignadoPAEFI, "4", nomeTecnicoPAEFI );
+
+  } // Fim da função handleBotaoInserirNoPAEFI
 
 
   /**

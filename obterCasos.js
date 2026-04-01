@@ -10,17 +10,25 @@
 /**
  * Função que retorna uma tabela com os casos registrados no sistema, filtrados por regional   
  * 
- * @param {String} idRegional: "0" - Traz os casos de todas as regionais
- *                             "idRegional" - Traz apenas os casos da regional especificada
- * 
  * @return Uma tabela em que cada linha contém um objeto com os dados de um caso
  */
-function obterCasos( idRegional ) {    
+function obterCasos() {    
+
+  // Obtém a regional associada ao usuário do app para filtrar os casos retornados
+  let usuarioLogado;
+  try {
+    usuarioLogado = JSON.parse( autenticarUsuario() );
+  } catch( error ) {
+    throw( "obterCasos: " + error.message );
+  }    
+  const idRegional = usuarioLogado.regional;
+
 
   // Se id inválido, retorna uma exceção
   if( idRegional < 0  ||  idRegional > NUM_REGIONAIS ) {
     throw( new Error( "ID Inválido" ) );
   }
+  
 
   // RETORNA NULL, SE TABELA DE CASOS ESTIVER VAZIA
   if( NUM_CASOS < 1 ) return null;
@@ -65,6 +73,7 @@ function obterCasos( idRegional ) {
         ativo: (linhaCaso[DATA_DE_DESIGNACAO]).trim()? "Não" : "Sim",
         idMotivoDeDesignacao: linhaCaso[MOTIVO_DE_DESIGNACAO],
         nomeMotivoDeDesignacao: idsToNomes(linhaCaso[MOTIVO_DE_DESIGNACAO], "MOTIVOS_DE_DESIGNACAO"),
+        nomeTecnicoPAEFI: linhaCaso[NOME_TECNICO_PAEFI],
   
         totalPontos: linhaCaso[TOTAL_DE_PONTOS],
   

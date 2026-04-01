@@ -49,7 +49,7 @@ const PLANILHA_CASOS           =  SpreadsheetApp.openById(PLANILHA_CASOS_ID);
 const TABELA_CASOS             =  PLANILHA_CASOS.getSheetByName('CASOS');
 let BUFFER_CASOS               =  TABELA_CASOS.getDataRange().getDisplayValues().splice(1);
 let NUM_CASOS                  =  BUFFER_CASOS.length;
-const NUM_COLUNAS_TABELA_CASOS =  24;
+const NUM_COLUNAS_TABELA_CASOS =  25;
 
 function refreshBufferCasos() {
   BUFFER_CASOS  =  TABELA_CASOS.getDataRange().getDisplayValues().splice(1);
@@ -111,6 +111,7 @@ const CATEGORIAS_CASO                   = 20;
 const PONTUACAO_PARAMETROS_CASO         = 21;
 const PARAMETROS_CASO                   = 22;
 const OBSERVACAO                        = 23;
+const NOME_TECNICO_PAEFI                = 24;
 
 
 // Posições das colunas da planilha USUARIOS
@@ -216,6 +217,7 @@ function gravarNaTabelaCasos( id,
                               dataDaUltimaResposta,
                               dataDeDesignacao,
                               idMotivoDeDesignacao,  
+                              nomeTecnicoPAEFI,
                               idsViolacoesCaso,                                             
                               idsCategoriasCaso,
                               idsParametrosCaso,
@@ -272,6 +274,9 @@ function gravarNaTabelaCasos( id,
       
     // Insere o motivo de designação do caso, no array - null
     caso[MOTIVO_DE_DESIGNACAO] = idMotivoDeDesignacao
+
+    // Insere o nome do técnico do PAEFI no array
+    caso[NOME_TECNICO_PAEFI] = nomeTecnicoPAEFI != "" ? nomeTecnicoPAEFI.trim().toUpperCase() : "";    
       
     // Insere um TOTAL DE PONTOS temporario no array (será calculado a seguir via fórmula do Planilhas Google)
     caso[TOTAL_DE_PONTOS] = null;
@@ -293,6 +298,7 @@ function gravarNaTabelaCasos( id,
       
     // Insere a observacao no array
     caso[OBSERVACAO] = observacao.trim().toUpperCase();
+
       
     // Insere o novo caso na tabela (planilha)  **** Alterar para inserção e update      
     try {

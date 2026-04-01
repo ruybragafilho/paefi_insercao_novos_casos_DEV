@@ -38,8 +38,7 @@
     // Esconde Componentes não utilizados na inserção de novo caso    
     document.getElementById( "dataUltimaRespostaLabel" ).style.display = "none";
     document.getElementById( "dataUltimaRespostaInput" ).style.display = "none";    
-    document.getElementById( "situacaoDoCaso" ).style.display = "none";    
-
+    document.getElementById( "situacaoDoCaso" ).style.display = "none";  
 
   } // Fim da função configurarPaginaInserirCaso
 
@@ -49,6 +48,9 @@
    * Função chamada quando o botão salvar é clicado para inserir um caso
    */    
   function inserirCasoFE() {
+
+    // Mensagem de debug
+    console.log( "inserirCasoFE - INÍCIO" );     
 
     // RF
     const referenciaFamiliar = document.getElementById('referenciaFamiliarInput').value;
@@ -221,15 +223,15 @@
                  .withSuccessHandler( () => {
 
                    // Volta para a tela de resumos de casos
-                   console.log( "\ninserirCasoFE_js - INÍCIO" ); 
-                   redirecionarParaTelaResumosDosCasos( 1 );
-                   console.log( "inserirCasoFE_js - FIM" ); 
+                   console.log( "inserirCasoFE - SuccessHandler" );
+                   redirecionarParaTelaResumosDosCasos( 1 ); 
 
                  })
                  .withFailureHandler( erro => {
 
                    // mostra modal com mensagem de erro 
-                   mostrarModalErro( "inserirCasoFE - " + erro.message );
+                   console.log( "inserirCasoFE - FailureHandler: " + erro.message );
+                   mostrarModalErro( "inserirCasoFE - FailureHandler: " + erro.message );
                    redirecionarParaTelaResumosDosCasos( 0 );
 
                  })
@@ -249,7 +251,10 @@
                                  idsViolacoesCaso,                 
                                  idsCategoriasCaso,
                                  idsParametrosCaso,
-                                 observacao  );        
+                                 observacao  );      
+                                 
+    // Mensagem de debug
+    console.log( "inserirCasoFE - FIM" );                                          
            
   } // Fim da função inserirCasoFE 
 

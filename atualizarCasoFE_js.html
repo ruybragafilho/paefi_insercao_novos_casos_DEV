@@ -106,8 +106,10 @@
       data = cache_CasoEmAtualizacao.dataDeDesignacao.split("/");
       document.getElementById( "dataDesignacaoInput" ).value = `${data[2]}-${data[1]}-${data[0]}`;
 
-      document.getElementById('selectMotivoDesiginacao').innerHTML = 
-      `<option selected value="${cache_CasoEmAtualizacao.idMotivoDeDesignacao}">${cache_CasoEmAtualizacao.nomeMotivoDeDesignacao}</option>`;      
+      document.getElementById( "selectMotivoDesiginacao" ).innerHTML = 
+      `<option selected value="${cache_CasoEmAtualizacao.idMotivoDeDesignacao}">${cache_CasoEmAtualizacao.nomeMotivoDeDesignacao}</option>`;
+      
+      document.getElementById( "nomeTecnicoPAEFIInput" ).value = cache_CasoEmAtualizacao.nomeTecnicoPAEFI;
     }
 
 
@@ -167,6 +169,9 @@
    * Função chamada quando o botão editar é clicado para salvar uma atualização de caso
    */    
   function atualizarCasoFE() {
+
+    // Mensagem de debug
+    console.log( "atualizarCasoFE - INÍCIO" ); 
 
     // RF
     const referenciaFamiliar = document.getElementById('referenciaFamiliarInput').value;
@@ -361,7 +366,6 @@
       observacao = observacao.substring(0, 200);
     }
 
-
     // mostra modal com mensagem de gravação de dados
     mostrarModalMensagem( "Gravando os dados, por favor aguarde..." );   
 
@@ -370,16 +374,16 @@
     google.script.run
                  .withSuccessHandler( () => {
 
-                   // Volta para a tela de resumos de casos
-                   console.log( "\natualizarCasoFE_js - INÍCIO" ); 
-                   redirecionarParaTelaResumosDosCasos( 1 );
-                   console.log( "atualizarCasoFE_js - FIM" ); 
+                   // Volta para a tela de resumos de casos    
+                   console.log( "atualizarCasoFE - SuccessHandler" );               
+                   redirecionarParaTelaResumosDosCasos( 1 );                   
 
                  })
                  .withFailureHandler( erro => {
 
                    // mostra modal com mensagem de erro 
-                   mostrarModalErro( "atualizarCasoFE - " + erro.message );
+                   console.log( "atualizarCasoFE - FailureHandler: " + erro.message );
+                   mostrarModalErro( "atualizarCasoFE - FailureHandler: " + erro.message );
                    redirecionarParaTelaResumosDosCasos( 0 );
 
                  })
@@ -400,11 +404,14 @@
                                    dataUltimaResposta, 
                                    cache_CasoEmAtualizacao.dataDeDesignacao,   
                                    cache_CasoEmAtualizacao.idMotivoDeDesignacao, 
+                                   cache_CasoEmAtualizacao.nomeTecnicoPAEFI,
                                    idsViolacoesCaso,
                                    idsCategoriasCaso,
                                    idsParametrosCaso,
                                    observacao );        
 
+    // Mensagem de debug                                    
+    console.log( "atualizarCasoFE - FIM" );                                     
 
   } // Fim da função atualizarCasoFE
 

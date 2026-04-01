@@ -60,14 +60,20 @@
         if( valorSelect ) {
 
           if( valorSelect == "4" ) {
-            mostrarModalNomeTecnicoPAEFI();
+
+            mostrarModalNomeTecnicoPAEFI( idCaso );
+            console.log( "mostrarModalNomeTecnicoPAEFI( idCaso )" );
+
+          } else {
+
+            // mostra modal com mensagem de designação de caso
+            mostrarModalMensagem( "Designando o caso, por favor aguarde..." );                               
+    
+            // Chama a função front end para designar o caso
+            designarCasoFE( idCaso, valorSelect, "" );                      
+
           }
 
-          // mostra modal com mensagem de designação de caso
-          mostrarModalMensagem( "Designando o caso, por favor aguarde..." );                               
-  
-          // Chama a função front end para designar o caso
-          designarCasoFE( idCaso, valorSelect );          
 
         // Se não, mostra modal de erro
         } else {
@@ -280,7 +286,9 @@
    */  
   function redirecionarParaTelaResumosDosCasos( recarregarCasos ) {
 
+    // Mensagem de debug        
     console.log( "redirecionarParaTelaResumosDosCasos - INÍCIO" );
+
 
     // Se flag == 1, chama a função que recarrega a tabela de resumos dos casos
     // e em seguida carrega a página de resumo de casos
@@ -294,7 +302,7 @@
       google.script.run
                    .withSuccessHandler( dados => {
 
-                     console.log( "redirecionarParaTelaResumosDosCasos - SUCCESS HANDLER" );
+                     console.log( "redirecionarParaTelaResumosDosCasos - SuccessHandler" );
 
                      // mostra modal com mensagem de operação concluída                     
                      mostrarModalMensagem( "Operação concluída! " );                    
@@ -309,16 +317,15 @@
                      exibirPagina("resumosDosCasos");
   
                    })
-                   .withFailureHandler( erro => {       
-                    
-                     console.log( "redirecionarParaTelaResumosDosCasos - FAILURE HANDLER" );
+                   .withFailureHandler( erro => {                            
 
                      // mostra modal de erro
-                     mostrarModalErro( "redirecionarParaTelaResumosDosCasos - " + erro.message );
+                     console.log( "redirecionarParaTelaResumosDosCasos - FailureHandler: " + erro.message );
+                     mostrarModalErro( "redirecionarParaTelaResumosDosCasos - FailureHandler: " + erro.message );
                      
                    })
                    // Chama a função backend para gerar e retornar a tabela de resumos de casos
-                   .obterCasos( usuarioLogado.regional );
+                   .obterCasos();
 
     // Se flag == 0, apenas carrega a página de resumo de casos, sem recarregar a tabela
     } else {
@@ -329,6 +336,8 @@
 
     }
 
+
+    // Mensagem de debug                
     console.log( "redirecionarParaTelaResumosDosCasos - FIM" );    
 
   } // Fim da função redirecionarParaTelaResumosDosCasos

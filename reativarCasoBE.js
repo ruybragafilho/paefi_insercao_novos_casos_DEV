@@ -20,9 +20,13 @@ function reativarCasoBE( id ) {
   }  
 
   // Verifica se o usuário do app tem permissão para reativar o caso
-  const usuarioLogado = JSON.parse( autenticarUsuario() );
-  const idRegional = BUFFER_CASOS[id-1][REGIONAL]
-  if( usuarioLogado.tipo == "2" || usuarioLogado.regional != idRegional ) {
+  let usuarioLogado;
+  try {
+    usuarioLogado = JSON.parse( autenticarUsuario() );
+  } catch( error ) {
+    throw( "reativarCasoBE: " + error.message );
+  }    
+  if( usuarioLogado.tipo == "2" || usuarioLogado.regional != BUFFER_CASOS[id-1][REGIONAL] ) {
     throw( new Error( "Usuário sem permissão para reativar o caso" ) );
   }  
 
@@ -43,6 +47,10 @@ function reativarCasoBE( id ) {
     // Grava null no motivo de designação do caso
     const idMotivo = TABELA_CASOS.getRange( idCaso+1, MOTIVO_DE_DESIGNACAO+1 );
     idMotivo.setValue( "" );        
+
+    // Grava null no nome do técnico do PAEFI
+    const nomeTecnico = TABELA_CASOS.getRange( idCaso+1, NOME_TECNICO_PAEFI+1 );
+    nomeTecnico.setValue( "" );            
 
     // SOLTA O LOCK
     lock.releaseLock();
