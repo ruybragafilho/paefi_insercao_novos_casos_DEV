@@ -72,11 +72,38 @@ const NUM_USUARIOS                =  BUFFER_USUARIOS.length;
 /**
  * Planilha TECNICOS  
  */
-const PLANILHA_TECNICOS_ID        =  "1jMDHHeTsAoqFjwoYalKfO20gTCAE98XHL52C-JaJT14";
-const PLANILHA_TECNICOS           =  SpreadsheetApp.openById(PLANILHA_TECNICOS_ID);
-const TABELA_TECNICOS             =  PLANILHA_TECNICOS.getSheetByName('TECNICOS');
-const BUFFER_TECNICOS             =  TABELA_TECNICOS.getDataRange().getDisplayValues().splice(1);
-const NUM_TECNICOS                =  BUFFER_TECNICOS.length;
+const PLANILHA_TECNICOS_ID    =  "1jMDHHeTsAoqFjwoYalKfO20gTCAE98XHL52C-JaJT14";
+const PLANILHA_TECNICOS       =  SpreadsheetApp.openById(PLANILHA_TECNICOS_ID);
+
+const TABELA_TECNICOS_B       =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_B');
+const TABELA_TECNICOS_CS      =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_CS');
+const TABELA_TECNICOS_L       =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_L');
+const TABELA_TECNICOS_NE      =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_NE');
+const TABELA_TECNICOS_NO      =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_NO');
+const TABELA_TECNICOS_N       =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_N');
+const TABELA_TECNICOS_O       =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_O');
+const TABELA_TECNICOS_P       =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_P');
+const TABELA_TECNICOS_VN      =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_VN');
+
+const BUFFER_TECNICOS_B       =  TABELA_TECNICOS_B.getDataRange().getDisplayValues().splice(1);
+const BUFFER_TECNICOS_CS      =  TABELA_TECNICOS_CS.getDataRange().getDisplayValues().splice(1);
+const BUFFER_TECNICOS_L       =  TABELA_TECNICOS_L.getDataRange().getDisplayValues().splice(1);
+const BUFFER_TECNICOS_NE      =  TABELA_TECNICOS_NE.getDataRange().getDisplayValues().splice(1);
+const BUFFER_TECNICOS_NO      =  TABELA_TECNICOS_NO.getDataRange().getDisplayValues().splice(1);
+const BUFFER_TECNICOS_N       =  TABELA_TECNICOS_N.getDataRange().getDisplayValues().splice(1);
+const BUFFER_TECNICOS_O       =  TABELA_TECNICOS_O.getDataRange().getDisplayValues().splice(1);
+const BUFFER_TECNICOS_P       =  TABELA_TECNICOS_P.getDataRange().getDisplayValues().splice(1);
+const BUFFER_TECNICOS_VN      =  TABELA_TECNICOS_VN.getDataRange().getDisplayValues().splice(1);
+
+const NUM_TECNICOS_B          =  BUFFER_TECNICOS_B.length;
+const NUM_TECNICOS_CS         =  BUFFER_TECNICOS_CS.length;
+const NUM_TECNICOS_L          =  BUFFER_TECNICOS_L.length;
+const NUM_TECNICOS_NE         =  BUFFER_TECNICOS_NE.length;
+const NUM_TECNICOS_NO         =  BUFFER_TECNICOS_NO.length;
+const NUM_TECNICOS_N          =  BUFFER_TECNICOS_N.length;
+const NUM_TECNICOS_O          =  BUFFER_TECNICOS_O.length;
+const NUM_TECNICOS_P          =  BUFFER_TECNICOS_P.length;
+const NUM_TECNICOS_VN         =  BUFFER_TECNICOS_VN.length;
 
 
 
@@ -129,10 +156,6 @@ const NOME_TECNICO_PAEFI                = 24;
 const EMAIL             = 1;
 const REGIONAL_USUARIO  = 3;
 const TIPO_USUARIO      = 4;
-
-
-// Posições das colunas da planilha TECNICOS
-const REGIONAL_TECNICO  = 3;
 
 
 
