@@ -70,6 +70,17 @@ const NUM_USUARIOS                =  BUFFER_USUARIOS.length;
 
 
 /**
+ * Planilha TECNICOS  
+ */
+const PLANILHA_TECNICOS_ID        =  "1jMDHHeTsAoqFjwoYalKfO20gTCAE98XHL52C-JaJT14";
+const PLANILHA_TECNICOS           =  SpreadsheetApp.openById(PLANILHA_TECNICOS_ID);
+const TABELA_TECNICOS             =  PLANILHA_TECNICOS.getSheetByName('TECNICOS');
+const BUFFER_TECNICOS             =  TABELA_TECNICOS.getDataRange().getDisplayValues().splice(1);
+const NUM_TECNICOS                =  BUFFER_TECNICOS.length;
+
+
+
+/**
  * Constantes que armazenam as posições das colunas nas tabelas
  */
 
@@ -118,6 +129,10 @@ const NOME_TECNICO_PAEFI                = 24;
 const EMAIL             = 1;
 const REGIONAL_USUARIO  = 3;
 const TIPO_USUARIO      = 4;
+
+
+// Posições das colunas da planilha TECNICOS
+const REGIONAL_TECNICO  = 3;
 
 
 
