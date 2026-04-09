@@ -173,7 +173,9 @@ function obterTabelaCompleta( nomeTabela ) {
     case "REGIONAIS":                bufferTabela = BUFFER_REGIONAIS;
                                      break;            
     case "MOTIVOS_DE_DESIGNACAO":    bufferTabela = BUFFER_MOTIVOS_DE_DESIGNACAO;
-                                     break;            
+                                     break;          
+    case "TECNICOS":                 bufferTabela = BUFFER_TECNICOS;
+                                     break;
     default:                         throw( new Error( "Tabela inválida" ) ); 
   }
 
@@ -447,7 +449,9 @@ function idsToNomes( stringIds, nomeTabela ) {
     case "REGIONAIS":                bufferTabela = BUFFER_REGIONAIS;
                                      break;                           
     case "MOTIVOS_DE_DESIGNACAO":    bufferTabela = BUFFER_MOTIVOS_DE_DESIGNACAO;
-                                     break;               
+                                     break;
+    case "TECNICOS":                 bufferTabela = BUFFER_TECNICOS;
+                                     break;                                                    
     default:                         throw( new Error( "Tabela Inválida" ) ); 
   }
 
@@ -580,10 +584,6 @@ function teste_formatarListaIds() {
   console.log(retorno);
 
 } // Fim da função teste_formatarListaIds
-
-
-
-
 
 
 
