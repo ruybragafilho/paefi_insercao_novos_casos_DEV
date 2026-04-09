@@ -18,38 +18,38 @@
 const PLANILHA_CODIGOS_ID  =  "1jhVYOdvx1-yYMi00MiMA92SKKeVCT11GlZTz1wRUDZI";
 const PLANILHA_CODIGOS     =  SpreadsheetApp.openById(PLANILHA_CODIGOS_ID);
 
-const TABELA_VIOLACOES                 =  PLANILHA_CODIGOS.getSheetByName('VIOLACOES');
-const TABELA_CATEGORIAS                =  PLANILHA_CODIGOS.getSheetByName('CATEGORIAS');
-const TABELA_PARAMETROS                =  PLANILHA_CODIGOS.getSheetByName('PARAMETROS');
-const TABELA_ORGAOS_ENCAMINHADORES     =  PLANILHA_CODIGOS.getSheetByName('ORGAOS_ENCAMINHADORES');
-const TABELA_REGIONAIS                 =  PLANILHA_CODIGOS.getSheetByName('REGIONAIS');
-const TABELA_MOTIVOS_DE_DESIGNACAO     =  PLANILHA_CODIGOS.getSheetByName('MOTIVOS_DE_DESIGNACAO');
+const TABELA_VIOLACOES              =  PLANILHA_CODIGOS.getSheetByName('VIOLACOES');
+const TABELA_CATEGORIAS             =  PLANILHA_CODIGOS.getSheetByName('CATEGORIAS');
+const TABELA_PARAMETROS             =  PLANILHA_CODIGOS.getSheetByName('PARAMETROS');
+const TABELA_ORGAOS_ENCAMINHADORES  =  PLANILHA_CODIGOS.getSheetByName('ORGAOS_ENCAMINHADORES');
+const TABELA_REGIONAIS              =  PLANILHA_CODIGOS.getSheetByName('REGIONAIS');
+const TABELA_MOTIVOS_DE_DESIGNACAO  =  PLANILHA_CODIGOS.getSheetByName('MOTIVOS_DE_DESIGNACAO');
 
-const BUFFER_VIOLACOES                 =  TABELA_VIOLACOES.getDataRange().getDisplayValues().splice(1);
-const BUFFER_CATEGORIAS                =  TABELA_CATEGORIAS.getDataRange().getDisplayValues().splice(1);
-const BUFFER_PARAMETROS                =  TABELA_PARAMETROS.getDataRange().getDisplayValues().splice(1);
-const BUFFER_ORGAOS_ENCAMINHADORES     =  TABELA_ORGAOS_ENCAMINHADORES.getDataRange().getDisplayValues().splice(1);
-const BUFFER_REGIONAIS                 =  TABELA_REGIONAIS.getDataRange().getDisplayValues().splice(1);
-const BUFFER_MOTIVOS_DE_DESIGNACAO     =  TABELA_MOTIVOS_DE_DESIGNACAO.getDataRange().getDisplayValues().splice(1);
+const BUFFER_VIOLACOES              =  TABELA_VIOLACOES.getDataRange().getDisplayValues().splice(1);
+const BUFFER_CATEGORIAS             =  TABELA_CATEGORIAS.getDataRange().getDisplayValues().splice(1);
+const BUFFER_PARAMETROS             =  TABELA_PARAMETROS.getDataRange().getDisplayValues().splice(1);
+const BUFFER_ORGAOS_ENCAMINHADORES  =  TABELA_ORGAOS_ENCAMINHADORES.getDataRange().getDisplayValues().splice(1);
+const BUFFER_REGIONAIS              =  TABELA_REGIONAIS.getDataRange().getDisplayValues().splice(1);
+const BUFFER_MOTIVOS_DE_DESIGNACAO  =  TABELA_MOTIVOS_DE_DESIGNACAO.getDataRange().getDisplayValues().splice(1);
 
-const NUM_VIOLACOES                 = BUFFER_VIOLACOES.length;
-const NUM_CATEGORIAS                = BUFFER_CATEGORIAS.length;
-const NUM_PARAMETROS                = BUFFER_PARAMETROS.length;
-const NUM_ORGAOS_ENCAMINHADORES     = BUFFER_ORGAOS_ENCAMINHADORES.length;
-const NUM_REGIONAIS                 = BUFFER_REGIONAIS.length;
-const NUM_MOTIVOS_DE_DESIGNACAO     = BUFFER_MOTIVOS_DE_DESIGNACAO.length;
+const NUM_VIOLACOES              =  BUFFER_VIOLACOES.length;
+const NUM_CATEGORIAS             =  BUFFER_CATEGORIAS.length;
+const NUM_PARAMETROS             =  BUFFER_PARAMETROS.length;
+const NUM_ORGAOS_ENCAMINHADORES  =  BUFFER_ORGAOS_ENCAMINHADORES.length;
+const NUM_REGIONAIS              =  BUFFER_REGIONAIS.length;
+const NUM_MOTIVOS_DE_DESIGNACAO  =  BUFFER_MOTIVOS_DE_DESIGNACAO.length;
 
 
 
 /**
  * Planilha CASOS
  */
-const PLANILHA_CASOS_ID        =  "1E7LCL70iFyGrYAWX_SvaUux0Yier31RR45api-7i5BM";
-const PLANILHA_CASOS           =  SpreadsheetApp.openById(PLANILHA_CASOS_ID);
-const TABELA_CASOS             =  PLANILHA_CASOS.getSheetByName('CASOS');
-let BUFFER_CASOS               =  TABELA_CASOS.getDataRange().getDisplayValues().splice(1);
-let NUM_CASOS                  =  BUFFER_CASOS.length;
-const NUM_COLUNAS_TABELA_CASOS =  25;
+const PLANILHA_CASOS_ID         =  "1E7LCL70iFyGrYAWX_SvaUux0Yier31RR45api-7i5BM";
+const PLANILHA_CASOS            =  SpreadsheetApp.openById(PLANILHA_CASOS_ID);
+const TABELA_CASOS              =  PLANILHA_CASOS.getSheetByName('CASOS');
+let BUFFER_CASOS                =  TABELA_CASOS.getDataRange().getDisplayValues().splice(1);
+let NUM_CASOS                   =  BUFFER_CASOS.length;
+const NUM_COLUNAS_TABELA_CASOS  =  25;
 
 function refreshBufferCasos() {
   BUFFER_CASOS  =  TABELA_CASOS.getDataRange().getDisplayValues().splice(1);
@@ -61,49 +61,22 @@ function refreshBufferCasos() {
 /**
  * Planilha USUARIOS
  */
-const PLANILHA_USUARIOS_ID        =  "10j2k4QDqJq81WtXhRYLxPvl3dLcKbfVEt4YRiNus6Sk";
-const PLANILHA_USUARIOS           =  SpreadsheetApp.openById(PLANILHA_USUARIOS_ID);
-const TABELA_USUARIOS             =  PLANILHA_USUARIOS.getSheetByName('USUARIOS');
-const BUFFER_USUARIOS             =  TABELA_USUARIOS.getDataRange().getDisplayValues().splice(1);
-const NUM_USUARIOS                =  BUFFER_USUARIOS.length;
+const PLANILHA_USUARIOS_ID  =  "10j2k4QDqJq81WtXhRYLxPvl3dLcKbfVEt4YRiNus6Sk";
+const PLANILHA_USUARIOS     =  SpreadsheetApp.openById(PLANILHA_USUARIOS_ID);
+const TABELA_USUARIOS       =  PLANILHA_USUARIOS.getSheetByName('USUARIOS');
+const BUFFER_USUARIOS       =  TABELA_USUARIOS.getDataRange().getDisplayValues().splice(1);
+const NUM_USUARIOS          =  BUFFER_USUARIOS.length;
 
 
 
 /**
  * Planilha TECNICOS  
  */
-const PLANILHA_TECNICOS_ID    =  "1jMDHHeTsAoqFjwoYalKfO20gTCAE98XHL52C-JaJT14";
-const PLANILHA_TECNICOS       =  SpreadsheetApp.openById(PLANILHA_TECNICOS_ID);
-
-const TABELA_TECNICOS_B       =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_B');
-const TABELA_TECNICOS_CS      =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_CS');
-const TABELA_TECNICOS_L       =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_L');
-const TABELA_TECNICOS_NE      =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_NE');
-const TABELA_TECNICOS_NO      =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_NO');
-const TABELA_TECNICOS_N       =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_N');
-const TABELA_TECNICOS_O       =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_O');
-const TABELA_TECNICOS_P       =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_P');
-const TABELA_TECNICOS_VN      =  PLANILHA_TECNICOS.getSheetByName('TECNICOS_VN');
-
-const BUFFER_TECNICOS_B       =  TABELA_TECNICOS_B.getDataRange().getDisplayValues().splice(1);
-const BUFFER_TECNICOS_CS      =  TABELA_TECNICOS_CS.getDataRange().getDisplayValues().splice(1);
-const BUFFER_TECNICOS_L       =  TABELA_TECNICOS_L.getDataRange().getDisplayValues().splice(1);
-const BUFFER_TECNICOS_NE      =  TABELA_TECNICOS_NE.getDataRange().getDisplayValues().splice(1);
-const BUFFER_TECNICOS_NO      =  TABELA_TECNICOS_NO.getDataRange().getDisplayValues().splice(1);
-const BUFFER_TECNICOS_N       =  TABELA_TECNICOS_N.getDataRange().getDisplayValues().splice(1);
-const BUFFER_TECNICOS_O       =  TABELA_TECNICOS_O.getDataRange().getDisplayValues().splice(1);
-const BUFFER_TECNICOS_P       =  TABELA_TECNICOS_P.getDataRange().getDisplayValues().splice(1);
-const BUFFER_TECNICOS_VN      =  TABELA_TECNICOS_VN.getDataRange().getDisplayValues().splice(1);
-
-const NUM_TECNICOS_B          =  BUFFER_TECNICOS_B.length;
-const NUM_TECNICOS_CS         =  BUFFER_TECNICOS_CS.length;
-const NUM_TECNICOS_L          =  BUFFER_TECNICOS_L.length;
-const NUM_TECNICOS_NE         =  BUFFER_TECNICOS_NE.length;
-const NUM_TECNICOS_NO         =  BUFFER_TECNICOS_NO.length;
-const NUM_TECNICOS_N          =  BUFFER_TECNICOS_N.length;
-const NUM_TECNICOS_O          =  BUFFER_TECNICOS_O.length;
-const NUM_TECNICOS_P          =  BUFFER_TECNICOS_P.length;
-const NUM_TECNICOS_VN         =  BUFFER_TECNICOS_VN.length;
+const PLANILHA_TECNICOS_ID  =  "1jMDHHeTsAoqFjwoYalKfO20gTCAE98XHL52C-JaJT14";
+const PLANILHA_TECNICOS     =  SpreadsheetApp.openById(PLANILHA_TECNICOS_ID);
+const TABELA_TECNICOS       =  PLANILHA_TECNICOS.getSheetByName('TECNICOS');
+const BUFFER_TECNICOS       =  TABELA_TECNICOS.getDataRange().getDisplayValues().splice(1);
+const NUM_TECNICOS          =  BUFFER_TECNICOS.length;
 
 
 
@@ -158,6 +131,8 @@ const REGIONAL_USUARIO  = 3;
 const TIPO_USUARIO      = 4;
 
 
+// Posições das colunas da planilha TECNICOS
+const REGIONAL_TECNICO  = 3;
 
 
 /** 
