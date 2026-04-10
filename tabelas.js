@@ -433,7 +433,7 @@ function calcularPontuacaoParametros( idsParametros ) {
  */
 function idsToNomes( stringIds, nomeTabela ) {
 
-  if(stringIds == "") return "";
+  if(stringIds.trim() == "") return "";
 
   let bufferTabela;
 
@@ -559,8 +559,14 @@ function teste_idsToNomes() {
   //const stringIds = "1;;3;;5";
   //const nomeTabela = "PARAMETROS";
 
-  const stringIds = "3";
-  const nomeTabela = "MOTIVOS_DE_DESIGNACAO";  
+  //const stringIds = "4";
+  //const nomeTabela = "MOTIVOS_DE_DESIGNACAO";  
+
+  //const stringIds = "4";
+  //const nomeTabela = "TECNICOS";    
+
+  const stringIds = "";
+  const nomeTabela = "TECNICOS";      
 
   const retorno = idsToNomes( stringIds, nomeTabela );
 
