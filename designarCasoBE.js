@@ -11,12 +11,12 @@
  *  
  * @param {String} id: id do caso de será designado 
  * @param {String} idMotivoDeDesignacao: id do motivo de designação 
- * @param {String} nomeTecnicoPAEFI: Nome do técnico do PAEFI, caso o tipo de designação seja Inserção no PAEFI
- *                                   "", para os outros tipos de designação            
+ * @param {String} idTecnicoPAEFI: ID do técnico do PAEFI, caso o tipo de designação seja Inserção no PAEFI
+ *                                 "", para os outros tipos de designação            
  */
 function designarCasoBE( id,                       
                          idMotivoDeDesignacao,
-                         nomeTecnicoPAEFI ) {
+                         idTecnicoPAEFI ) {
 
 
   // Se id inválido, retorna uma exceção
@@ -46,7 +46,7 @@ function designarCasoBE( id,
     const idCaso = parseInt(id);
         
     // Gera, formata e grava a data de designação do caso
-    let dataDeDesignacao = new Date().toLocaleString("pt-BR", {dateStyle: "short"});
+    const dataDeDesignacao = new Date().toLocaleString("pt-BR", {dateStyle: "short"});
     const data = TABELA_CASOS.getRange( idCaso+1, DATA_DE_DESIGNACAO+1 );
     data.setValue( dataDeDesignacao );    
 
@@ -54,10 +54,9 @@ function designarCasoBE( id,
     const idMotivo = TABELA_CASOS.getRange( idCaso+1, MOTIVO_DE_DESIGNACAO+1 );
     idMotivo.setValue( idMotivoDeDesignacao );        
 
-    // Grava o nome do técncio do PAEFI
-    const nomeTecnico = TABELA_CASOS.getRange( idCaso+1, NOME_TECNICO_PAEFI+1 );
-    const nomePadronizado = nomeTecnicoPAEFI != "" ? nomeTecnicoPAEFI.trim().toUpperCase() : "";
-    nomeTecnico.setValue( nomePadronizado );
+    // Grava o id do técncio do PAEFI
+    const idTecnico = TABELA_CASOS.getRange( idCaso+1, ID_TECNICO_PAEFI+1 );    
+    idTecnico.setValue( idTecnicoPAEFI );
     
     // SOLTA O LOCK
     lock.releaseLock();

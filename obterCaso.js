@@ -62,7 +62,8 @@ function obterCaso( id ) {
         ativo: (linhaCaso[DATA_DE_DESIGNACAO]).trim()? "Não" : "Sim",
         idMotivoDeDesignacao: linhaCaso[MOTIVO_DE_DESIGNACAO],
         nomeMotivoDeDesignacao: idsToNomes(linhaCaso[MOTIVO_DE_DESIGNACAO], "MOTIVOS_DE_DESIGNACAO"),
-        nomeTecnicoPAEFI: linhaCaso[NOME_TECNICO_PAEFI],
+        idTecnicoPAEFI: linhaCaso[ID_TECNICO_PAEFI],
+        nomeTecnicoPAEFI: idsToNomes(linhaCaso[ID_TECNICO_PAEFI], "TECNICOS"),
   
         totalPontos: linhaCaso[TOTAL_DE_PONTOS],
   

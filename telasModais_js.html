@@ -15,7 +15,7 @@
   let modalParametrosCaso;
 
   // Variáveis para controlar a exibição da janela modal para o nome do técnico do PAEFI
-  let conteudoModalNomeTecnicoPAEFI;
+  let selectTecnicos;
   let modalNomeTecnicoPAEFI;
   let idCasoDesignadoPAEFI;
 
@@ -35,7 +35,8 @@
 
 
     // Instancia as variáveis para controlar a exibição da janela modal para o nome do técnico do PAEFI    
-    conteudoModalNomeTecnicoPAEFI = document.getElementById("nomeTecnicoPAEFI");
+    document.getElementById("nomeTecnicoPAEFI").innerHTML = gerarSelectTecnicos();
+    selectTecnicos = document.getElementById("selectTecnico");
     modalNomeTecnicoPAEFI = new bootstrap.Modal( document.getElementById("modalNomeTecnicoPAEFI") );
     idCasoDesignadoPAEFI = 0;
 
@@ -64,7 +65,7 @@
     modalMensagem.show();
 
   } // Fim da função mostrarModalMensagem
-
+ 
 
   /**
    * Função frontend que mostra o modal para o nome do técnico do PAEFI    
@@ -75,7 +76,7 @@
     idCasoDesignadoPAEFI = idCaso;
 
     // Limpa o campo para o nome do técnico do PAEFI
-    conteudoModalNomeTecnicoPAEFI.value = "";
+    selectTecnicos.value = "";
 
     // Mostra modal para o nome do técnico do PAEFI 
     modalNomeTecnicoPAEFI.show();
@@ -84,19 +85,38 @@
 
 
   /**
+   * Gera o Select de técnicos, que é utilizado no modal de nome de técnico   
+   */
+  function gerarSelectTecnicos() {
+
+    // Filtra a tabela de técnicos para obter apenas os técnicos da regional do usuário logado
+    let tabelaTecnicosRegional = cache_TabelaTecnicos.filter( tecnico => tecnico[COLUNA_REGIONAL_TECNICO] == usuarioLogado.regional );
+    
+    // Gera, dinamicamente, o select de técnicos.
+    let tecnicoSelect = `<select id="selectTecnico" class="form-select form-select-sm py-0" style="width: 120px; height: 28px;">`;
+    tecnicoSelect += gerarSelectFrontend( tabelaTecnicosRegional );
+    tecnicoSelect += `</select>`;        
+
+    // Retorna o select gerado
+    return tecnicoSelect;
+      
+  } // Fim da função gerarSelectTecnicos 
+
+
+  /**
    * Função frontend que mostra o modal para o nome do técnico do PAEFI    
    */    
   function handleBotaoInserirNoPAEFI() {
 
-    let nomeTecnicoPAEFI = conteudoModalNomeTecnicoPAEFI.value;
+    let idTecnico = selectTecnicos.value;
 
-    console.log( `handleBotaoInserirNoPAEFI: ${nomeTecnicoPAEFI} - ${idCasoDesignadoPAEFI}`  );
+    console.log( `handleBotaoInserirNoPAEFI: ${idTecnico} - ${idCasoDesignadoPAEFI}`  );
 
     // mostra modal com mensagem de designação de caso
     mostrarModalMensagem( "Designando o caso, por favor aguarde..." );                               
     
     // Chama a função front end para designar o caso    
-    designarCasoFE( idCasoDesignadoPAEFI, "4", nomeTecnicoPAEFI );
+    designarCasoFE( idCasoDesignadoPAEFI, "4", idTecnico );
 
   } // Fim da função handleBotaoInserirNoPAEFI
 

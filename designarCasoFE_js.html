@@ -7,10 +7,10 @@
    *  
    * @param {String} id: id do caso de será designado 
    * @param {String} idMotivoDeDesignacao: id do motivo de designação 
-   * @param {String} nomeTecnicoPAEFI: Nome do técnico do PAEFI, caso o tipo de designação seja Inserção no PAEFI
-   *                                   "", para os outros tipos de designação            
+   * @param {String} idTecnico: ID do técnico do PAEFI, caso o tipo de designação seja Inserção no PAEFI
+   *                            "", para os outros tipos de designação            
    */  
-  function designarCasoFE( idCaso, idMotivoDeDesignacao, nomeTecnicoPAEFI ) {
+  function designarCasoFE( idCaso, idMotivoDeDesignacao, idTecnico ) {
 
     // Mensagem de debug
     console.log( "designarCasoFE - INÍCIO" ); 
@@ -36,7 +36,7 @@
                  // Chama a função backend que designa o caso
                  .designarCasoBE( idCaso,                       
                                   idMotivoDeDesignacao,
-                                  nomeTecnicoPAEFI );  
+                                  idTecnico );  
 
     // Mensagem de debug
     console.log( "designarCasoFE - FIM" );                               

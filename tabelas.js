@@ -122,7 +122,7 @@ const CATEGORIAS_CASO                   = 20;
 const PONTUACAO_PARAMETROS_CASO         = 21;
 const PARAMETROS_CASO                   = 22;
 const OBSERVACAO                        = 23;
-const NOME_TECNICO_PAEFI                = 24;
+const ID_TECNICO_PAEFI                  = 24;
 
 
 // Posições das colunas da planilha USUARIOS

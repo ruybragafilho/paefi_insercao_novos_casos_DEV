@@ -48,9 +48,9 @@ function reativarCasoBE( id ) {
     const idMotivo = TABELA_CASOS.getRange( idCaso+1, MOTIVO_DE_DESIGNACAO+1 );
     idMotivo.setValue( "" );        
 
-    // Grava null no nome do técnico do PAEFI
-    const nomeTecnico = TABELA_CASOS.getRange( idCaso+1, NOME_TECNICO_PAEFI+1 );
-    nomeTecnico.setValue( "" );            
+    // Grava null no id do técnico do PAEFI
+    const idTecnico = TABELA_CASOS.getRange( idCaso+1, ID_TECNICO_PAEFI+1 );
+    idTecnico.setValue( "" );            
 
     // SOLTA O LOCK
     lock.releaseLock();

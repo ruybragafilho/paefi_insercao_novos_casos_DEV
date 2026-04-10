@@ -26,8 +26,8 @@
  * @param {Date}   dataDaUltimaResposta: Data da última resposta
  * @param {Date}   dataDeDesignacao: Data de designação do caso
  * @param {String} idMotivoDeDesignacao: id do motivo de designação 
- * @param {String} nomeTecnicoPAEFI: Nome do técnico do PAEFI, caso o tipo de designação seja Inserção no PAEFI
- *                                   "", para os outros tipos de designação            
+ * @param {String} idTecnicoPAEFI: ID do técnico do PAEFI, caso o tipo de designação seja Inserção no PAEFI
+ *                                 "", para os outros tipos de designação            
  * @param {String} idsViolacoesCaso: ids das violacoes
  * @param {String} idsCategoriasCaso: ids das categorias
  * @param {String} idsParametrosCaso: ids dos parâmetros selecionados
@@ -49,7 +49,7 @@ function atualizarCasoBE( id,
                           dataDaUltimaResposta, 
                           dataDeDesignacao,   
                           idMotivoDeDesignacao,  
-                          nomeTecnicoPAEFI, 
+                          idTecnicoPAEFI, 
                           idsViolacoesCaso,                 
                           idsCategoriasCaso,
                           idsParametrosCaso,
@@ -95,7 +95,7 @@ function atualizarCasoBE( id,
                          dataDaUltimaResposta,
                          dataDeDesignacao,
                          idMotivoDeDesignacao,    
-                         nomeTecnicoPAEFI,
+                         idTecnicoPAEFI,
                          idsViolacoesCaso, 
                          idsCategoriasCaso,
                          idsParametrosCaso,
@@ -138,7 +138,7 @@ function teste_atualizarCasoBE() {
   let dataDaUltimaResposta = new Date("2025-09-01");  
   let dataDeDesignacao = new Date("2025-09-01");  
   let idMotivoDeDesignacao = "2"; 
-  let nomeTecnicoPAEFI = "";  
+  let idTecnicoPAEFI = "";  
   let idsViolacoesCaso = "2;4";
   let idsCategoriasCaso = "1;3;5";
   let idsParametrosCaso = "1;2;4;6;9";
@@ -161,7 +161,7 @@ function teste_atualizarCasoBE() {
                       dataDaUltimaResposta, 
                       dataDeDesignacao,   
                       idMotivoDeDesignacao, 
-                      nomeTecnicoPAEFI,  
+                      idTecnicoPAEFI,  
                       idsViolacoesCaso,                 
                       idsCategoriasCaso,
                       idsParametrosCaso,
