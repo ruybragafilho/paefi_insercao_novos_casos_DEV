@@ -109,7 +109,19 @@
       document.getElementById( "selectMotivoDesiginacao" ).innerHTML = 
       `<option selected value="${cache_CasoEmAtualizacao.idMotivoDeDesignacao}">${cache_CasoEmAtualizacao.nomeMotivoDeDesignacao}</option>`;
       
-      document.getElementById( "nomeTecnicoPAEFIInput" ).value = cache_CasoEmAtualizacao.nomeTecnicoPAEFI;
+      if( cache_CasoEmAtualizacao.idMotivoDeDesignacao == "4" ) {
+
+        document.getElementById( "nomeTecnicoPAEFIInput" ).value = cache_CasoEmAtualizacao.nomeTecnicoPAEFI;
+        document.getElementById( "nomeTecnicoPAEFIInput" ).style.display = "";
+        document.getElementById( "nomeTecnicoPAEFIInputLabel" ).style.display = "";
+
+      } else {
+
+        document.getElementById( "nomeTecnicoPAEFIInput" ).value = "";
+        document.getElementById( "nomeTecnicoPAEFIInput" ).style.display = "none";
+        document.getElementById( "nomeTecnicoPAEFIInputLabel" ).style.display = "none";
+
+      }      
     }
 
 
