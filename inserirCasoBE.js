@@ -76,10 +76,10 @@ function inserirCasoBE( referenciaFamiliar,
   // por isso o valor null é atribuído à variável  
   const idMotivoDeDesignacao = null;
 
-  // Gera o nome do técnico do PAEFI do novo caso.
+  // Gera o id do técnico do PAEFI do novo caso.
   // Para um novo caso, essa informação não é conhecida,
   // por isso o valor null é atribuído à variável    
-  const nomeTecnicoPAEFI = null;
+  const idTecnicoPAEFI = null;
     
   // Chama a função para gravar o novo caso na tabela CASOS
   try {
@@ -100,7 +100,7 @@ function inserirCasoBE( referenciaFamiliar,
                          dataDaUltimaResposta,
                          dataDeDesignacao,
                          idMotivoDeDesignacao,  
-                         nomeTecnicoPAEFI,   
+                         idTecnicoPAEFI,   
                          idsViolacoesCaso,
                          idsCategoriasCaso,
                          idsParametrosCaso,

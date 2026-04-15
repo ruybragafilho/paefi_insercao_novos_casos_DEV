@@ -209,6 +209,7 @@ function obterTabelaCompleta( nomeTabela ) {
  * @param {Date}   dataDaUltimaResposta: Data da última resposta
  * @param {Date}   dataDeDesignacao: Data de designação do caso
  * @param {String} idMotivoDeDesignacao: id do motivo de designação do caso
+ * @param {String} idTecnicoPAEFI: id do técnico do PAEFI para quem o caso foi designado
  * @param {String} idsViolacoesCaso: ids das violações
  * @param {String} idsCategoriasCaso: ids das categorias
  * @param {String} idsParametrosCaso: ids dos parâmetros selecionados
@@ -232,7 +233,7 @@ function gravarNaTabelaCasos( id,
                               dataDaUltimaResposta,
                               dataDeDesignacao,
                               idMotivoDeDesignacao,  
-                              nomeTecnicoPAEFI,
+                              idTecnicoPAEFI,
                               idsViolacoesCaso,                                             
                               idsCategoriasCaso,
                               idsParametrosCaso,
@@ -291,7 +292,7 @@ function gravarNaTabelaCasos( id,
     caso[MOTIVO_DE_DESIGNACAO] = idMotivoDeDesignacao
 
     // Insere o nome do técnico do PAEFI no array
-    caso[NOME_TECNICO_PAEFI] = nomeTecnicoPAEFI != "" ? nomeTecnicoPAEFI.trim().toUpperCase() : "";    
+    caso[ID_TECNICO_PAEFI] = idTecnicoPAEFI;    
       
     // Insere um TOTAL DE PONTOS temporario no array (será calculado a seguir via fórmula do Planilhas Google)
     caso[TOTAL_DE_PONTOS] = null;
