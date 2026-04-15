@@ -18,38 +18,38 @@
 const PLANILHA_CODIGOS_ID  =  "1jhVYOdvx1-yYMi00MiMA92SKKeVCT11GlZTz1wRUDZI";
 const PLANILHA_CODIGOS     =  SpreadsheetApp.openById(PLANILHA_CODIGOS_ID);
 
-const TABELA_VIOLACOES                 =  PLANILHA_CODIGOS.getSheetByName('VIOLACOES');
-const TABELA_CATEGORIAS                =  PLANILHA_CODIGOS.getSheetByName('CATEGORIAS');
-const TABELA_PARAMETROS                =  PLANILHA_CODIGOS.getSheetByName('PARAMETROS');
-const TABELA_ORGAOS_ENCAMINHADORES     =  PLANILHA_CODIGOS.getSheetByName('ORGAOS_ENCAMINHADORES');
-const TABELA_REGIONAIS                 =  PLANILHA_CODIGOS.getSheetByName('REGIONAIS');
-const TABELA_MOTIVOS_DE_DESIGNACAO     =  PLANILHA_CODIGOS.getSheetByName('MOTIVOS_DE_DESIGNACAO');
+const TABELA_VIOLACOES              =  PLANILHA_CODIGOS.getSheetByName('VIOLACOES');
+const TABELA_CATEGORIAS             =  PLANILHA_CODIGOS.getSheetByName('CATEGORIAS');
+const TABELA_PARAMETROS             =  PLANILHA_CODIGOS.getSheetByName('PARAMETROS');
+const TABELA_ORGAOS_ENCAMINHADORES  =  PLANILHA_CODIGOS.getSheetByName('ORGAOS_ENCAMINHADORES');
+const TABELA_REGIONAIS              =  PLANILHA_CODIGOS.getSheetByName('REGIONAIS');
+const TABELA_MOTIVOS_DE_DESIGNACAO  =  PLANILHA_CODIGOS.getSheetByName('MOTIVOS_DE_DESIGNACAO');
 
-const BUFFER_VIOLACOES                 =  TABELA_VIOLACOES.getDataRange().getDisplayValues().splice(1);
-const BUFFER_CATEGORIAS                =  TABELA_CATEGORIAS.getDataRange().getDisplayValues().splice(1);
-const BUFFER_PARAMETROS                =  TABELA_PARAMETROS.getDataRange().getDisplayValues().splice(1);
-const BUFFER_ORGAOS_ENCAMINHADORES     =  TABELA_ORGAOS_ENCAMINHADORES.getDataRange().getDisplayValues().splice(1);
-const BUFFER_REGIONAIS                 =  TABELA_REGIONAIS.getDataRange().getDisplayValues().splice(1);
-const BUFFER_MOTIVOS_DE_DESIGNACAO     =  TABELA_MOTIVOS_DE_DESIGNACAO.getDataRange().getDisplayValues().splice(1);
+const BUFFER_VIOLACOES              =  TABELA_VIOLACOES.getDataRange().getDisplayValues().splice(1);
+const BUFFER_CATEGORIAS             =  TABELA_CATEGORIAS.getDataRange().getDisplayValues().splice(1);
+const BUFFER_PARAMETROS             =  TABELA_PARAMETROS.getDataRange().getDisplayValues().splice(1);
+const BUFFER_ORGAOS_ENCAMINHADORES  =  TABELA_ORGAOS_ENCAMINHADORES.getDataRange().getDisplayValues().splice(1);
+const BUFFER_REGIONAIS              =  TABELA_REGIONAIS.getDataRange().getDisplayValues().splice(1);
+const BUFFER_MOTIVOS_DE_DESIGNACAO  =  TABELA_MOTIVOS_DE_DESIGNACAO.getDataRange().getDisplayValues().splice(1);
 
-const NUM_VIOLACOES                 = BUFFER_VIOLACOES.length;
-const NUM_CATEGORIAS                = BUFFER_CATEGORIAS.length;
-const NUM_PARAMETROS                = BUFFER_PARAMETROS.length;
-const NUM_ORGAOS_ENCAMINHADORES     = BUFFER_ORGAOS_ENCAMINHADORES.length;
-const NUM_REGIONAIS                 = BUFFER_REGIONAIS.length;
-const NUM_MOTIVOS_DE_DESIGNACAO     = BUFFER_MOTIVOS_DE_DESIGNACAO.length;
+const NUM_VIOLACOES              =  BUFFER_VIOLACOES.length;
+const NUM_CATEGORIAS             =  BUFFER_CATEGORIAS.length;
+const NUM_PARAMETROS             =  BUFFER_PARAMETROS.length;
+const NUM_ORGAOS_ENCAMINHADORES  =  BUFFER_ORGAOS_ENCAMINHADORES.length;
+const NUM_REGIONAIS              =  BUFFER_REGIONAIS.length;
+const NUM_MOTIVOS_DE_DESIGNACAO  =  BUFFER_MOTIVOS_DE_DESIGNACAO.length;
 
 
 
 /**
  * Planilha CASOS
  */
-const PLANILHA_CASOS_ID        =  "1E7LCL70iFyGrYAWX_SvaUux0Yier31RR45api-7i5BM";
-const PLANILHA_CASOS           =  SpreadsheetApp.openById(PLANILHA_CASOS_ID);
-const TABELA_CASOS             =  PLANILHA_CASOS.getSheetByName('CASOS');
-let BUFFER_CASOS               =  TABELA_CASOS.getDataRange().getDisplayValues().splice(1);
-let NUM_CASOS                  =  BUFFER_CASOS.length;
-const NUM_COLUNAS_TABELA_CASOS =  24;
+const PLANILHA_CASOS_ID         =  "1E7LCL70iFyGrYAWX_SvaUux0Yier31RR45api-7i5BM";
+const PLANILHA_CASOS            =  SpreadsheetApp.openById(PLANILHA_CASOS_ID);
+const TABELA_CASOS              =  PLANILHA_CASOS.getSheetByName('CASOS');
+let BUFFER_CASOS                =  TABELA_CASOS.getDataRange().getDisplayValues().splice(1);
+let NUM_CASOS                   =  BUFFER_CASOS.length;
+const NUM_COLUNAS_TABELA_CASOS  =  25;
 
 function refreshBufferCasos() {
   BUFFER_CASOS  =  TABELA_CASOS.getDataRange().getDisplayValues().splice(1);
@@ -61,11 +61,22 @@ function refreshBufferCasos() {
 /**
  * Planilha USUARIOS
  */
-const PLANILHA_USUARIOS_ID        =  "10j2k4QDqJq81WtXhRYLxPvl3dLcKbfVEt4YRiNus6Sk";
-const PLANILHA_USUARIOS           =  SpreadsheetApp.openById(PLANILHA_USUARIOS_ID);
-const TABELA_USUARIOS             =  PLANILHA_USUARIOS.getSheetByName('USUARIOS');
-const BUFFER_USUARIOS             =  TABELA_USUARIOS.getDataRange().getDisplayValues().splice(1);
-const NUM_USUARIOS                =  BUFFER_USUARIOS.length;
+const PLANILHA_USUARIOS_ID  =  "10j2k4QDqJq81WtXhRYLxPvl3dLcKbfVEt4YRiNus6Sk";
+const PLANILHA_USUARIOS     =  SpreadsheetApp.openById(PLANILHA_USUARIOS_ID);
+const TABELA_USUARIOS       =  PLANILHA_USUARIOS.getSheetByName('USUARIOS');
+const BUFFER_USUARIOS       =  TABELA_USUARIOS.getDataRange().getDisplayValues().splice(1);
+const NUM_USUARIOS          =  BUFFER_USUARIOS.length;
+
+
+
+/**
+ * Planilha TECNICOS  
+ */
+const PLANILHA_TECNICOS_ID  =  "1jMDHHeTsAoqFjwoYalKfO20gTCAE98XHL52C-JaJT14";
+const PLANILHA_TECNICOS     =  SpreadsheetApp.openById(PLANILHA_TECNICOS_ID);
+const TABELA_TECNICOS       =  PLANILHA_TECNICOS.getSheetByName('TECNICOS');
+const BUFFER_TECNICOS       =  TABELA_TECNICOS.getDataRange().getDisplayValues().splice(1);
+const NUM_TECNICOS          =  BUFFER_TECNICOS.length;
 
 
 
@@ -111,6 +122,7 @@ const CATEGORIAS_CASO                   = 20;
 const PONTUACAO_PARAMETROS_CASO         = 21;
 const PARAMETROS_CASO                   = 22;
 const OBSERVACAO                        = 23;
+const ID_TECNICO_PAEFI                  = 24;
 
 
 // Posições das colunas da planilha USUARIOS
@@ -119,6 +131,8 @@ const REGIONAL_USUARIO  = 3;
 const TIPO_USUARIO      = 4;
 
 
+// Posições das colunas da planilha TECNICOS
+const REGIONAL_TECNICO  = 3;
 
 
 /** 
@@ -159,7 +173,9 @@ function obterTabelaCompleta( nomeTabela ) {
     case "REGIONAIS":                bufferTabela = BUFFER_REGIONAIS;
                                      break;            
     case "MOTIVOS_DE_DESIGNACAO":    bufferTabela = BUFFER_MOTIVOS_DE_DESIGNACAO;
-                                     break;            
+                                     break;          
+    case "TECNICOS":                 bufferTabela = BUFFER_TECNICOS;
+                                     break;
     default:                         throw( new Error( "Tabela inválida" ) ); 
   }
 
@@ -216,6 +232,7 @@ function gravarNaTabelaCasos( id,
                               dataDaUltimaResposta,
                               dataDeDesignacao,
                               idMotivoDeDesignacao,  
+                              nomeTecnicoPAEFI,
                               idsViolacoesCaso,                                             
                               idsCategoriasCaso,
                               idsParametrosCaso,
@@ -272,6 +289,9 @@ function gravarNaTabelaCasos( id,
       
     // Insere o motivo de designação do caso, no array - null
     caso[MOTIVO_DE_DESIGNACAO] = idMotivoDeDesignacao
+
+    // Insere o nome do técnico do PAEFI no array
+    caso[NOME_TECNICO_PAEFI] = nomeTecnicoPAEFI != "" ? nomeTecnicoPAEFI.trim().toUpperCase() : "";    
       
     // Insere um TOTAL DE PONTOS temporario no array (será calculado a seguir via fórmula do Planilhas Google)
     caso[TOTAL_DE_PONTOS] = null;
@@ -293,6 +313,7 @@ function gravarNaTabelaCasos( id,
       
     // Insere a observacao no array
     caso[OBSERVACAO] = observacao.trim().toUpperCase();
+
       
     // Insere o novo caso na tabela (planilha)  **** Alterar para inserção e update      
     try {
@@ -412,7 +433,7 @@ function calcularPontuacaoParametros( idsParametros ) {
  */
 function idsToNomes( stringIds, nomeTabela ) {
 
-  if(stringIds == "") return "";
+  if(stringIds.trim() == "") return "";
 
   let bufferTabela;
 
@@ -428,7 +449,9 @@ function idsToNomes( stringIds, nomeTabela ) {
     case "REGIONAIS":                bufferTabela = BUFFER_REGIONAIS;
                                      break;                           
     case "MOTIVOS_DE_DESIGNACAO":    bufferTabela = BUFFER_MOTIVOS_DE_DESIGNACAO;
-                                     break;               
+                                     break;
+    case "TECNICOS":                 bufferTabela = BUFFER_TECNICOS;
+                                     break;                                                    
     default:                         throw( new Error( "Tabela Inválida" ) ); 
   }
 
@@ -536,8 +559,14 @@ function teste_idsToNomes() {
   //const stringIds = "1;;3;;5";
   //const nomeTabela = "PARAMETROS";
 
-  const stringIds = "3";
-  const nomeTabela = "MOTIVOS_DE_DESIGNACAO";  
+  //const stringIds = "4";
+  //const nomeTabela = "MOTIVOS_DE_DESIGNACAO";  
+
+  //const stringIds = "4";
+  //const nomeTabela = "TECNICOS";    
+
+  const stringIds = "";
+  const nomeTabela = "TECNICOS";      
 
   const retorno = idsToNomes( stringIds, nomeTabela );
 
@@ -561,10 +590,6 @@ function teste_formatarListaIds() {
   console.log(retorno);
 
 } // Fim da função teste_formatarListaIds
-
-
-
-
 
 
 

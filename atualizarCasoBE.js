@@ -26,6 +26,8 @@
  * @param {Date}   dataDaUltimaResposta: Data da última resposta
  * @param {Date}   dataDeDesignacao: Data de designação do caso
  * @param {String} idMotivoDeDesignacao: id do motivo de designação 
+ * @param {String} idTecnicoPAEFI: ID do técnico do PAEFI, caso o tipo de designação seja Inserção no PAEFI
+ *                                 "", para os outros tipos de designação            
  * @param {String} idsViolacoesCaso: ids das violacoes
  * @param {String} idsCategoriasCaso: ids das categorias
  * @param {String} idsParametrosCaso: ids dos parâmetros selecionados
@@ -46,11 +48,12 @@ function atualizarCasoBE( id,
                           dataPrevistaResposta,  
                           dataDaUltimaResposta, 
                           dataDeDesignacao,   
-                          idMotivoDeDesignacao,   
+                          idMotivoDeDesignacao,  
+                          idTecnicoPAEFI, 
                           idsViolacoesCaso,                 
                           idsCategoriasCaso,
                           idsParametrosCaso,
-                          observacao ) {
+                          observacao     ) {
 
 
   // Se id inválido, retorna uma exceção
@@ -59,8 +62,13 @@ function atualizarCasoBE( id,
   }  
 
   // Verifica se o usuário do app tem permissão para atualizar o caso
-  const usuarioLogado = JSON.parse( autenticarUsuario() );
-  if( usuarioLogado.tipo == "2" || usuarioLogado.regional != idRegional ) {
+  let usuarioLogado;
+  try {
+    usuarioLogado = JSON.parse( autenticarUsuario() );
+  } catch( error ) {
+    throw( "atualizarCasoBE: " + error.message );
+  }  
+  if( usuarioLogado.tipo == "2" || usuarioLogado.regional != BUFFER_CASOS[id-1][REGIONAL] || usuarioLogado.regional != idRegional ) {
     throw( new Error( "Usuário sem permissão para atualizar o caso" ) );
   }
 
@@ -87,6 +95,7 @@ function atualizarCasoBE( id,
                          dataDaUltimaResposta,
                          dataDeDesignacao,
                          idMotivoDeDesignacao,    
+                         idTecnicoPAEFI,
                          idsViolacoesCaso, 
                          idsCategoriasCaso,
                          idsParametrosCaso,
@@ -128,11 +137,12 @@ function teste_atualizarCasoBE() {
   let dataPrevistaResposta = new Date("2025-08-31");  
   let dataDaUltimaResposta = new Date("2025-09-01");  
   let dataDeDesignacao = new Date("2025-09-01");  
-  let idMotivoDeDesignacao = "2";   
+  let idMotivoDeDesignacao = "2"; 
+  let idTecnicoPAEFI = "";  
   let idsViolacoesCaso = "2;4";
   let idsCategoriasCaso = "1;3;5";
   let idsParametrosCaso = "1;2;4;6;9";
-  let observacao = "Observação do caso atualizado";
+  let observacao = "Observação do caso atualizado";  
 
   try {
     atualizarCasoBE(  id,
@@ -150,7 +160,8 @@ function teste_atualizarCasoBE() {
                       dataPrevistaResposta,  
                       dataDaUltimaResposta, 
                       dataDeDesignacao,   
-                      idMotivoDeDesignacao,   
+                      idMotivoDeDesignacao, 
+                      idTecnicoPAEFI,  
                       idsViolacoesCaso,                 
                       idsCategoriasCaso,
                       idsParametrosCaso,

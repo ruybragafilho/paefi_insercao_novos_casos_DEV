@@ -22,6 +22,17 @@ function obterCaso( id ) {
     throw( new Error( "ID Inválido" ) );
   }
 
+  // Verifica se o usuário do app tem permissão para obter o caso
+  let usuarioLogado;
+  try {
+    usuarioLogado = JSON.parse( autenticarUsuario() );
+  } catch( error ) {
+    throw( "obterCaso: " + error.message );
+  }    
+  if( usuarioLogado.regional != BUFFER_CASOS[id-1][REGIONAL]  &&  usuarioLogado.regional != "0" ) {
+    throw( new Error( "Usuário sem permissão para obter o caso" ) );
+  }  
+
   // Array que armazenará o caso pesquisado
   const linhaCaso = BUFFER_CASOS[id-1];   
 
@@ -51,6 +62,8 @@ function obterCaso( id ) {
         ativo: (linhaCaso[DATA_DE_DESIGNACAO]).trim()? "Não" : "Sim",
         idMotivoDeDesignacao: linhaCaso[MOTIVO_DE_DESIGNACAO],
         nomeMotivoDeDesignacao: idsToNomes(linhaCaso[MOTIVO_DE_DESIGNACAO], "MOTIVOS_DE_DESIGNACAO"),
+        idTecnicoPAEFI: linhaCaso[ID_TECNICO_PAEFI],
+        nomeTecnicoPAEFI: idsToNomes(linhaCaso[ID_TECNICO_PAEFI], "TECNICOS"),
   
         totalPontos: linhaCaso[TOTAL_DE_PONTOS],
   

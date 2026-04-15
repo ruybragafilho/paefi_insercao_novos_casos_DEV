@@ -11,9 +11,12 @@
  *  
  * @param {String} id: id do caso de será designado 
  * @param {String} idMotivoDeDesignacao: id do motivo de designação 
+ * @param {String} idTecnicoPAEFI: ID do técnico do PAEFI, caso o tipo de designação seja Inserção no PAEFI
+ *                                 "", para os outros tipos de designação            
  */
 function designarCasoBE( id,                       
-                         idMotivoDeDesignacao ) {
+                         idMotivoDeDesignacao,
+                         idTecnicoPAEFI ) {
 
 
   // Se id inválido, retorna uma exceção
@@ -21,10 +24,14 @@ function designarCasoBE( id,
     throw( new Error( "ID Inválido" ) );
   }  
 
-  // Verifica se o usuário do app tem permissão para designar o caso
-  const usuarioLogado = JSON.parse( autenticarUsuario() );
-  const idRegional = BUFFER_CASOS[id-1][REGIONAL]
-  if( usuarioLogado.tipo == "2" || usuarioLogado.regional != idRegional ) {
+  // Verifica se o usuário do app tem permissão para designar o caso  
+  let usuarioLogado;
+  try {
+    usuarioLogado = JSON.parse( autenticarUsuario() );
+  } catch( error ) {
+    throw( "designarCasoBE: " + error.message );
+  }    
+  if( usuarioLogado.tipo == "2" || usuarioLogado.regional != BUFFER_CASOS[id-1][REGIONAL] ) {
     throw( new Error( "Usuário sem permissão para designar o caso" ) );
   }  
 
@@ -39,7 +46,7 @@ function designarCasoBE( id,
     const idCaso = parseInt(id);
         
     // Gera, formata e grava a data de designação do caso
-    let dataDeDesignacao = new Date().toLocaleString("pt-BR", {dateStyle: "short"});
+    const dataDeDesignacao = new Date().toLocaleString("pt-BR", {dateStyle: "short"});
     const data = TABELA_CASOS.getRange( idCaso+1, DATA_DE_DESIGNACAO+1 );
     data.setValue( dataDeDesignacao );    
 
@@ -47,6 +54,10 @@ function designarCasoBE( id,
     const idMotivo = TABELA_CASOS.getRange( idCaso+1, MOTIVO_DE_DESIGNACAO+1 );
     idMotivo.setValue( idMotivoDeDesignacao );        
 
+    // Grava o id do técncio do PAEFI
+    const idTecnico = TABELA_CASOS.getRange( idCaso+1, ID_TECNICO_PAEFI+1 );    
+    idTecnico.setValue( idTecnicoPAEFI );
+    
     // SOLTA O LOCK
     lock.releaseLock();
 
@@ -78,7 +89,8 @@ function teste_designarCasoBE() {
 
   try {
     designarCasoBE( id,
-                    idMotivoDeDesignacao );
+                    idMotivoDeDesignacao,
+                    "" );
   } catch( error ) {
     console.log( error.message );
   }

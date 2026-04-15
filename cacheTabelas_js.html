@@ -13,38 +13,35 @@
 
   // Cache da tabela Violacoes, carregados via chamada 
   // da função backend obterTabelaCompleta( "VIOLACOES" )
-  //let cacheViolacoes = [];  
   let cache_TabelaViolacoes = [];  
 
   // Cache da tabela Categorias, carregados via chamada 
   // da função backend obterTabelaCompleta( "CATEGORIAS" )
-  //let cacheCategorias = [];  
   let cache_TabelaCategorias = [];  
 
   // Cache da tabela Parâmetros, carregados via chamada 
   // da função backend obterTabelaCompleta( "PARAMETROS" )
-  //let cacheParametros = [];    
   let cache_TabelaParametros = [];      
 
   // Cache da tabela Órgãos Encaminhadores, carregados via chamada 
   // da função backend obterTabelaCompleta( "ORGAOS_ENCAMINHADORES" )
-  //let cacheOrgaosEncaminhadores = [];    
   let cache_TabelaOrgaosEncaminhadores = [];    
 
   // Cache da tabela Regionais, carregados via chamada 
   // da função backend obterTabelaCompleta( "REGIONAIS" )
-  //let cacheRegionais = [];
   let cache_TabelaRegionais = [];
 
   // Cache da tabela Motivos de Designação, carregados via chamada 
   // da função backend obterTabelaCompleta( "MOTIVOS_DE_DESIGNACAO" )
-  //let cacheMotivosDeDesignacao = [];
   let cache_TabelaMotivosDeDesignacao = [];
+
+  // Cache da tabela Tecnicos, carregados via chamada 
+  // da função backend obterTabelaCompleta( "TECNICOS" )
+  let cache_TabelaTecnicos = [];
 
 
   // Cache da tabela com os casos, carregados via chamada 
   // da função backend obterCasos
-  //let cacheCasos = [];
   let cache_TabelaCasos = [];
 
 
@@ -58,6 +55,7 @@
   let flagCache_TabelaOrgaosEncaminhadores  = 0;  
   let flagCache_TabelaRegionais             = 0;
   let flagCache_TabelaMotivosDeDesignacao   = 0;  
+  let flagCache_TabelaTecnicos              = 0;
   let flagCache_TabelaCasos                 = 0;
 
 
@@ -66,6 +64,7 @@
   const COLUNA_ID    = 0;
   const COLUNA_NOME  = 1;
   const COLUNA_ATIVO = 2;  
+  const COLUNA_REGIONAL_TECNICO = 3;
   const COLUNA_CATEGORIAS_DO_PARAMETRO = 4;
 
 
@@ -81,6 +80,7 @@
     carregarTabelaNaCache( "ORGAOS_ENCAMINHADORES" );
     carregarTabelaNaCache( "REGIONAIS" );    
     carregarTabelaNaCache( "MOTIVOS_DE_DESIGNACAO" );
+    carregarTabelaNaCache( "TECNICOS" );    
 
   } // Fim da função preCarregarTabelasNaCache
 
@@ -97,7 +97,8 @@
         flagCache_TabelaParametros   &&
         flagCache_TabelaOrgaosEncaminhadores &&
         flagCache_TabelaRegionais    &&
-        flagCache_TabelaMotivosDeDesignacao ) {
+        flagCache_TabelaMotivosDeDesignacao  &&
+        flagCache_TabelaTecnicos              ) {
 
       return true;
 
@@ -145,6 +146,10 @@
                       case "MOTIVOS_DE_DESIGNACAO":    cache_TabelaMotivosDeDesignacao     = tabela;
                                                        flagCache_TabelaMotivosDeDesignacao = 1;  
                                                        break;            
+
+                      case "TECNICOS":                 cache_TabelaTecnicos     = tabela;
+                                                       flagCache_TabelaTecnicos = 1;  
+                                                       break;                                                                 
 
                       default:                         throw( new Error( "Tabela Inválida" ) ); 
 

@@ -45,7 +45,12 @@ function inserirCasoBE( referenciaFamiliar,
                         observacao ) {
 
   // Verifica se o usuário do app tem permissão para inserir o novo caso
-  const usuarioLogado = JSON.parse( autenticarUsuario() );
+  let usuarioLogado;
+  try {
+    usuarioLogado = JSON.parse( autenticarUsuario() );
+  } catch( error ) {
+    throw( "inserirCasoBE: " + error.message );
+  }    
   if( usuarioLogado.tipo == "2" || usuarioLogado.regional != idRegional ) {
     throw( new Error( "Usuário sem permissão para inserir o novo caso" ) );
   }                          
@@ -56,20 +61,25 @@ function inserirCasoBE( referenciaFamiliar,
   // Gera a data de insercao do novo caso no sistema
   const dataInsercaoNoSistema = new Date().toLocaleString("pt-BR", {dateStyle: "short"});    
 
-  // Gera a data da ultima resposta do novo caso
+  // Gera a data da ultima resposta do novo caso.
   // Para um novo caso, essa informação não é conhecida,
   // por isso o valor null é atribuído à variável
   const dataDaUltimaResposta = null;   
 
-  // Gera a data de designação do novo caso
+  // Gera a data de designação do novo caso.
   // Para um novo caso, essa informação não é conhecida,
   // por isso o valor null é atribuído à variável  
   const dataDeDesignacao = null;     
 
-  // Gera o motivo de designação do novo caso
+  // Gera o motivo de designação do novo caso.
   // Para um novo caso, essa informação não é conhecida,
   // por isso o valor null é atribuído à variável  
   const idMotivoDeDesignacao = null;
+
+  // Gera o nome do técnico do PAEFI do novo caso.
+  // Para um novo caso, essa informação não é conhecida,
+  // por isso o valor null é atribuído à variável    
+  const nomeTecnicoPAEFI = null;
     
   // Chama a função para gravar o novo caso na tabela CASOS
   try {
@@ -89,7 +99,8 @@ function inserirCasoBE( referenciaFamiliar,
                          dataPrevistaResposta, 
                          dataDaUltimaResposta,
                          dataDeDesignacao,
-                         idMotivoDeDesignacao,     
+                         idMotivoDeDesignacao,  
+                         nomeTecnicoPAEFI,   
                          idsViolacoesCaso,
                          idsCategoriasCaso,
                          idsParametrosCaso,

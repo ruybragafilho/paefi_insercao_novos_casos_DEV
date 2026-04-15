@@ -151,30 +151,34 @@
 
       <!-- Labels Dados da Designação -->
       <div class="row mb-2">
-        <label for="situacaoCasoInput" class="form-label fw-bold col-md-3">SITUAÇÃO DO CASO</label>        
-        <label for="dataDesignacaoInput" class="form-label fw-bold col-md-4">DATA DE DESIGNAÇÃO DO CASO</label>          
+        <label for="situacaoCasoInput" class="form-label fw-bold col-md-2">SITUAÇÃO DO CASO</label>        
+        <label for="dataDesignacaoInput" class="form-label fw-bold col-md-3">DATA DE DESIGNAÇÃO DO CASO</label>          
         <label for="selectMotivoDesiginacao" class="form-label fw-bold col-md-4">MOTIVO DE DESIGNAÇÃO DO CASO</label>    
-        <div class="col-md-1"></div>
+        <label for="nomeTecnicoPAEFIInput" class="form-label fw-bold col-md-3">NOME DO TÉCICO DO PAEFI</label>            
       </div>
 
       <!-- Inputs Dados da Designação -->
       <div class="row mb-2">
-        <div class="col-md-2">
+        <div class="col-md-1">
           <input type="text" class="form-control" id="situacaoCasoInput" disabled>     
         </div>
-        <div class="col-md-1"></div>        
-  
+        <div class="col-md-1"></div>
+          
         <div class="col-md-2">
           <input type="date" class="form-control" id="dataDesignacaoInput" disabled>
         </div>      
-        <div class="col-md-2"></div>
+        <div class="col-md-1"></div>
   
         <div class="col-md-3">
           <select class="form-select" id="selectMotivoDesiginacao" disabled>
             <?!= gerarSelectBackend( BUFFER_MOTIVOS_DE_DESIGNACAO ); ?>
           </select>      
         </div>  
-        <div class="col-md-1"></div>
+        <div class="col-md-1"></div>        
+        
+        <div class="col-md-3">
+          <input type="text" class="form-control" id="nomeTecnicoPAEFIInput" disabled>     
+        </div>
       </div>
 
       <!-- Linha separadora -->
