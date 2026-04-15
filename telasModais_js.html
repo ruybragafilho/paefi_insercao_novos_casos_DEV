@@ -34,9 +34,7 @@
     }); 
 
 
-    // Instancia as variáveis para controlar a exibição da janela modal para o nome do técnico do PAEFI    
-    document.getElementById("nomeTecnicoPAEFI").innerHTML = gerarSelectTecnicos();
-    selectTecnicos = document.getElementById("selectTecnico");
+    // Instancia as variáveis para controlar a exibição da janela modal para o nome do técnico do PAEFI            
     modalNomeTecnicoPAEFI = new bootstrap.Modal( document.getElementById("modalNomeTecnicoPAEFI") );
     idCasoDesignadoPAEFI = 0;
 
@@ -93,12 +91,13 @@
     let tabelaTecnicosRegional = cache_TabelaTecnicos.filter( tecnico => tecnico[COLUNA_REGIONAL_TECNICO] == usuarioLogado.regional );
     
     // Gera, dinamicamente, o select de técnicos.
-    let tecnicoSelect = `<select id="selectTecnico" class="form-select form-select-sm py-0" style="width: 120px; height: 28px;">`;
+    let tecnicoSelect = `<select id="selectTecnico" class="form-select form-select-sm py-0" style="width: 300px; height: 28px;">`;
     tecnicoSelect += gerarSelectFrontend( tabelaTecnicosRegional );
     tecnicoSelect += `</select>`;        
 
-    // Retorna o select gerado
-    return tecnicoSelect;
+    // Select gerado
+    document.getElementById("nomeTecnicoPAEFI").innerHTML = tecnicoSelect;
+    selectTecnicos = document.getElementById("selectTecnico");
       
   } // Fim da função gerarSelectTecnicos 
 
