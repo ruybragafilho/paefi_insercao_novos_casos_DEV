@@ -408,13 +408,56 @@ function calcularPontuacaoParametros( idsParametros ) {
   for( let i=0; i<numParametros; ++i) {
 
     id = idsParametros[i];
-    somaPontos += parseInt( BUFFER_PARAMETROS[id-1][PONTUACAO_PARAMETRO] );
+    if(id != "") {
+      id = parseInt( id );
+      if( BUFFER_PARAMETROS[id-1][ATIVO] == "1" ) {
+        somaPontos += parseInt( BUFFER_PARAMETROS[id-1][PONTUACAO_PARAMETRO] );
+      }            
+    } 
+
   }
 
   // Retorna o somatório das pontuações dos parâmetros 
   return somaPontos;
 
 } // Fim da função calcularPontuacaoParametros
+
+
+
+/**
+ * Função que recalcula a pontuação de todos os casos da tabela CASOS. 
+ * É utilizada em situações em que as pontuações dos parâmetros são
+ * alteradas e também em situações em que os status de parâmetros
+ * ( ATIVO / INATIVO ) são alterados. 
+ */
+function reprocessarCasos() {
+
+  let linhaTabela;
+
+  let idCaso;
+  let idsParametrosCaso;
+  let pontuacao;
+  let novaPontuação;
+
+  // Percorre a tabela de casos recalculando as pontuações
+  for( linhaTabela=0; linhaTabela<NUM_CASOS; ++linhaTabela) {  
+
+    idCaso = parseInt( BUFFER_CASOS[linhaTabela][ID] );
+    idsParametrosCaso = BUFFER_CASOS[linhaTabela][PARAMETROS_CASO];
+
+    if(idsParametrosCaso != "") {
+
+      // Calcula a nova pontuação do caso
+      novaPontuação = calcularPontuacaoParametros( idsParametrosCaso.split(";") );
+
+      // Grava a nova pontuação do caso
+      pontuacao = TABELA_CASOS.getRange( idCaso+1, PONTUACAO_PARAMETROS_CASO+1 );
+      pontuacao.setValue( novaPontuação );        
+    }  
+                     
+  } // Fim do for
+
+} // Fim da função reprocessarCasos
 
 
 
