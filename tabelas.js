@@ -584,7 +584,7 @@ function idsToNomes( stringIds, nomeTabela ) {
  */
 function formatarListaIds( idsSelecionados, numMaximoDeIds ) {
 
-  if(idsSelecionados == "") return "";
+  if(idsSelecionados == "") return ";".repeat(numMaximoDeIds-1);
 
   // Array com os ids selecionados pelo trabalhador
   const arrayIdsSelecionados = idsSelecionados.split(";");
