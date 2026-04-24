@@ -388,6 +388,47 @@ function gravarNaTabelaCasos( id,
 
 
 /**
+ * Função que atualiza uma lista de parâmetros
+ *  
+ * @param {String} idsParametros: String com os IDs dos parâmetros originais, separados por ;
+ * 
+ * @return String com os IDs dos parâmetros atualizados, separados por ;
+ */
+function atualizarParametros( idsParametros ) {
+
+  // Arrays com os parâmetros atuais e com os parâmetros novos
+  let parametrosAtuais = idsParametros.split(";");
+  let parametrosNovos  = [NUM_PARAMETROS]; 
+
+  // Atualiza a lista de parâmetros para o novo número de parâmetros
+  let i;
+  let numParametrosAtuais = parametrosAtuais.length;
+  for(i=0; i<numParametrosAtuais; ++i) {
+    if( parseInt(BUFFER_PARAMETROS[ parseInt(parametrosAtuais[i]) - 1 ][ATIVO]) == 1 ) {
+      parametrosNovos[i] = parametrosAtuais[i];
+    } else {
+      parametrosNovos[i] = "";
+    }    
+  }
+  if( NUM_PARAMETROS > numParametrosAtuais ) {
+    for(i=numParametrosAtuais; i<NUM_PARAMETROS; ++i) {
+      parametrosNovos[i] = "";
+    }
+  }
+  
+  // Mapeamento dos parâmetros 12 e 13 para o 36
+  if( parametrosAtuais[11] != ""  || parametrosAtuais[12] != "" ) {
+    parametrosNovos[35] = 36;
+  }
+
+  // Retorna a nova 
+  return parametrosNovos.join(";");
+
+} // Fim da função atualizarParametros
+
+
+
+/**
  * Função que calcula a pontuação da lista de parâmetros cujos ids estão contidos no array idsParametros.
  *  
  * @param {Array of Integers} idsParametros: ids dos parâmetros cujas pontuações serão somadas.
@@ -396,7 +437,7 @@ function gravarNaTabelaCasos( id,
  */
 function calcularPontuacaoParametros( idsParametros ) {
   
-  if(idsParametros == "") return 0;
+  if(idsParametros == ""  ||  idsParametros.length == 0) return 0;
 
   // Somatório das pontuações dos parâmetros 
   let somaPontos = 0;
@@ -410,12 +451,12 @@ function calcularPontuacaoParametros( idsParametros ) {
     id = idsParametros[i];
     if(id != "") {
       id = parseInt( id );
-      if( BUFFER_PARAMETROS[id-1][ATIVO] == "1" ) {
+      if( id >= 1  &&  id <= NUM_PARAMETROS  &&  parseInt(BUFFER_PARAMETROS[id-1][ATIVO]) == 1 ) {
         somaPontos += parseInt( BUFFER_PARAMETROS[id-1][PONTUACAO_PARAMETRO] );
       }            
     } 
 
-  }
+  } // Fim do for
 
   // Retorna o somatório das pontuações dos parâmetros 
   return somaPontos;
@@ -434,25 +475,39 @@ function reprocessarCasos() {
 
   let linhaTabela;
 
-  let idCaso;
-  let idsParametrosCaso;
-  let pontuacao;
-  let novaPontuação;
+  let idCaso;  
+  let idsParametros;  
+
+  let novosIdsParametros;
+  let novaPontuacao;
+
+  let celulaParametros;
+  let celulaPontuacao;   
+
 
   // Percorre a tabela de casos recalculando as pontuações
   for( linhaTabela=0; linhaTabela<NUM_CASOS; ++linhaTabela) {  
 
+    // Obtém o id e os parâmetros atuais do caso
     idCaso = parseInt( BUFFER_CASOS[linhaTabela][ID] );
-    idsParametrosCaso = BUFFER_CASOS[linhaTabela][PARAMETROS_CASO];
+    idsParametros = BUFFER_CASOS[linhaTabela][PARAMETROS_CASO];
 
-    if(idsParametrosCaso != "") {
+    // Atualiza os parâmetros e calcula a nova pontuação
+    if(idsParametros != "") {
+
+      // Atualiza a lista de IDs de parâmetros
+      novosIdsParametros = atualizarParametros( idsParametros );
 
       // Calcula a nova pontuação do caso
-      novaPontuação = calcularPontuacaoParametros( idsParametrosCaso.split(";") );
+      novaPontuacao = calcularPontuacaoParametros( novosIdsParametros.split(";") );
+
+      // Grava os novos parâmetros do caso
+      celulaParametros = TABELA_CASOS.getRange( idCaso+1, PARAMETROS_CASO+1 );
+      celulaParametros.setValue( novosIdsParametros );              
 
       // Grava a nova pontuação do caso
-      pontuacao = TABELA_CASOS.getRange( idCaso+1, PONTUACAO_PARAMETROS_CASO+1 );
-      pontuacao.setValue( novaPontuação );        
+      celulaPontuacao = TABELA_CASOS.getRange( idCaso+1, PONTUACAO_PARAMETROS_CASO+1 );
+      celulaPontuacao.setValue( novaPontuacao );        
     }  
                      
   } // Fim do for
@@ -638,26 +693,21 @@ function teste_formatarListaIds() {
 
 
 /**
+ * Função para testar a função principal atualizarParametros
+ */
+function teste_atualizarParametros(  ) {
+
+  let novosParametros = atualizarParametros( "1;;;;5;;;;9;;;12;;;;;;;19;;;;23;;;;;;;;" );
+
+  console.log( novosParametros );
+
+} // Fim da função teste_atualizarParametros
+
+
+
+/**
  * ##### FIM DO MÓDULO tabelas.gs #####
  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

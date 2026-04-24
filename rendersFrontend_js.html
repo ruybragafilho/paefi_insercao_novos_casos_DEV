@@ -16,7 +16,7 @@
 
     tabela.forEach( item => {
 
-      if( parseInt( item[COLUNA_ATIVO] ) ) {
+      if( parseInt( item[COLUNA_ATIVO] ) == 1 ) {
 
         selectGerado += `<option value="${item[COLUNA_ID]}">${item[COLUNA_NOME]}</option>`;
 
