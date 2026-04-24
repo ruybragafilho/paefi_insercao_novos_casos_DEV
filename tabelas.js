@@ -404,7 +404,7 @@ function atualizarParametros( idsParametros ) {
   let i;
   let numParametrosAtuais = parametrosAtuais.length;
   for(i=0; i<numParametrosAtuais; ++i) {
-    if( parseInt(BUFFER_PARAMETROS[ parseInt(parametrosAtuais[i]) - 1 ][ATIVO]) == 1 ) {
+    if( parseInt(BUFFER_PARAMETROS[i][ATIVO]) == 1 ) {
       parametrosNovos[i] = parametrosAtuais[i];
     } else {
       parametrosNovos[i] = "";
