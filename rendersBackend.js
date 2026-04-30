@@ -18,7 +18,7 @@ function gerarCheckBox( tabela, idCheckBox, inline ) {
 
   tabela.forEach( item => {
 
-    if( parseInt( item[ATIVO] ) ) {
+    if( parseInt( item[ATIVO] ) == 1 ) {
 
       idItem = idCheckBox + item[ID];
 
@@ -63,7 +63,7 @@ function gerarCheckBoxTable( tabela, idCheckBox, numColunas ) {
   
   tabela.forEach( item => {
 
-    if( parseInt( item[ATIVO] ) ) {
+    if( parseInt( item[ATIVO] ) == 1 ) {
 
       idItem = idCheckBox + item[ID];
 
@@ -111,7 +111,7 @@ function gerarSelectBackend( tabela ) {
 
   tabela.forEach( item => {
 
-    if( parseInt( item[ATIVO] ) ) {
+    if( parseInt( item[ATIVO] ) == 1 ) {
 
       selectGerado += `<option value="${item[ID]}">${item[NOME]}</option>`;
 
@@ -154,7 +154,7 @@ function gerarAbasCategorias( visibilidade ) {
 
   BUFFER_CATEGORIAS.forEach( categoria => {
 
-    if( parseInt( categoria[ATIVO] ) ) {
+    if( parseInt( categoria[ATIVO] ) == 1 ) {
 
       // Gerando os cabeçalhos das abas
       idTituloAba = idAbas + "_" + categoria[ID];
