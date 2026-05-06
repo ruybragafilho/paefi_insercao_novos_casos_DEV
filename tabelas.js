@@ -313,7 +313,11 @@ function gravarNaTabelaCasos( id,
     caso[PARAMETROS_CASO] = formatarListaIds( idsParametrosCaso, NUM_PARAMETROS );
       
     // Insere a observacao no array
-    caso[OBSERVACAO] = observacao.trim().toUpperCase();
+    caso[OBSERVACAO] = observacao.length > 0 ?
+                       observacao.trim().toUpperCase().substring(0, 200) :
+                       "SEM OBSERVAÇÃO";
+
+    observacao.trim().toUpperCase();
 
       
     // Insere o novo caso na tabela (planilha)  **** Alterar para inserção e update      
