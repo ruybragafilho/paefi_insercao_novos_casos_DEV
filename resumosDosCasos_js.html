@@ -210,7 +210,7 @@
   */
 
   // Referância que apontará para os casos filtrados
-  let casosFiltrados = cache_TabelaCasos;
+  let casosFiltrados;
 
   function filtrar() {
 
@@ -271,6 +271,9 @@
     // Gera a tabela de casos filtrados
     gerarTabelaResumosCasos( casosPesquisados );
 
+    // Gera o gráfico de quantitativo de cada tipo de motivo de designação
+    gerarGraficoQuantitativoMotivosDeDesignacao();
+
   } // Fim da função filtrar
 
 
@@ -308,6 +311,7 @@
   
                      // Atualiza o cache de resumos de casos com a tabela carregada do servidor
                      cache_TabelaCasos = dados;   
+                     casosFiltrados = cache_TabelaCasos;
 
                      // Sinaliza que a tabela de casos já está na cache
                      flagCache_TabelaCasos = 1;
