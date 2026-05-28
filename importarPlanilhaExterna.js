@@ -1,7 +1,7 @@
 /**
  * Planilha externa que será importada
  */
-const PLANILHA_EXTERNA_ID  =  "15McHyDXcDaUlLo_OwEB_1YDJVUTokQcCB6OH9THyWNI";
+const PLANILHA_EXTERNA_ID  =  "1D8VsDhUcBA6pEkbVXDQwhtWDyxMCTpUCzTy2TIKbDEk";
 const PLANILHA_EXTERNA     =  SpreadsheetApp.openById(PLANILHA_EXTERNA_ID);
 
 const TABELA_EXTERNA         =  PLANILHA_EXTERNA.getSheetByName('Página1');
